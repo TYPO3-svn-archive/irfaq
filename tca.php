@@ -50,7 +50,7 @@ $TCA['tx_irfaq_q'] = Array (
 		),
 		'cat' => Array (		
 			'exclude' => 1,		
-			'label' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_q.cat',		
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.category',		
 			'config' => Array (
 				'type' => 'group',	
 				'internal_type' => 'db',	
@@ -151,7 +151,7 @@ $TCA['tx_irfaq_cat'] = Array (
 		),
 		'title' => Array (		
 			'exclude' => 0,		
-			'label' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_cat.title',		
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.title',		
 			'config' => Array (
 				'type' => 'input',	
 				'size' => '30',	
@@ -159,21 +159,15 @@ $TCA['tx_irfaq_cat'] = Array (
 			)
 		),
 		'shortcut' => Array (
-			'label' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_cat.shortcut',
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.shortcut_page',
 			'config' => Array (
-				'type' => 'input',
-				'size' => '30',
-				'max' => '256',
-				'wizards' => Array(
-					'_PADDING' => 2,
-					'link' => Array(
-						'type' => 'popup',
-						'title' => 'Link',
-						'icon' => 'link_popup.gif',
-						'script' => 'browse_links.php?mode=wizard',
-						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
-					)
-				)
+				'type' => 'group',
+				'internal_type' => 'db',
+					'allowed' => 'pages',
+				'size' => '1',
+				'maxitems' => '1',
+				'minitems' => '0',
+				'show_thumbs' => '1'
 			)
 		),
 	),
@@ -203,7 +197,7 @@ $TCA['tx_irfaq_expert'] = Array (
 		),
 		'email' => Array (		
 			'exclude' => 1,		
-			'label' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_expert.email',		
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.email',		
 			'config' => Array (
 				'type' => 'input',	
 				'size' => '30',	

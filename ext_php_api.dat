@@ -1,20 +1,22 @@
-a:2:{s:4:"meta";a:3:{s:5:"title";s:5:"irfaq";s:5:"descr";s:10:"Simple FAQ";s:7:"options";a:2:{s:10:"usageCount";s:1:"1";s:19:"includeCodeAbstract";s:1:"1";}}s:5:"files";a:9:{s:14:"MD5_28b11e99ee";a:4:{s:8:"filename";s:14:"ext_emconf.php";s:8:"filesize";i:2414;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_650ba9004d";a:4:{s:8:"filename";s:17:"ext_localconf.php";s:8:"filesize";i:957;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_78af9ebebb";a:4:{s:8:"filename";s:14:"ext_tables.php";s:8:"filesize";i:3054;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_3dd8690662";a:4:{s:8:"filename";s:13:"locallang.php";s:8:"filesize";i:1304;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_eaa23d78e9";a:4:{s:8:"filename";s:16:"locallang_db.php";s:8:"filesize";i:6452;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_a3d98baa72";a:4:{s:8:"filename";s:7:"tca.php";s:8:"filesize";i:6070;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_bfe92adf4f";a:5:{s:8:"filename";s:26:"pi1/class.tx_irfaq_pi1.php";s:8:"filesize";i:15004;s:6:"header";a:5:{s:4:"text";s:117:"
+a:2:{s:4:"meta";a:3:{s:5:"title";s:5:"irfaq";s:5:"descr";s:10:"Simple FAQ";s:7:"options";a:2:{s:10:"usageCount";s:1:"1";s:19:"includeCodeAbstract";s:1:"1";}}s:5:"files";a:9:{s:14:"MD5_28b11e99ee";a:4:{s:8:"filename";s:14:"ext_emconf.php";s:8:"filesize";i:3014;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_650ba9004d";a:4:{s:8:"filename";s:17:"ext_localconf.php";s:8:"filesize";i:957;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_78af9ebebb";a:4:{s:8:"filename";s:14:"ext_tables.php";s:8:"filesize";i:3054;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_3dd8690662";a:4:{s:8:"filename";s:13:"locallang.php";s:8:"filesize";i:1304;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_eaa23d78e9";a:4:{s:8:"filename";s:16:"locallang_db.php";s:8:"filesize";i:5849;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_a3d98baa72";a:4:{s:8:"filename";s:7:"tca.php";s:8:"filesize";i:5871;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_bfe92adf4f";a:5:{s:8:"filename";s:26:"pi1/class.tx_irfaq_pi1.php";s:8:"filesize";i:16827;s:6:"header";a:5:{s:4:"text";s:117:"
 
 class.tx_irfaq_pi1.php
 
 Creates a faq list.
-$Id: class.tx_irfaq_pi1.php,v 1.1 2005/02/01 21:38:33 ingorenner Exp $
+$Id: class.tx_irfaq_pi1.php,v 1.2 2005/02/15 07:35:52 ingorenner Exp $
 ";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:1:{i:0;s:43:"@author Ingo Renner <typo3@ingo-renner.com>";}s:11:"other_index";a:1:{s:7:"@author";a:1:{i:0;s:35:"Ingo Renner <typo3@ingo-renner.com>";}}}s:3:"DAT";a:11:{i:1;a:8:{s:6:"header";s:41:"class tx_irfaq_pi1 extends tslib_pibase {";s:5:"class";i:1;s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:5:{s:4:"text";s:117:"
 
 class.tx_irfaq_pi1.php
 
 Creates a faq list.
-$Id: class.tx_irfaq_pi1.php,v 1.1 2005/02/01 21:38:33 ingorenner Exp $
-";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:1:{i:0;s:43:"@author Ingo Renner <typo3@ingo-renner.com>";}s:11:"other_index";a:1:{s:7:"@author";a:1:{i:0;s:35:"Ingo Renner <typo3@ingo-renner.com>";}}}s:7:"content";a:2:{i:0;s:364:"	var $local_cObj;
+$Id: class.tx_irfaq_pi1.php,v 1.2 2005/02/15 07:35:52 ingorenner Exp $
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:1:{i:0;s:43:"@author Ingo Renner <typo3@ingo-renner.com>";}s:11:"other_index";a:1:{s:7:"@author";a:1:{i:0;s:35:"Ingo Renner <typo3@ingo-renner.com>";}}}s:7:"content";a:2:{i:0;s:343:"	var $local_cObj;
 
-	var $prefixId 		= 'tx_irfaq_pi1';		// Same as class name
-	var $scriptRelPath 	= 'pi1/class.tx_irfaq_pi1.php';	// Path to this script relative to the extension dir.
-	var $extKey 		= 'irfaq';	// The extension key.
+	// Same as class name
+	var $prefixId 		= 'tx_irfaq_pi1';
+	// Path to this script relative to the extension dir.
+	var $scriptRelPath 	= 'pi1/class.tx_irfaq_pi1.php';
+	var $extKey 		= 'irfaq';
 
 	var $config 		= array();
 	var $categories 	= array();
@@ -22,7 +24,7 @@ $Id: class.tx_irfaq_pi1.php,v 1.1 2005/02/01 21:38:33 ingorenner Exp $
 	var $pageArray 		= array();
 	var $count			= 0;
 
-	";i:1;i:-1;}s:12:"content_size";i:364;s:13:"content_lines";i:12;s:6:"atLine";i:42;}i:3;a:7:{s:6:"header";s:31:"function main($content,$conf)	{";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:77:"
+	";i:1;i:-1;}s:12:"content_size";i:343;s:13:"content_lines";i:14;s:6:"atLine";i:42;}i:3;a:7:{s:6:"header";s:31:"function main($content,$conf)	{";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:77:"
 
 main function, which is called at startup
 calls init() and determines view
@@ -43,7 +45,7 @@ calls init() and determines view
 		return $content;
 	}
 
-	";i:1;i:0;}s:12:"content_size";i:326;s:13:"content_lines";i:17;s:6:"atLine";i:63;}i:5;a:7:{s:6:"header";s:22:"function init($conf) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:38:"
+	";i:1;i:0;}s:12:"content_size";i:326;s:13:"content_lines";i:17;s:6:"atLine";i:65;}i:5;a:7:{s:6:"header";s:22:"function init($conf) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:38:"
 
 initializes configuration variables
 ";s:5:"param";a:1:{i:0;a:2:{i:0;s:5:"array";i:1;s:34:"$conf: configuration array from TS";}}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}}s:7:"content";a:2:{i:0;s:507:"		$this->config = $conf;
@@ -56,13 +58,14 @@ initializes configuration variables
 		// "CODE" decides what is rendered: code can be added by TS or FF with priority on FF
 		$ffCode = 
 [...]
-teFile']);
+ile']
+		);
 
 		$this->initCategories(); // initialize category-array
 		$this->initExperts(); // initialize experts-array
 	}
 
-	";i:1;i:1;}s:12:"content_size";i:2817;s:13:"content_lines";i:60;s:6:"atLine";i:87;}i:7;a:7:{s:6:"header";s:27:"function initCategories() {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:100:"
+	";i:1;i:1;}s:12:"content_size";i:2838;s:13:"content_lines";i:85;s:6:"atLine";i:89;}i:7;a:7:{s:6:"header";s:27:"function initCategories() {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:100:"
 
 Getting all tx_irfaq_cat categories into internal array
 partly taken from tt_news - thx Rupert!!!
@@ -74,14 +77,16 @@ partly taken from tt_news - thx Rupert!!!
 													  '',
 											
 [...]
-> $catTitle, 'catid' => $row['uid_foreign']);
+ign'],
+					'shortcut' => $catShortcut
+				);
 			} else {
 				$this->categories['0'][$row['uid']] = $catTitle;
 			}
 		}
 	}
 
-	";i:1;i:1;}s:12:"content_size";i:781;s:13:"content_lines";i:22;s:6:"atLine";i:154;}i:9;a:7:{s:6:"header";s:24:"function initExperts() {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:42:"
+	";i:1;i:1;}s:12:"content_size";i:830;s:13:"content_lines";i:26;s:6:"atLine";i:181;}i:9;a:7:{s:6:"header";s:24:"function initExperts() {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:42:"
 
 Getting all experts into internal array
 ";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}}s:7:"content";a:2:{i:0;s:419:"		// Fetching experts
@@ -96,7 +101,7 @@ Getting all experts into internal array
 		}
 	}
 
-	";i:1;i:0;}s:12:"content_size";i:419;s:13:"content_lines";i:12;s:6:"atLine";i:182;}i:11;a:7:{s:6:"header";s:24:"function dynamicView() {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:77:"
+	";i:1;i:0;}s:12:"content_size";i:419;s:13:"content_lines";i:12;s:6:"atLine";i:213;}i:11;a:7:{s:6:"header";s:24:"function dynamicView() {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:77:"
 
 creates the dynamic view with dhtml and adds javascript to the page
 header
@@ -105,27 +110,37 @@ header
 		$template     = array();
 		$subpartArray = array();
 
-		$template['total']   = $this->cObj->getSubpart($this->templateCode, '###TEMPLATE_DYNAMIC###');
-		$template['content'] = $this->cObj->getSubPart($template['total'], '###CONTENT###');
+		$template['total']   = $this->cObj->getSubpart(
+			$this->templateCode, '###TEMPLATE_DYNAMIC###'
+		);
+		$template['content'] = $this->cObj->getSubPart(
+			$template['total'], '###CONTENT###'
+		);
 
 		$subpartArray['###CONTENT###'] = $this->fillMarkers($template['content']);
 
-		//after callin
+		
 [...]
-
-		$content = $this->cObj->substituteMarkerArrayCached($template['total'], array(), $subpartArray);
+ $this->cObj->substituteMarkerArrayCached(
+			$template['total'],
+			array(),
+			$subpartArray
+		);
 
 		return $content;
 	}
 
-	";i:1;i:1;}s:12:"content_size";i:1187;s:13:"content_lines";i:26;s:6:"atLine";i:201;}i:13;a:7:{s:6:"header";s:23:"function staticView() {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:40:"
+	";i:1;i:1;}s:12:"content_size";i:1218;s:13:"content_lines";i:35;s:6:"atLine";i:232;}i:13;a:7:{s:6:"header";s:23:"function staticView() {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:40:"
 
 creates the static view without dhtml
-";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:8:"faq list";}}s:7:"content";a:2:{i:0;s:573:"		$templateName = 'TEMPLATE_STATIC';
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:8:"faq list";}}s:7:"content";a:2:{i:0;s:596:"		$templateName = 'TEMPLATE_STATIC';
 		$content = '';
 
 		$template = array();
-		$template['total'] = $this->cObj->getSubpart($this->templateCode, '###'.$templateName.'###');
+		$template['total'] = $this->cObj->getSubpart(
+			$this->templateCode,
+			'###'.$templateName.'###'
+		);
 
 		$temp = $this->cObj->getSubPart($template['total'], '###QUESTIONS###');
 		$subpartArray['###QUESTIONS###'] = $this->fillMarkers($temp);
@@ -133,12 +148,16 @@ creates the static view without dhtml
 		$temp = $this->cObj->getSubPart($template['total'], '###ANSWERS###');
 		$subpartArray['###ANSWERS###'] = $this->fillMarkers($temp);
 
-		$content = $this->cObj->substituteMarkerArrayCached($template['total'], array(), $subpartArray);
+		$content = $this->cObj->substituteMarkerArrayCached(
+			$template['total'],
+			array(),
+			$subpartArray
+		);
 
 		return $content;
 	}
 
-	";i:1;i:0;}s:12:"content_size";i:573;s:13:"content_lines";i:17;s:6:"atLine";i:233;}i:15;a:7:{s:6:"header";s:33:"function fillMarkers($template) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:32:"
+	";i:1;i:0;}s:12:"content_size";i:596;s:13:"content_lines";i:24;s:6:"atLine";i:273;}i:15;a:7:{s:6:"header";s:33:"function fillMarkers($template) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:32:"
 
 replaces markers with content
 ";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:46:"$template: the html with markers to substitude";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:33:"template with substituted markers";}}s:7:"content";a:2:{i:0;s:507:"
@@ -147,19 +166,19 @@ replaces markers with content
 		$selectConf = array();
 		$where 		= 'pid = '.$this->config['pidList'].$this->cObj->enableFields('tx_irfaq_q');
 		$selectConf = $this->getSelectConf($where);
-		$selectConf['selectFields'] = 'DISTINCT tx_irfaq_q.uid, tx_irfaq_q.q, tx_irfaq_q.a, tx_irfaq_q.cat, tx_irfaq_q.expert';
+		$selectConf['selectFields'] = 'DISTINCT tx_irfaq_q.uid, tx_irfaq_q.q, tx_irfaq_q.q_from, tx_irfaq_q.a, tx_irfaq_q.cat, tx_irfaq_q.expert';
 		$selectConf['orderBy'] 		= 'tx_irfaq_q.sorting';
 
-		$res = $this->cObj->e
+		$r
 [...]
- '###FAQ###');
-			$content .= $this->cObj->substituteMarkerArrayCached($subpart, $markerArray);
+	$content .= $this->cObj->substituteMarkerArrayCached($subpart,
+																 $markerArray);
 		}
 
 		return $content;
 	}
 
-	";i:1;i:1;}s:12:"content_size";i:2590;s:13:"content_lines";i:58;s:6:"atLine";i:257;}i:17;a:7:{s:6:"header";s:48:"function getCatMarkerArray($markerArray, $row) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:74:"
+	";i:1;i:1;}s:12:"content_size";i:3322;s:13:"content_lines";i:110;s:6:"atLine";i:304;}i:17;a:7:{s:6:"header";s:48:"function getCatMarkerArray($markerArray, $row) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:74:"
 
 Fills in the Category markerArray with data
 also taken from tt_news ;-)
@@ -174,21 +193,25 @@ also taken from tt_news ;-)
 			while(list($key, $val) = each($this->categories[$row['uid']])) {
 				// find categories, wrap the
 [...]
-ory_stdWrap.']);
+stdWrap.']
+			);
 			$markerArray['###TEXT_CATEGORY###'] = $this->pi_getLL('text_category');
 		}
 
 		return $markerArray;
 	}
 
-	";i:1;i:1;}s:12:"content_size";i:1271;s:13:"content_lines";i:37;s:6:"atLine";i:324;}i:19;a:4:{s:6:"header";s:32:"function getSelectConf($where) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:84:"
+	";i:1;i:1;}s:12:"content_size";i:1636;s:13:"content_lines";i:52;s:6:"atLine";i:423;}i:19;a:4:{s:6:"header";s:32:"function getSelectConf($where) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:84:"
 
 build the selectconf (array of query-parameters) to get the faq items from the db
-";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:32:"$where : where-part of the query";}}s:6:"return";a:2:{i:0;s:5:"array";i:1;s:45:"the selectconf for the display of a news item";}}s:6:"atLine";i:368;}i:21;a:7:{s:6:"header";s:26:"function formatStr($str) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:56:"
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:32:"$where : where-part of the query";}}s:6:"return";a:2:{i:0;s:5:"array";i:1;s:45:"the selectconf for the display of a news item";}}s:6:"atLine";i:482;}i:21;a:7:{s:6:"header";s:26:"function formatStr($str) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:56:"
 
 Format string with general_stdWrap from configuration
-";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:14:"string to wrap";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:14:"wrapped string";}}s:7:"content";a:2:{i:0;s:370:"		if (is_array($this->config['general_stdWrap.'])) {
-			$str = $this->local_cObj->stdWrap($str, $this->config['general_stdWrap.']);
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:14:"string to wrap";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:14:"wrapped string";}}s:7:"content";a:2:{i:0;s:383:"		if (is_array($this->config['general_stdWrap.'])) {
+			$str = $this->local_cObj->stdWrap(
+				$str,
+				$this->config['general_stdWrap.']
+			);
 		}
 		return $str;
 	}
@@ -200,7 +223,7 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/irfaq/p
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/irfaq/pi1/class.tx_irfaq_pi1.php']);
 }
 
-?>";i:1;i:0;}s:12:"content_size";i:370;s:13:"content_lines";i:13;s:6:"atLine";i:402;}}s:10:"usageCount";a:11:{s:12:"H_ff1fe2ae17";a:2:{s:24:"_searchtime_milliseconds";d:24;s:15:"_functionHeader";s:41:"class tx_irfaq_pi1 extends tslib_pibase {";}s:12:"H_e8476b0991";a:2:{s:24:"_searchtime_milliseconds";d:6;s:15:"_functionHeader";s:31:"function main($content,$conf)	{";}s:12:"H_2199b34fe8";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:9;s:15:"_functionHeader";s:22:"function init($conf) {";}s:12:"H_6930b10610";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:8;s:15:"_functionHeader";s:27:"function initCategories() {";}s:12:"H_024d3bdae3";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:8;s:15:"_functionHeader";s:24:"function initExperts() {";}s:12:"H_6659d3b89b";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:7;s:15:"_functionHeader";s:24:"function dynamicView() {";}s:12:"H_5d42fed44a";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:6;s:15:"_functionHeader";s:23:"function staticView() {";}s:12:"H_731f9171b7";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:3;s:5:"TOTAL";i:3;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:3;s:5:"TOTAL";i:3;}s:24:"_searchtime_milliseconds";d:9;s:15:"_functionHeader";s:33:"function fillMarkers($template) {";}s:12:"H_8d691384b5";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:10;s:15:"_functionHeader";s:48:"function getCatMarkerArray($markerArray, $row) {";}s:12:"H_e3a78634c9";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:9;s:15:"_functionHeader";s:32:"function getSelectConf($where) {";}s:12:"H_e91540d1bf";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:2;s:5:"TOTAL";i:2;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:2;s:5:"TOTAL";i:2;}s:24:"_searchtime_milliseconds";d:9;s:15:"_functionHeader";s:26:"function formatStr($str) {";}}}s:14:"MD5_7d66307cfd";a:5:{s:8:"filename";s:34:"pi1/class.tx_irfaq_pi1_wizicon.php";s:8:"filesize";i:1952;s:6:"header";a:5:{s:4:"text";s:35:"
+?>";i:1;i:0;}s:12:"content_size";i:383;s:13:"content_lines";i:16;s:6:"atLine";i:516;}}s:10:"usageCount";a:11:{s:12:"H_ff1fe2ae17";a:2:{s:24:"_searchtime_milliseconds";d:40;s:15:"_functionHeader";s:41:"class tx_irfaq_pi1 extends tslib_pibase {";}s:12:"H_e8476b0991";a:2:{s:24:"_searchtime_milliseconds";d:12;s:15:"_functionHeader";s:31:"function main($content,$conf)	{";}s:12:"H_2199b34fe8";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:11;s:15:"_functionHeader";s:22:"function init($conf) {";}s:12:"H_6930b10610";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:8;s:15:"_functionHeader";s:27:"function initCategories() {";}s:12:"H_024d3bdae3";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:8;s:15:"_functionHeader";s:24:"function initExperts() {";}s:12:"H_6659d3b89b";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:7;s:15:"_functionHeader";s:24:"function dynamicView() {";}s:12:"H_5d42fed44a";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:9;s:15:"_functionHeader";s:23:"function staticView() {";}s:12:"H_731f9171b7";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:3;s:5:"TOTAL";i:3;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:3;s:5:"TOTAL";i:3;}s:24:"_searchtime_milliseconds";d:10;s:15:"_functionHeader";s:33:"function fillMarkers($template) {";}s:12:"H_8d691384b5";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:12;s:15:"_functionHeader";s:48:"function getCatMarkerArray($markerArray, $row) {";}s:12:"H_e3a78634c9";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:10;s:15:"_functionHeader";s:32:"function getSelectConf($where) {";}s:12:"H_e91540d1bf";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:2;s:5:"TOTAL";i:2;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:2;s:5:"TOTAL";i:2;}s:24:"_searchtime_milliseconds";d:15;s:15:"_functionHeader";s:26:"function formatStr($str) {";}}}s:14:"MD5_7d66307cfd";a:5:{s:8:"filename";s:34:"pi1/class.tx_irfaq_pi1_wizicon.php";s:8:"filesize";i:1952;s:6:"header";a:5:{s:4:"text";s:35:"
 
 Class that adds the wizard icon.
 ";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:1:{i:0;s:43:"@author	Ingo Renner <typo3@ingo-renner.com>";}s:11:"other_index";a:1:{s:7:"@author";a:1:{i:0;s:35:"Ingo Renner <typo3@ingo-renner.com>";}}}s:3:"DAT";a:2:{i:1;a:5:{s:6:"header";s:28:"class tx_irfaq_pi1_wizicon {";s:5:"class";i:1;s:11:"parentClass";s:20:"tx_irfaq_pi1_wizicon";s:4:"cDat";a:5:{s:4:"text";s:35:"
@@ -220,4 +243,4 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/irfaq/p
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/irfaq/pi1/class.tx_irfaq_pi1_wizicon.php']);
 }
 
-?>";i:1;i:0;}s:12:"content_size";i:316;s:13:"content_lines";i:11;s:6:"atLine";i:48;}}s:10:"usageCount";a:2:{s:12:"H_6f109d65a7";a:2:{s:24:"_searchtime_milliseconds";d:44;s:15:"_functionHeader";s:28:"class tx_irfaq_pi1_wizicon {";}s:12:"H_bb44c57692";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_7d66307cfd";a:3:{s:8:"fileName";s:34:"pi1/class.tx_irfaq_pi1_wizicon.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:7;s:15:"_functionHeader";s:29:"function includeLocalLang()	{";}}}s:14:"MD5_eb3db5c1b2";a:4:{s:8:"filename";s:17:"pi1/locallang.php";s:8:"filesize";i:1372;s:6:"header";N;s:3:"DAT";a:0:{}}}}
+?>";i:1;i:0;}s:12:"content_size";i:316;s:13:"content_lines";i:11;s:6:"atLine";i:48;}}s:10:"usageCount";a:2:{s:12:"H_6f109d65a7";a:2:{s:24:"_searchtime_milliseconds";d:28;s:15:"_functionHeader";s:28:"class tx_irfaq_pi1_wizicon {";}s:12:"H_bb44c57692";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_7d66307cfd";a:3:{s:8:"fileName";s:34:"pi1/class.tx_irfaq_pi1_wizicon.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:7;s:15:"_functionHeader";s:29:"function includeLocalLang()	{";}}}s:14:"MD5_eb3db5c1b2";a:4:{s:8:"filename";s:17:"pi1/locallang.php";s:8:"filesize";i:1459;s:6:"header";N;s:3:"DAT";a:0:{}}}}

@@ -1,0 +1,20 @@
+2005-02-20 Ingo Renner <typo3@ingo-renner.com>
+		* ADD asked by field
+		* ADD category text modes
+		* FIX RTE transformations now working
+		* CHG manual updated
+		* CHG default css
+		* CHG default template
+		* CHG TCE Forms now use labels of EXT:lang where appropriate
+
+
+2005-02-15 Ingo Renner <typo3@ingo-renner.com>
+
+        * ADD dutch translation
+        * ADD category selection by GET vars
+        * ADD show/hide all function
+        * ADD show only one FAQ at a time mode
+        * FIX sorting of categories and questions
+        * CHG Manual
+        * CHG default CSS
+        * Thanks a lot to Ben van't Ende and Rupert Germann for helping out with ideas and programming!!

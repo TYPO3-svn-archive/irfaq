@@ -27,6 +27,8 @@ TEXT_CATEGORY - Category
 TEXT_EXPERT - Expert
 FAQ_EXPERT - the Name of the Expert
 FAQ_EXPERT_URL - webpage of the expert
+TEXT_ASKED_BY
+ASKED_BY
 </pre>
 <br />
 <br />
@@ -63,9 +65,13 @@ FAQ_EXPERT_URL - webpage of the expert
 	-->
 	<div class="tx-irfaq-answer">
 		<a name="irfaq_###FAQ_ID###"></a>
-		<h4>###FAQ_Q###</h4> ###TEXT_CATEGORY### ###FAQ_CATEGORY###
-		###FAQ_A###<br /><br />
-		###TEXT_EXPERT### ###FAQ_EXPERT###
+		<h4>###FAQ_Q###</h4> 
+		###FAQ_A###
+		<div class="additional-info">
+			###TEXT_CATEGORY### ###FAQ_CATEGORY###
+			###TEXT_EXPERT### ###FAQ_EXPERT### ###FAQ_EXPERT_URL###
+			###TEXT_ASKED_BY### ###ASKED_BY###
+		</div>
 	</div>
 	<!-- ###FAQ### end-->
 	<!-- ###ANSWERS###  end -->
@@ -98,12 +104,14 @@ FAQ_EXPERT_URL - webpage of the expert
 		<!-- ###FAQ### begin 
 			Template for a single FAQ item 
 		-->
-		<dt onclick="toggleFaq('###FAQ_ID###', ###SINGLE_OPEN###)" style="cursor: pointer;">###FAQ_PM_IMG### ###FAQ_Q### ###TEXT_CATEGORY### ###FAQ_CATEGORY###</dt>
+		<dt onclick="toggleFaq('###FAQ_ID###', ###SINGLE_OPEN###)" style="cursor: pointer;">###FAQ_PM_IMG### ###FAQ_Q###</dt>
 		<dd id="irfaq_a_###FAQ_ID###" style="display: none;">
 			###FAQ_A###
-			<br />###TEXT_EXPERT###
-			<br />###FAQ_EXPERT###
-			<br />###FAQ_EXPERT_URL###
+			<div class="additional-info">
+				###TEXT_CATEGORY### ###FAQ_CATEGORY###
+				###TEXT_EXPERT### ###FAQ_EXPERT### ###FAQ_EXPERT_URL###
+				###TEXT_ASKED_BY### ###ASKED_BY###
+			</div>
 		</dd>	
 		<!-- ###FAQ### end-->
 	<!-- ###CONTENT###  end -->
