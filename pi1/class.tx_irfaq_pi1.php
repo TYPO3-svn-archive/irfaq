@@ -80,7 +80,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				$content .= 'unknown view!';
 		}
 
-		return $content;
+		return $this->pi_wrapInBaseClass($content);
 	}
 
 	/**
