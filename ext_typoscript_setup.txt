@@ -1,0 +1,39 @@
+# Includes the irfaqLib:
+includeLibs.tx_irfaq_pi1 = EXT:irfaq/pi1/class.tx_irfaq_pi1.php
+
+#plugin.tx_irfaq_pi1 >
+plugin.tx_irfaq_pi1 = USER
+plugin.tx_irfaq_pi1 {
+	userFunc = tx_irfaq_pi1->main
+	
+	defaultCode = dynamic
+	#code = dynamic
+	
+	# html template
+	templateFile = {$plugin.tx_irfaq_pi1.file.templateFile}
+	
+	# plus/minus icons for dynamic view
+	iconMinus = {$plugin.tx_irfaq_pi1.file.iconMinus}
+	iconPlus = {$plugin.tx_irfaq_pi1.file.iconPlus}
+	
+	# pid_list is the page, where your news db-records are stored 
+	pid_list.field = pages
+  
+	# you can also leave the "starting Point" field in the content element empty and
+	# define the pid_list in this way:
+	# pid_list = 12,13  # comma separated list of pages
+	
+	# categoryModes are: 0=display all categories, 1=display selected categories, -1=display deselected categories
+	categoryMode = 0
+	#categorySelection = 0
+	
+	### Set default Styles
+	_CSS_DEFAULT_STYLE (
+		.tx-irfaq-pi1 ul.tx-irfaq-questions-list { margin-bottom: 75px; }
+		.tx-irfaq-pi1 ul li a { color: #000; text-decoration: none; }
+		.tx-irfaq-pi1 ul li a:hover { color: #000; text-decoration: underline; }
+		.tx-irfaq-pi1 .tx-irfaq-answer { margin-bottom: 10px; border-bottom: 1px solid #000; }
+		.tx-irfaq-pi1 dd { margin-left: 0; }
+	)
+
+}

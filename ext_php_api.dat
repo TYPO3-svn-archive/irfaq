@@ -1,0 +1,53 @@
+a:2:{s:4:"meta";a:3:{s:5:"title";s:5:"irfaq";s:5:"descr";s:10:"Simple FAQ";s:7:"options";a:2:{s:10:"usageCount";s:1:"1";s:19:"includeCodeAbstract";N;}}s:5:"files";a:9:{s:14:"MD5_28b11e99ee";a:4:{s:8:"filename";s:14:"ext_emconf.php";s:8:"filesize";i:2268;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_650ba9004d";a:4:{s:8:"filename";s:17:"ext_localconf.php";s:8:"filesize";i:785;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_78af9ebebb";a:4:{s:8:"filename";s:14:"ext_tables.php";s:8:"filesize";i:3054;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_3dd8690662";a:4:{s:8:"filename";s:13:"locallang.php";s:8:"filesize";i:1304;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_eaa23d78e9";a:4:{s:8:"filename";s:16:"locallang_db.php";s:8:"filesize";i:4952;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_a3d98baa72";a:4:{s:8:"filename";s:7:"tca.php";s:8:"filesize";i:5589;s:6:"header";N;s:3:"DAT";a:0:{}}s:14:"MD5_bfe92adf4f";a:5:{s:8:"filename";s:26:"pi1/class.tx_irfaq_pi1.php";s:8:"filesize";i:13661;s:6:"header";a:5:{s:4:"text";s:51:"
+
+class.tx_irfaq_pi1.php
+
+Creates a faq list.
+$Id$
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:1:{i:0;s:43:"@author Ingo Renner <typo3@ingo-renner.com>";}s:11:"other_index";a:1:{s:7:"@author";a:1:{i:0;s:35:"Ingo Renner <typo3@ingo-renner.com>";}}}s:3:"DAT";a:10:{i:1;a:8:{s:6:"header";s:41:"class tx_irfaq_pi1 extends tslib_pibase {";s:5:"class";i:1;s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:5:{s:4:"text";s:51:"
+
+class.tx_irfaq_pi1.php
+
+Creates a faq list.
+$Id$
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:1:{i:0;s:43:"@author Ingo Renner <typo3@ingo-renner.com>";}s:11:"other_index";a:1:{s:7:"@author";a:1:{i:0;s:35:"Ingo Renner <typo3@ingo-renner.com>";}}}s:7:"content";s:0:"";s:12:"content_size";i:339;s:13:"content_lines";i:11;s:6:"atLine";i:42;}i:3;a:7:{s:6:"header";s:31:"function main($content,$conf)	{";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:77:"
+
+main function, which is called at startup
+calls init() and determines view
+";s:5:"param";a:2:{i:0;a:2:{i:0;s:6:"string";i:1;s:31:"$content: output string of page";}i:1;a:2:{i:0;s:5:"array";i:1;s:34:"$conf: configuration array from TS";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:30:"$content: output of faq plugin";}}s:7:"content";s:0:"";s:12:"content_size";i:266;s:13:"content_lines";i:17;s:6:"atLine";i:62;}i:5;a:7:{s:6:"header";s:22:"function init($conf) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:38:"
+
+initializes configuration variables
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:5:"array";i:1;s:34:"$conf: configuration array from TS";}}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}}s:7:"content";s:0:"";s:12:"content_size";i:2649;s:13:"content_lines";i:54;s:6:"atLine";i:86;}i:7;a:7:{s:6:"header";s:27:"function initCategories() {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:100:"
+
+Getting all tx_irfaq_cat categories into internal array
+partly taken from tt_news - thx Rupert!!!
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}}s:7:"content";s:0:"";s:12:"content_size";i:651;s:13:"content_lines";i:17;s:6:"atLine";i:147;}i:9;a:7:{s:6:"header";s:24:"function initExperts() {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:42:"
+
+Getting all experts into internal array
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}}s:7:"content";s:0:"";s:12:"content_size";i:388;s:13:"content_lines";i:10;s:6:"atLine";i:170;}i:11;a:7:{s:6:"header";s:24:"function dynamicView() {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:77:"
+
+creates the dynamic view with dhtml and adds javascript to the page
+header
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:8:"faq list";}}s:7:"content";s:0:"";s:12:"content_size";i:1038;s:13:"content_lines";i:24;s:6:"atLine";i:187;}i:13;a:7:{s:6:"header";s:23:"function staticView() {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:40:"
+
+creates the static view without dhtml
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:8:"faq list";}}s:7:"content";s:0:"";s:12:"content_size";i:573;s:13:"content_lines";i:17;s:6:"atLine";i:217;}i:15;a:7:{s:6:"header";s:33:"function fillMarkers($template) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:32:"
+
+replaces markers with content
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:46:"$template: the html with markers to substitude";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:33:"template with substituted markers";}}s:7:"content";s:0:"";s:12:"content_size";i:1332;s:13:"content_lines";i:34;s:6:"atLine";i:241;}i:17;a:4:{s:6:"header";s:48:"function getCatMarkerArray($markerArray, $row) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:74:"
+
+Fills in the Category markerArray with data
+also taken from tt_news ;-)
+";s:5:"param";a:2:{i:0;a:2:{i:0;s:5:"array";i:1;s:41:"$markerArray : partly filled marker array";}i:1;a:2:{i:0;s:5:"array";i:1;s:33:"$row : result row for a news item";}}s:6:"return";a:2:{i:0;s:5:"array";i:1;s:32:"$markerArray: filled markerarray";}}s:6:"atLine";i:284;}i:19;a:7:{s:6:"header";s:32:"function getSelectConf($where) {";s:11:"parentClass";s:12:"tx_irfaq_pi1";s:4:"cDat";a:3:{s:4:"text";s:85:"
+
+build the selectconf (array of query-parameters) to get the news items from the db
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:32:"$where : where-part of the query";}}s:6:"return";a:2:{i:0;s:5:"array";i:1;s:45:"the selectconf for the display of a news item";}}s:7:"content";s:0:"";s:12:"content_size";i:2667;s:13:"content_lines";i:60;s:6:"atLine";i:315;}}s:10:"usageCount";a:10:{s:12:"H_ff1fe2ae17";a:2:{s:24:"_searchtime_milliseconds";d:8;s:15:"_functionHeader";s:41:"class tx_irfaq_pi1 extends tslib_pibase {";}s:12:"H_e8476b0991";a:2:{s:24:"_searchtime_milliseconds";d:1;s:15:"_functionHeader";s:31:"function main($content,$conf)	{";}s:12:"H_2199b34fe8";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:4;s:15:"_functionHeader";s:22:"function init($conf) {";}s:12:"H_6930b10610";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:3;s:15:"_functionHeader";s:27:"function initCategories() {";}s:12:"H_024d3bdae3";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:2;s:15:"_functionHeader";s:24:"function initExperts() {";}s:12:"H_6659d3b89b";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:1;s:15:"_functionHeader";s:24:"function dynamicView() {";}s:12:"H_5d42fed44a";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:1;s:15:"_functionHeader";s:23:"function staticView() {";}s:12:"H_731f9171b7";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:3;s:5:"TOTAL";i:3;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:3;s:5:"TOTAL";i:3;}s:24:"_searchtime_milliseconds";d:4;s:15:"_functionHeader";s:33:"function fillMarkers($template) {";}s:12:"H_8d691384b5";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:6;s:15:"_functionHeader";s:48:"function getCatMarkerArray($markerArray, $row) {";}s:12:"H_e3a78634c9";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_bfe92adf4f";a:3:{s:8:"fileName";s:26:"pi1/class.tx_irfaq_pi1.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:4;s:15:"_functionHeader";s:32:"function getSelectConf($where) {";}}}s:14:"MD5_7d66307cfd";a:5:{s:8:"filename";s:34:"pi1/class.tx_irfaq_pi1_wizicon.php";s:8:"filesize";i:1952;s:6:"header";a:5:{s:4:"text";s:35:"
+
+Class that adds the wizard icon.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:1:{i:0;s:43:"@author	Ingo Renner <typo3@ingo-renner.com>";}s:11:"other_index";a:1:{s:7:"@author";a:1:{i:0;s:35:"Ingo Renner <typo3@ingo-renner.com>";}}}s:3:"DAT";a:2:{i:1;a:5:{s:6:"header";s:28:"class tx_irfaq_pi1_wizicon {";s:5:"class";i:1;s:11:"parentClass";s:20:"tx_irfaq_pi1_wizicon";s:4:"cDat";a:5:{s:4:"text";s:35:"
+
+Class that adds the wizard icon.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:1:{i:0;s:43:"@author	Ingo Renner <typo3@ingo-renner.com>";}s:11:"other_index";a:1:{s:7:"@author";a:1:{i:0;s:35:"Ingo Renner <typo3@ingo-renner.com>";}}}s:6:"atLine";i:27;}i:3;a:7:{s:6:"header";s:29:"function includeLocalLang()	{";s:11:"parentClass";s:20:"tx_irfaq_pi1_wizicon";s:4:"cDat";a:3:{s:4:"text";s:58:"
+
+Includes the locallang file for the 'tt_news' extension
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:5:"array";i:1;s:20:"The LOCAL_LANG array";}}s:7:"content";s:0:"";s:12:"content_size";i:316;s:13:"content_lines";i:11;s:6:"atLine";i:48;}}s:10:"usageCount";a:2:{s:12:"H_6f109d65a7";a:2:{s:24:"_searchtime_milliseconds";d:1;s:15:"_functionHeader";s:28:"class tx_irfaq_pi1_wizicon {";}s:12:"H_bb44c57692";a:4:{s:3:"ALL";a:2:{s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:14:"MD5_7d66307cfd";a:3:{s:8:"fileName";s:34:"pi1/class.tx_irfaq_pi1_wizicon.php";s:11:"objectUsage";i:1;s:5:"TOTAL";i:1;}s:24:"_searchtime_milliseconds";d:2;s:15:"_functionHeader";s:29:"function includeLocalLang()	{";}}}s:14:"MD5_eb3db5c1b2";a:4:{s:8:"filename";s:17:"pi1/locallang.php";s:8:"filesize";i:1193;s:6:"header";N;s:3:"DAT";a:0:{}}}}
