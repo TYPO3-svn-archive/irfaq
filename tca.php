@@ -111,7 +111,7 @@ $TCA['tx_irfaq_q'] = Array (
 	),
 	'types' => Array (
 		//divider to tabs
-		'0' => Array('showitem' => 'hidden;;1;;1-1-1, q_from, expert, cat,--div--;Q & A, q, a;;;richtext[paste|bold|italic|underline|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts]') #,--div--;Media,image')
+		'0' => Array('showitem' => 'hidden;;1;;1-1-1, q, a;;;richtext[paste|bold|italic|underline|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts],--div--;Details, q_from, expert, cat') #,image')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => 'fe_group')
@@ -158,9 +158,27 @@ $TCA['tx_irfaq_cat'] = Array (
 				'eval' => 'required,trim',
 			)
 		),
+		'shortcut' => Array (
+			'label' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_cat.shortcut',
+			'config' => Array (
+				'type' => 'input',
+				'size' => '30',
+				'max' => '256',
+				'wizards' => Array(
+					'_PADDING' => 2,
+					'link' => Array(
+						'type' => 'popup',
+						'title' => 'Link',
+						'icon' => 'link_popup.gif',
+						'script' => 'browse_links.php?mode=wizard',
+						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
+					)
+				)
+			)
+		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'hidden;;1;;1-1-1, title;;;;2-2-2')
+		'0' => Array('showitem' => 'hidden;;1;;1-1-1, title;;;;2-2-2,shortcut')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => 'fe_group')

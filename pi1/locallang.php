@@ -9,12 +9,14 @@ $LOCAL_LANG = Array (
 	'default' => Array (
 		'fold_faq' => 'fold faq',
 		'text_expert' => 'expert:',
+		'text_category' => 'Category: ',
 	),
 	'dk' => Array (
 	),
 	'de' => Array (
 		'fold_faq' => 'Antwort auf/zuklappen',
 		'text_expert' => 'Ansprechpartner:',
+		'text_category' => 'Kategorie: ',
 	),
 	'no' => Array (
 	),
@@ -25,6 +27,9 @@ $LOCAL_LANG = Array (
 	'es' => Array (
 	),
 	'nl' => Array (
+		'fold_faq' => 'Antwoord uit/inklappen',
+		'text_expert' => 'Expert:',
+		'text_category' => 'Categorie: ',
 	),
 	'cz' => Array (
 	),

@@ -8,4 +8,7 @@ plugin.tx_irfaq_pi1 {
 	
 	# cat=plugin.irfaq/file; type=file[gif,jpg,jpeg,png]; label= Minus Icon for dynamic view
 	file.iconMinus = EXT:irfaq/res/minus.gif
+	
+	# cat=plugin.irfaq/enable; type=options[only one open item at a time=1,multiple open items at a time=0]; label= View Mode: choose whether a click on an item will collapse all other items and open the clicked or open the clicked item as usual
+	singleOpen = 0
 }

@@ -42,7 +42,7 @@ require_once(PATH_tslib.'class.tslib_pibase.php');
  * @author Ingo Renner <typo3@ingo-renner.com>
  */
 class tx_irfaq_pi1 extends tslib_pibase {
-	var $cObj;
+	var $local_cObj;
 
 	var $prefixId 		= 'tx_irfaq_pi1';		// Same as class name
 	var $scriptRelPath 	= 'pi1/class.tx_irfaq_pi1.php';	// Path to this script relative to the extension dir.
@@ -52,6 +52,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	var $categories 	= array();
 	var $experts		= array();
 	var $pageArray 		= array();
+	var $count			= 0;
 
 	/**
 	 * main function, which is called at startup
@@ -62,7 +63,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	 * @return	string		$content: output of faq plugin
 	 */
 	function main($content,$conf)	{
-
+		$this->local_cObj = t3lib_div::makeInstance('tslib_cObj');
 		$this->init($conf);
 
 		switch($this->config['code']) {
@@ -112,6 +113,12 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$this->config['catExclusive'] = 0;
 		}
 
+		//set category by $_GET
+		if (is_numeric($this->piVars['cat'])) {
+			$this->config['catExclusive'] = $this->piVars['cat'];
+			$this->config['categoryMode'] = 1;
+		}
+
 		// pidList is the pid/list of pids from where to fetch the faq items.
 		$ffPidList = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'pages');
 		$pidList   = $ffPidList ? $ffPidList : trim($this->cObj->stdWrap($this->conf['pid_list'], $this->conf['pid_list.']));
@@ -149,12 +156,17 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	function initCategories() {
 		$storagePid = $GLOBALS['TSFE']->getStorageSiterootPids();
 
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tx_irfaq_cat LEFT JOIN tx_irfaq_q_cat_mm ON tx_irfaq_q_cat_mm.uid_foreign = tx_irfaq_cat.uid', 'tx_irfaq_cat.pid IN (' . $storagePid['_STORAGE_PID'] . ')' . $this->cObj->enableFields('tx_irfaq_cat'));
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*',
+													  'tx_irfaq_cat LEFT JOIN tx_irfaq_q_cat_mm ON tx_irfaq_q_cat_mm.uid_foreign = tx_irfaq_cat.uid',
+													  'tx_irfaq_cat.pid IN (' . $storagePid['_STORAGE_PID'] . ')' . $this->cObj->enableFields('tx_irfaq_cat'),
+													  '',
+													  'tx_irfaq_cat.sorting');
 
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 
-			$catTitle = '';
-			$catTitle = $row['title'];
+			$catTitle    = '';
+			$catTitle    = $row['title'];
+			$catShortcut = $row['shortcut'];
 
 			if (isset($row['uid_local'])) {
 				$this->categories[$row['uid_local']][] = array('title' => $catTitle, 'catid' => $row['uid_foreign']);
@@ -163,16 +175,18 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			}
 		}
 	}
-	
+
 	/**
 	 * Getting all experts into internal array
-	 * 
-	 * @return void
+	 *
+	 * @return	void
 	 */
 	function initExperts() {
 		// Fetching experts
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*','tx_irfaq_expert', '1=1'.$this->cObj->enableFields('tx_irfaq_expert'));
-		
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*',
+													  'tx_irfaq_expert',
+													  '1=1'.$this->cObj->enableFields('tx_irfaq_expert'));
+
 		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))   {
 			$this->experts[$row['uid']]['name']  = $row['name'];
 			$this->experts[$row['uid']]['url']   = $row['url'];
@@ -192,20 +206,22 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$template     = array();
 		$subpartArray = array();
 
-		$header  = '<script type="text/javascript" language="javascript">'.chr(10);
-		$header .= '<!--'.chr(10);
-		$header .= 'var tx_irfaq_pi1_iconPlus = "'.$this->config['iconPlus'].'";'.chr(10);
-		$header .= 'var tx_irfaq_pi1_iconMinus = "'.$this->config['iconMinus'].'";'.chr(10);
-		$header .= '// -->'.chr(10);
-		$header .= '</script>'.chr(10);
-		$header .= '<script type="text/javascript" language="javascript" src="'.t3lib_extMgm::siteRelPath($this->extKey).'res/toggleFaq.js"></script>';
-		
-		$GLOBALS['TSFE']->additionalHeaderData['tx_irfaq'] = $header;
-		
 		$template['total']   = $this->cObj->getSubpart($this->templateCode, '###TEMPLATE_DYNAMIC###');
 		$template['content'] = $this->cObj->getSubPart($template['total'], '###CONTENT###');
 
 		$subpartArray['###CONTENT###'] = $this->fillMarkers($template['content']);
+
+		//after calling fillMarkers we know count and can fill the corresponding js var
+		$header  = '<script type="text/javascript" language="javascript">'.chr(10);
+		$header .= '<!--'.chr(10);
+		$header .= 'var tx_irfaq_pi1_iconPlus = "'.$this->config['iconPlus'].'";'.chr(10);
+		$header .= 'var tx_irfaq_pi1_iconMinus = "'.$this->config['iconMinus'].'";'.chr(10);
+		$header .= 'var tx_irfaq_pi1_count = '.$this->count.';'.chr(10);
+		$header .= '// -->'.chr(10);
+		$header .= '</script>'.chr(10);
+		$header .= '<script type="text/javascript" language="javascript" src="'.t3lib_extMgm::siteRelPath($this->extKey).'res/toggleFaq.js"></script>';
+		$GLOBALS['TSFE']->additionalHeaderData['tx_irfaq'] = $header;
+
 		$content = $this->cObj->substituteMarkerArrayCached($template['total'], array(), $subpartArray);
 
 		return $content;
@@ -244,30 +260,54 @@ class tx_irfaq_pi1 extends tslib_pibase {
 
 		$content = '';
 
-		$selectConf = array();	
-		$where = 'pid = '.$this->config['pidList'].$this->cObj->enableFields('tx_irfaq_q');	
+		$selectConf = array();
+		$where 		= 'pid = '.$this->config['pidList'].$this->cObj->enableFields('tx_irfaq_q');
 		$selectConf = $this->getSelectConf($where);
 		$selectConf['selectFields'] = 'DISTINCT tx_irfaq_q.uid, tx_irfaq_q.q, tx_irfaq_q.a, tx_irfaq_q.cat, tx_irfaq_q.expert';
-		
+		$selectConf['orderBy'] 		= 'tx_irfaq_q.sorting';
+
 		$res = $this->cObj->exec_getQuery('tx_irfaq_q', $selectConf);
-		
-		
-		#$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*','tx_irfaq_q', 'pid = '.$this->config['pidList'].$this->cObj->enableFields('tx_irfaq_q'), '', 'sorting');
+		$this->count = $GLOBALS['TYPO3_DB']->sql_num_rows($res);
 
 		$markerArray = array();
-
-
+		$i = 0;
 		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-			$markerArray['###FAQ_ID###']		   = $row['uid'];
-			$markerArray['###FAQ_Q###']			   = $row['q'];
-			$markerArray['###FAQ_A###']			   = $row['a'];
+			$markerArray['###FAQ_ID###'] = ++$i;
+			$markerArray['###FAQ_Q###']	 = $this->formatStr($this->local_cObj->stdWrap($row['q'], $this->config['question_stdWrap.']));
+			$markerArray['###FAQ_A###']	 = $this->formatStr($this->local_cObj->stdWrap($row['a'], $this->config['answer_stdWrap.']));
+			//categories
+			$markerArray    			 = $this->getCatMarkerArray($markerArray, $row);
 
-			$markerArray['###FAQ_CATEGORY###']     = $this->getCatMarkerArray($markerArray, $row);
-			$markerArray['###FAQ_EXPERT###']	   = $this->experts[$row['expert']]['name'];
-			$markerArray['###TEXT_EXPERT###']	   = $this->pi_getLL('text_expert');
-			
-			$markerArray['###FAQ_PM_IMG###']	   = '<img src="'.$this->config['iconPlus'].'" id="irfaq_pm_'.$row['uid'].'" alt="'.$this->pi_getLL('fold_faq').'" />';
-			
+			if($this->config['singleOpen']) {
+				$markerArray['###SINGLE_OPEN###'] = 'true';
+			}
+			else {
+				$markerArray['###SINGLE_OPEN###'] = 'false';
+			}
+
+			if($row['expert']) {
+				$this->local_cObj->LOAD_REGISTER(
+				array(
+					'faqExpertEmail' => $this->experts[$row['expert']]['email'],
+					'faqExpertUrl'   => $this->experts[$row['expert']]['url']
+				),
+				'');
+				$markerArray['###FAQ_EXPERT###']	   = $this->local_cObj->stdWrap($this->experts[$row['expert']]['name'], $this->config['expert_stdWrap.']);
+				$markerArray['###TEXT_EXPERT###']	   = $this->local_cObj->stdWrap($this->pi_getLL('text_expert'), $this->config['textexpert_stdWrap.']);
+				$markerArray['###FAQ_EXPERT_EMAIL###'] = $this->local_cObj->stdWrap($this->experts[$row['expert']]['email'], $this->config['expertemail_stdWrap.']);
+				$markerArray['###FAQ_EXPERT_URL###']   = $this->local_cObj->stdWrap($this->experts[$row['expert']]['url'], $this->config['experturl_stdWrap.']);
+			}
+			else {
+				//leave everything empty if no expert assigned
+				$markerArray['###FAQ_EXPERT###']	   = '';
+				$markerArray['###TEXT_EXPERT###']	   = '';
+				$markerArray['###FAQ_EXPERT_EMAIL###'] = '';
+				$markerArray['###FAQ_EXPERT_URL###']   = '';
+				$this->local_cObj->LOAD_REGISTER(array('faqExpertEmail' => '','faqExpertUrl' => ''), '');
+			}
+
+			$markerArray['###FAQ_PM_IMG###'] = '<img src="'.$this->config['iconPlus'].'" id="irfaq_pm_'.$i.'" alt="'.$this->pi_getLL('fold_faq').'" />';
+
 			$subpart  = $this->cObj->getSubPart($template, '###FAQ###');
 			$content .= $this->cObj->substituteMarkerArrayCached($subpart, $markerArray);
 		}
@@ -286,30 +326,43 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	function getCatMarkerArray($markerArray, $row) {
 		// clear the category text marker if the FAQ item has no categories
 		$markerArray['###FAQ_CATEGORY###'] = '';
+		$markerArray['###TEXT_CATEGORY###'] = '';
 
 		if(isset($this->categories[$row['uid']])) {
 			reset($this->categories[$row['uid']]);
 			$faq_category = array();
 
 			while(list($key, $val) = each($this->categories[$row['uid']])) {
-
 				// find categories, wrap them with links and collect them in the array $news_category.
-				$faq_category[] = $this->categories[$row['uid']][$key]['title'];
+				if ($this->config['catTextMode']) {
+					// link to category shortcut
+					$faq_category[] = $this->pi_linkToPage($this->categories[$row['uid']][$key]['title'], $this->categories[$row['uid']][$key]['shortcut']);
+				}
+				else {
+					//no link
+					$faq_category[] = $this->categories[$row['uid']][$key]['title'];
+				}
 			}
 		}
-		
+
 		//check for empty categories
 		if(!is_array($faq_category)) {
 			$faq_category = array();
 		}
-		
+
 		$markerArray['###FAQ_CATEGORY###'] = implode(', ', array_slice($faq_category, 0));
 
-		return $markerArray['###FAQ_CATEGORY###'];
+		//apply the wraps if there are categories
+		if(count($faq_category)) {
+			$markerArray['###FAQ_CATEGORY###']= $this->local_cObj->stdWrap($markerArray['###FAQ_CATEGORY###'], $this->config['category_stdWrap.']);
+			$markerArray['###TEXT_CATEGORY###'] = $this->pi_getLL('text_category');
+		}
+
+		return $markerArray;
 	}
-	
+
 	/**
-	 * build the selectconf (array of query-parameters) to get the news items from the db
+	 * build the selectconf (array of query-parameters) to get the faq items from the db
 	 *
 	 * @param	string		$where : where-part of the query
 	 * @return	array		the selectconf for the display of a news item
@@ -318,7 +371,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$selectConf = array();
 		$selectConf['pidInList'] = $this->config['pidList'];
 		$selectConf['where'] = $where;
-		
+
 		//build SQL on condition of categoryMode
 		if($this->config['categoryMode'] == 1) {
 			$selectConf['leftjoin'] = 'tx_irfaq_q_cat_mm ON tx_irfaq_q.uid = tx_irfaq_q_cat_mm.uid_local';
@@ -326,7 +379,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		}
 		elseif ($this->config['categoryMode'] == -1) {
 			$selectConf['leftjoin'] = 'tx_irfaq_q_cat_mm ON (tx_irfaq_q.uid = tx_irfaq_q_cat_mm.uid_local AND (tx_irfaq_q_cat_mm.uid_foreign=';
-			
+
 			//multiple categories selected?
 			if(strpos($this->config['catExclusive'], ',')) {
 				//yes
@@ -339,33 +392,20 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$selectConf['leftjoin'] .= '))';
 			$selectConf['where'] .= ' AND (tx_irfaq_q_cat_mm.uid_foreign IS NULL)';
 		}
-		
-		/*
-		if ($this->config['categoryMode'] == -1) {
-			$selectConf['leftjoin'] = 'tt_news_cat_mm ON tt_news.uid = tt_news_cat_mm.uid_local';
-			$selectConf['where'] .= ' AND (IFNULL(tt_news_cat_mm.uid_foreign,0) NOT IN (' . ($this->catExclusive?$this->catExclusive:0) . '))';
-		} elseif ($this->catExclusive) {
-			if ($this->config['categoryMode'] == 1) {
-				$selectConf['leftjoin'] = 'tt_news_cat_mm ON tt_news.uid = tt_news_cat_mm.uid_local';
-				$selectConf['where'] .= ' AND (IFNULL(tt_news_cat_mm.uid_foreign,0) IN (' . ($this->catExclusive?$this->catExclusive:0) . '))';
-			}
-			if ($this->config['categoryMode'] == -1) {
-				$selectConf['leftjoin'] = 'tt_news_cat_mm ON (tt_news.uid = tt_news_cat_mm.uid_local AND (tt_news_cat_mm.uid_foreign=';
-				if (strstr($this->catExclusive, ',')) {
-					$selectConf['leftjoin'] .= ereg_replace(',', ' OR tt_news_cat_mm.uid_foreign=', $this->catExclusive);
-				} else {
-					$selectConf['leftjoin'] .= $this->catExclusive?$this->catExclusive:0;
-				}
-				$selectConf['leftjoin'] .= '))';
-				$selectConf['where'] .= ' AND (tt_news_cat_mm.uid_foreign IS NULL)';
-			}
-		} elseif ($this->config['categoryMode']) {
-			$selectConf['leftjoin'] = 'tt_news_cat_mm ON tt_news.uid = tt_news_cat_mm.uid_local';
-			$selectConf['where'] .= ' AND (IFNULL(tt_news_cat_mm.uid_foreign,\'nocat\') ' . ($this->config['categoryMode'] > 0?'':'!') . '=\'nocat\')';
-		}
-		*/
-		
 		return $selectConf;
+	}
+
+	/**
+	 * Format string with general_stdWrap from configuration
+	 *
+	 * @param	string		string to wrap
+	 * @return	string		wrapped string
+	 */
+	function formatStr($str) {
+		if (is_array($this->config['general_stdWrap.'])) {
+			$str = $this->local_cObj->stdWrap($str, $this->config['general_stdWrap.']);
+		}
+		return $str;
 	}
 }
 

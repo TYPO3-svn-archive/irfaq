@@ -23,6 +23,10 @@ FAQ_Q - Question
 FAQ_A - Answer
 FAQ_PM_IMG - the plus / minus icon
 FAQ_CATEGORY - FAQ item category
+TEXT_CATEGORY - Category
+TEXT_EXPERT - Expert
+FAQ_EXPERT - the Name of the Expert
+FAQ_EXPERT_URL - webpage of the expert
 </pre>
 <br />
 <br />
@@ -38,34 +42,34 @@ FAQ_CATEGORY - FAQ item category
 <!-- ###TEMPLATE_STATIC### begin
 	This is the template for static FAQ list 
 -->
-	<div class="tx-irfaq-pi1">
-		<ul class="tx-irfaq-questions-list">	
+<div class="tx-irfaq-pi1">
+	<ul class="tx-irfaq-questions-list">	
 	<!-- ###QUESTIONS### begin
 		  This is the part of the template substituted with the list of FAQ - questions: 
 	-->
 		<!-- ###FAQ### begin 
 			Template for a single question 
 		-->
-			<li><a href="#irfaq###FAQ_ID###">###FAQ_Q### (###FAQ_CATEGORY###)</a></li>
+		<li><a href="#irfaq_###FAQ_ID###">###FAQ_Q###</a> ###TEXT_CATEGORY### ###FAQ_CATEGORY###</li>
 		<!-- ###FAQ### end-->
 	<!-- ###QUESTIONS###  end -->
-		</ul>	
-				
+	</ul>	
+			
 	<!-- ###ANSWERS### begin
 		  This is the part of the template substituted with the list of faqs: 
 	-->
-		<!-- ###FAQ### begin 
-			Template for a single item 
-		-->
-		<div class="tx-irfaq-answer">
-			<a name="irfaq###FAQ_ID###"></a>
-			###FAQ_Q### (###FAQ_CATEGORY###)<br />
-			###FAQ_A###<br /><br />
-			###TEXT_EXPERT### ###FAQ_EXPERT###
-		</div>
-		<!-- ###FAQ### end-->
-	<!-- ###ANSWERS###  end -->
+	<!-- ###FAQ### begin 
+		Template for a single item 
+	-->
+	<div class="tx-irfaq-answer">
+		<a name="irfaq_###FAQ_ID###"></a>
+		<h4>###FAQ_Q###</h4> ###TEXT_CATEGORY### ###FAQ_CATEGORY###
+		###FAQ_A###<br /><br />
+		###TEXT_EXPERT### ###FAQ_EXPERT###
 	</div>
+	<!-- ###FAQ### end-->
+	<!-- ###ANSWERS###  end -->
+</div>
 <!-- ###TEMPLATE_STATIC### end -->
 
 <br />
@@ -82,26 +86,35 @@ FAQ_CATEGORY - FAQ item category
 <!-- ###TEMPLATE_DYNAMIC### begin
 	This is the template for dynamic FAQ list. 
 -->
-	<div class="tx-irfaq-pi1">
-		<dl>
+<div class="tx-irfaq-pi1">
+	<p>
+		<a href="javascript:toggleAll(true);">show</a>/<a href="javascript:toggleAll(false);">hide</a> all
+	</p>
+	
+	<dl>
 	<!-- ###CONTENT### begin
 		  This is the part of the template substituted with the list of FAQs: 
 	-->		
 		<!-- ###FAQ### begin 
 			Template for a single FAQ item 
 		-->
-			<dt onclick="toggleFaq('###FAQ_ID###')" style="cursor: pointer;">
-			###FAQ_PM_IMG### ###FAQ_Q### (###FAQ_CATEGORY###)</dt>
-			<dd id="irfaq_a_###FAQ_ID###" style="display: none;">
-				###FAQ_A###
-				<br /><br />
-			</dd>
-		
+		<dt onclick="toggleFaq('###FAQ_ID###', ###SINGLE_OPEN###)" style="cursor: pointer;">###FAQ_PM_IMG### ###FAQ_Q### ###TEXT_CATEGORY### ###FAQ_CATEGORY###</dt>
+		<dd id="irfaq_a_###FAQ_ID###" style="display: none;">
+			###FAQ_A###
+			<br />###TEXT_EXPERT###
+			<br />###FAQ_EXPERT###
+			<br />###FAQ_EXPERT_URL###
+		</dd>	
 		<!-- ###FAQ### end-->
 	<!-- ###CONTENT###  end -->
-		</dl>
-	</div>	
+	</dl>
+</div>	
 <!-- ###TEMPLATE_DYNAMIC### end -->
 
 </body>
 </html>
+
+
+
+
+

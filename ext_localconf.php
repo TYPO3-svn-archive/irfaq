@@ -26,10 +26,7 @@ t3lib_extMgm::addTypoScript($_EXTKEY,'setup',"
 
 //listing FAQ in Web->Page view
 $TYPO3_CONF_VARS['EXTCONF']['cms']['db_layout']['addTables']['tx_irfaq_q'][0] = array(
-
-    'fList' => 'q,a,q_from,expert',
-
-    'icon' => TRUE
-
+	'fList' => 'q,a,q_from,expert',
+	'icon' => TRUE
 );
 ?>
