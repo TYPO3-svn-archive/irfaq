@@ -18,7 +18,7 @@ CREATE TABLE tx_irfaq_q_cat_mm (
 # Table structure for table 'tx_irfaq_q'
 #
 CREATE TABLE tx_irfaq_q (
-	uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+	uid int(11) unsigned NOT NULL auto_increment,
 	pid int(11) unsigned DEFAULT '0' NOT NULL,
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE tx_irfaq_q (
 # Table structure for table 'tx_irfaq_cat'
 #
 CREATE TABLE tx_irfaq_cat (
-	uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+	uid int(11) unsigned NOT NULL auto_increment,
 	pid int(11) unsigned DEFAULT '0' NOT NULL,
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE tx_irfaq_cat (
 # Table structure for table 'tx_irfaq_expert'
 #
 CREATE TABLE tx_irfaq_expert (
-	uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+	uid int(11) unsigned NOT NULL auto_increment,
 	pid int(11) unsigned DEFAULT '0' NOT NULL,
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
