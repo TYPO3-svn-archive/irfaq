@@ -25,6 +25,8 @@ $LOCAL_LANG = Array (
 	'es' => Array (
 	),
 	'nl' => Array (
+		'pi1_title' => 'Moderne FAQ',
+		'pi1_plus_wiz_description' => 'FAQ met dynamische en statische lijst',
 	),
 	'cz' => Array (
 	),

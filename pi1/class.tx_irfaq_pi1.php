@@ -54,7 +54,8 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	var $categories 	= array();
 	var $experts		= array();
 	var $pageArray 		= array();
-	var $count			= 0;
+	var $faqCount			= 0;
+	var $hash			= ''; //a random hash to use multiple pi on one page
 
 	/**
 	 * main function, which is called at startup
@@ -172,6 +173,9 @@ class tx_irfaq_pi1 extends tslib_pibase {
 
 		$this->initCategories(); // initialize category-array
 		$this->initExperts(); // initialize experts-array
+		
+		mt_srand();
+		$this->hash = substr(md5(mt_rand()), 0, 5);
 	}
 
 	/**
@@ -251,16 +255,19 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$header .= '<!--'.chr(10);
 		$header .= 'var tx_irfaq_pi1_iconPlus = "'.$this->config['iconPlus'].'";'.chr(10);
 		$header .= 'var tx_irfaq_pi1_iconMinus = "'.$this->config['iconMinus'].'";'.chr(10);
-		$header .= 'var tx_irfaq_pi1_count = '.$this->count.';'.chr(10);
 		$header .= '// -->'.chr(10);
 		$header .= '</script>'.chr(10);
 		$header .= '<script type="text/javascript" language="javascript" src="'.
 			t3lib_extMgm::siteRelPath($this->extKey).'res/toggleFaq.js"></script>';
 		$GLOBALS['TSFE']->additionalHeaderData['tx_irfaq'] = $header;
 
+		$markerArray = array(
+			'###HASH###' => $this->hash,
+			'###COUNT###' => $this->faqCount,
+		);
 		$content = $this->cObj->substituteMarkerArrayCached(
 			$template['total'], 
-			array(), 
+			$markerArray, 
 			$subpartArray
 		);
 
@@ -314,7 +321,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$selectConf['orderBy'] 		= 'tx_irfaq_q.sorting';
 
 		$res = $this->cObj->exec_getQuery('tx_irfaq_q', $selectConf);
-		$this->count = $GLOBALS['TYPO3_DB']->sql_num_rows($res);
+		$this->faqCount = $GLOBALS['TYPO3_DB']->sql_num_rows($res);
 
 		$markerArray = array();
 		$i = 0;
@@ -403,9 +410,11 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			}
 
 			$markerArray['###FAQ_PM_IMG###'] = '<img src="'.
-				$this->config['iconPlus'].'" id="irfaq_pm_'.$i.'" alt="'.
+				$this->config['iconPlus'].'" id="irfaq_pm_'.$i.'_'.$this->hash.'" alt="'.
 				$this->pi_getLL('fold_faq').'" />';
 
+			$markerArray['###HASH###'] = $this->hash;
+			
 			$subpart  = $this->cObj->getSubPart($template, '###FAQ###');
 			$content .= $this->cObj->substituteMarkerArrayCached($subpart, 
 																 $markerArray);

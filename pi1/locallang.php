@@ -29,9 +29,10 @@ $LOCAL_LANG = Array (
 	'es' => Array (
 	),
 	'nl' => Array (
-		'fold_faq' => 'Antwoord uit/inklappen',
+		'fold_faq' => 'FAQ uit/inklappen',
 		'text_expert' => 'Expert:',
-		'text_category' => 'Categorie: ',
+		'text_category' => 'Categorie:',
+		'text_asked_by' => 'Gevraagd door:',
 	),
 	'cz' => Array (
 	),
@@ -41,7 +42,9 @@ $LOCAL_LANG = Array (
 	),
 	'fi' => Array (
 		'fold_faq' => 'faq hakemisto',
-		'text_expert' => 'asiantuntija:',
+		'text_expert' => 'Asiantuntija:',
+		'text_category' => 'Luokka:',
+		'text_asked_by' => 'Kysymyksen asetti:',
 	),
 	'tr' => Array (
 	),

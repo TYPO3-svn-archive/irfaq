@@ -52,7 +52,7 @@ ASKED_BY
 		<!-- ###FAQ### begin 
 			Template for a single question 
 		-->
-		<li><a href="#irfaq_###FAQ_ID###">###FAQ_Q###</a> ###TEXT_CATEGORY### ###FAQ_CATEGORY###</li>
+		<li><a href="#irfaq_###FAQ_ID###_###HASH###">###FAQ_Q###</a> ###TEXT_CATEGORY### ###FAQ_CATEGORY###</li>
 		<!-- ###FAQ### end-->
 	<!-- ###QUESTIONS###  end -->
 	</ul>	
@@ -64,7 +64,7 @@ ASKED_BY
 		Template for a single item 
 	-->
 	<div class="tx-irfaq-answer">
-		<a name="irfaq_###FAQ_ID###"></a>
+		<a name="irfaq_###FAQ_ID###_###HASH###"></a>
 		<h4>###FAQ_Q###</h4> 
 		###FAQ_A###
 		<div class="additional-info">
@@ -94,7 +94,7 @@ ASKED_BY
 -->
 <div class="tx-irfaq-pi1">
 	<p>
-		<a href="javascript:toggleAll(true);">show</a>/<a href="javascript:toggleAll(false);">hide</a> all
+		<a href="javascript:toggleAll(true, '###HASH###', ###COUNT###);">show</a>/<a href="javascript:toggleAll(false, '###HASH###', ###COUNT###);">hide</a> all
 	</p>
 	
 	<dl>
@@ -104,8 +104,8 @@ ASKED_BY
 		<!-- ###FAQ### begin 
 			Template for a single FAQ item 
 		-->
-		<dt onclick="toggleFaq('###FAQ_ID###', ###SINGLE_OPEN###)" style="cursor: pointer;">###FAQ_PM_IMG### ###FAQ_Q###</dt>
-		<dd id="irfaq_a_###FAQ_ID###" style="display: none;">
+		<dt onclick="toggleFaq('###FAQ_ID###', ###SINGLE_OPEN###, '###HASH###')" style="cursor: pointer;">###FAQ_PM_IMG### ###FAQ_Q###</dt>
+		<dd id="irfaq_a_###FAQ_ID###_###HASH###" style="display: none;">
 			###FAQ_A###
 			<div class="additional-info">
 				###TEXT_CATEGORY### ###FAQ_CATEGORY###

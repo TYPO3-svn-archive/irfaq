@@ -4,20 +4,20 @@
  * @param id 		the id of the FAQ item to hide or show
  * @param single	true to show only one item at a time, false the open as many as you want
  */
-function toggleFaq(id, single) {	
+function toggleFaq(id, single, hash) {	
 		
 	if(single) {
 		//show only one Q+A at a time
-		toggleAll(false);		
-		showHideFaq(id, true);
+		toggleAll(false, hash);		
+		showHideFaq(id, true, hash);
 	}
 	else {
 		//open as many Q+A as you like		
-		if(document.getElementById('irfaq_a_'+id).style.display == 'none') {
-			showHideFaq(id, true);
+		if(document.getElementById('irfaq_a_'+id+'_'+hash).style.display == 'none') {
+			showHideFaq(id, true, hash);
 		}
 		else {
-			showHideFaq(id, false);
+			showHideFaq(id, false, hash);
 		}			
 	}	
 }
@@ -28,9 +28,9 @@ function toggleFaq(id, single) {
  * @param id 		the id of the FAQ item to hide or show
  * @param status	true to show the item, false to hide it
  */
-function showHideFaq(id, status) {
-	var faq_id = 'irfaq_a_'+id; //answer
-	var pm_id  = 'irfaq_pm_'+id; // plus/minus icon
+function showHideFaq(id, status, hash) {
+	var faq_id = 'irfaq_a_'+id+'_'+hash; //answer
+	var pm_id  = 'irfaq_pm_'+id+'_'+hash; // plus/minus icon
 	
 	if(status) {
 		document.getElementById(faq_id).style.display = 'inline';
@@ -47,8 +47,8 @@ function showHideFaq(id, status) {
  *
  * @param mode	true to show the items, false to hide them
  */
-function toggleAll(mode) {
-	for(i = 0; i < tx_irfaq_pi1_count; i++) {
-		showHideFaq(i+1, mode);
+function toggleAll(mode, hash, count) {
+	for(i = 0; i < count; i++) {
+		showHideFaq(i+1, mode, hash);
 	}				
 }
