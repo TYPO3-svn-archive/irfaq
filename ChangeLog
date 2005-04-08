@@ -1,3 +1,7 @@
+2005-04-08  Ingo Renner  <typo3@ingo-renner.com>
+
+	* CHG Removed all "unsigned" keywords from ext_tables.sql (non-DBAL compliant)
+	
 2005-02-20 Ingo Renner <typo3@ingo-renner.com>
 	* FIX small bug when using multiple instances of irfaq on one page
 
