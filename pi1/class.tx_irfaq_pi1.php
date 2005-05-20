@@ -257,7 +257,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$header .= 'var tx_irfaq_pi1_iconMinus = "'.$this->config['iconMinus'].'";'.chr(10);
 		$header .= '// -->'.chr(10);
 		$header .= '</script>'.chr(10);
-		$header .= '<script type="text/javascript" language="javascript" src="'.
+		$header .= '<script type="text/javascript" src="'.
 			t3lib_extMgm::siteRelPath($this->extKey).'res/toggleFaq.js"></script>';
 		$GLOBALS['TSFE']->additionalHeaderData['tx_irfaq'] = $header;
 
