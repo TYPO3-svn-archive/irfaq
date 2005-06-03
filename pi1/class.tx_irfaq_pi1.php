@@ -174,7 +174,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$this->initCategories(); // initialize category-array
 		$this->initExperts(); // initialize experts-array
 		
-		mt_srand();
+		mt_srand(time());
 		$this->hash = substr(md5(mt_rand()), 0, 5);
 	}
 
