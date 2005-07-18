@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2004 Ingo Renner (typo3@ingo-renner.com)
+*  (c) 2004 - 2005 Ingo Renner (typo3@ingo-renner.com)
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -315,7 +315,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$content = '';
 
 		$selectConf = array();
-		$where 		= 'pid = '.$this->config['pidList'].$this->cObj->enableFields('tx_irfaq_q');
+		$where 		= '1 = 1'.$this->cObj->enableFields('tx_irfaq_q');
 		$selectConf = $this->getSelectConf($where);
 		$selectConf['selectFields'] = 'DISTINCT tx_irfaq_q.uid, tx_irfaq_q.q, tx_irfaq_q.q_from, tx_irfaq_q.a, tx_irfaq_q.cat, tx_irfaq_q.expert';
 		$selectConf['orderBy'] 		= 'tx_irfaq_q.sorting';

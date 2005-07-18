@@ -1,6 +1,10 @@
+2005-07-18  Ingo Renner  <typo3@ingo-renner.com>
+
+	* FIX fixed bug which resulted in a SQL error when retrieving questions from more than one page
+
 2005-05-20  Ingo Renner  <typo3@ingo-renner.com>
 
-	* CHG XHTML Strict compiant
+	* CHG XHTML Strict compliant
 	
 2005-04-08  Ingo Renner  <typo3@ingo-renner.com>
 
