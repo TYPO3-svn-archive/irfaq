@@ -23,6 +23,10 @@ $LOCAL_LANG = Array (
 	'no' => Array (
 	),
 	'it' => Array (
+		'fold_faq' => 'fold faq',
+		'text_expert' => 'Esperto:',
+		'text_category' => 'Categoria:',
+		'text_asked_by' => 'Domanda fatta da:',
 	),
 	'fr' => Array (
 	),

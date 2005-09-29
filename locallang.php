@@ -19,6 +19,8 @@ $LOCAL_LANG = Array (
 	'no' => Array (
 	),
 	'it' => Array (
+		'pi1_title' => 'FAQ Moderna',
+		'pi1_plus_wiz_description' => 'FAQ con visualizzazione statica e dinamica',
 	),
 	'fr' => Array (
 	),
