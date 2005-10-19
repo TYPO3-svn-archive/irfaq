@@ -1,3 +1,7 @@
+2005-10-19  Ingo Renner  <typo3@ingo-renner.com>
+
+	* FIX rendering now works like regular content elements
+
 2005-09-30  Ingo Renner  <typo3@ingo-renner.com>
 
 	* ADD added italian translation
