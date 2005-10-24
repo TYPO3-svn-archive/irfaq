@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2004 - 2005 Ingo Renner (typo3@ingo-renner.com)
+*  (c) 2004 Ingo Renner (typo3@ingo-renner.com)
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -54,7 +54,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	var $categories 	= array();
 	var $experts		= array();
 	var $pageArray 		= array();
-	var $faqCount			= 0;
+	var $faqCount		= 0;
 	var $hash			= ''; //a random hash to use multiple pi on one page
 
 	/**
@@ -315,7 +315,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$content = '';
 
 		$selectConf = array();
-		$where 		= '1 = 1'.$this->cObj->enableFields('tx_irfaq_q');
+		$where 		= 'pid = '.$this->config['pidList'].$this->cObj->enableFields('tx_irfaq_q');
 		$selectConf = $this->getSelectConf($where);
 		$selectConf['selectFields'] = 'DISTINCT tx_irfaq_q.uid, tx_irfaq_q.q, tx_irfaq_q.q_from, tx_irfaq_q.a, tx_irfaq_q.cat, tx_irfaq_q.expert';
 		$selectConf['orderBy'] 		= 'tx_irfaq_q.sorting';
@@ -441,7 +441,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$faq_category = array();
 
 			while(list($key, $val) = each($this->categories[$row['uid']])) {
-				// find categories, wrap them with links and collect them in the array $news_category.
+				// find categories, wrap them with links and collect them in the array $faq_category.
 				if ($this->config['catTextMode'] == 1) {
 					// link to category shortcut page
 					$faq_category[] = $this->pi_linkToPage(
@@ -451,11 +451,10 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				}
 				else if($this->config['catTextMode'] == 2) {
 					// act as category selector
-					$faq_category[] = $this->pi_linkToPage(
+					$faq_category[] = $this->pi_linkTP(
 						$this->categories[$row['uid']][$key]['title'], 
-						$GLOBALS['TSFE']->page['uid'], 
-						'', 
-						array('tx_irfaq_pi1[cat]' => $this->categories[$row['uid']][$key]['catid'])
+						array('tx_irfaq_pi1[cat]' => $this->categories[$row['uid']][$key]['catid']),
+						true
 					);
 				}
 				else {
