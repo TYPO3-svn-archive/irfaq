@@ -11,6 +11,8 @@ $LOCAL_LANG = Array (
 		'pi1_plus_wiz_description' => 'FAQ with dynamic and static list',
 	),
 	'dk' => Array (
+		'pi1_title' => 'Moderne FAQ',
+		'pi1_plus_wiz_description' => 'FAQ med dynamisk og statisk liste',
 	),
 	'de' => Array (
 		'pi1_title' => 'Moderne FAQ',
@@ -95,6 +97,12 @@ $LOCAL_LANG = Array (
 	'ba' => Array (
 	),
 	'kr' => Array (
+	),
+	'eo' => Array (
+	),
+	'my' => Array (
+	),
+	'hi' => Array (
 	),
 );
 ?>

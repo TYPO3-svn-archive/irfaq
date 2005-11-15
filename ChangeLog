@@ -1,3 +1,8 @@
+2005-11-15  Ingo Renner  <typo3@ingo-renner.com>
+
+	* ADD added danish translation
+	* CHG version is now 0.4.11
+	
 2005-10-24  Ingo Renner  <typo3@ingo-renner.com>
 
 	* FIX fixed bug with category selector, now using cHash. Thanks to Benjamin A. Schmit

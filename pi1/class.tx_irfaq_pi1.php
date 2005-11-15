@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2004 Ingo Renner (typo3@ingo-renner.com)
+*  (c) 2004 - 2005 Ingo Renner (typo3@ingo-renner.com)
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -187,11 +187,12 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	function initCategories() {
 		$storagePid = $GLOBALS['TSFE']->getStorageSiterootPids();
 
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*',
-													  'tx_irfaq_cat LEFT JOIN tx_irfaq_q_cat_mm ON tx_irfaq_q_cat_mm.uid_foreign = tx_irfaq_cat.uid',
-													  'tx_irfaq_cat.pid IN (' . $storagePid['_STORAGE_PID'] . ')' . $this->cObj->enableFields('tx_irfaq_cat'),
-													  '',
-													  'tx_irfaq_cat.sorting');
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'*',
+			'tx_irfaq_cat LEFT JOIN tx_irfaq_q_cat_mm ON tx_irfaq_q_cat_mm.uid_foreign = tx_irfaq_cat.uid',
+			'tx_irfaq_cat.pid IN (' . $storagePid['_STORAGE_PID'] . ')' . $this->cObj->enableFields('tx_irfaq_cat'),
+			'',
+			'tx_irfaq_cat.sorting');
 
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 
@@ -315,7 +316,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$content = '';
 
 		$selectConf = array();
-		$where 		= 'pid = '.$this->config['pidList'].$this->cObj->enableFields('tx_irfaq_q');
+		$where 		= '1 = 1'.$this->cObj->enableFields('tx_irfaq_q');
 		$selectConf = $this->getSelectConf($where);
 		$selectConf['selectFields'] = 'DISTINCT tx_irfaq_q.uid, tx_irfaq_q.q, tx_irfaq_q.q_from, tx_irfaq_q.a, tx_irfaq_q.cat, tx_irfaq_q.expert';
 		$selectConf['orderBy'] 		= 'tx_irfaq_q.sorting';
@@ -451,10 +452,11 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				}
 				else if($this->config['catTextMode'] == 2) {
 					// act as category selector
-					$faq_category[] = $this->pi_linkTP(
+					$faq_category[] = $this->pi_linkToPage(
 						$this->categories[$row['uid']][$key]['title'], 
-						array('tx_irfaq_pi1[cat]' => $this->categories[$row['uid']][$key]['catid']),
-						true
+						$GLOBALS['TSFE']->page['uid'], 
+						'', 
+						array('tx_irfaq_pi1[cat]' => $this->categories[$row['uid']][$key]['catid'])
 					);
 				}
 				else {

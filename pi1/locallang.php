@@ -10,15 +10,19 @@ $LOCAL_LANG = Array (
 		'fold_faq' => 'fold faq',
 		'text_expert' => 'Expert:',
 		'text_category' => 'Category: ',
-		'text_asked_by' => 'Question asked by: '
+		'text_asked_by' => 'Question asked by: ',
 	),
 	'dk' => Array (
+		'fold_faq' => 'Vis/skjul svar',
+		'text_expert' => 'Ekspert:',
+		'text_category' => 'Kategori:',
+		'text_asked_by' => 'Spørgsmål stillet af:',
 	),
 	'de' => Array (
 		'fold_faq' => 'Antwort auf/zuklappen',
 		'text_expert' => 'Ansprechpartner:',
 		'text_category' => 'Kategorie: ',
-		'text_asked_by' => 'Frage gestellt von: '
+		'text_asked_by' => 'Frage gestellt von: ',
 	),
 	'no' => Array (
 	),
@@ -105,6 +109,12 @@ $LOCAL_LANG = Array (
 	'ba' => Array (
 	),
 	'kr' => Array (
+	),
+	'eo' => Array (
+	),
+	'my' => Array (
+	),
+	'hi' => Array (
 	),
 );
 ?>

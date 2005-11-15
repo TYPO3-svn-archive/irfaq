@@ -56,7 +56,7 @@ plugin.tx_irfaq_pi1 {
     catTextMode = 2
     
     general_stdWrap.parseFunc >
-    general_stdWrap.parseFunc < tt_content.text.20.parseFunc
+    general_stdWrap.parseFunc =< tt_content.text.20.parseFunc
 }
 
 

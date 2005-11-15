@@ -29,6 +29,26 @@ $LOCAL_LANG = Array (
 		'tx_irfaq.sysfolder' => 'Modern FAQ',
 	),
 	'dk' => Array (
+		'tx_irfaq_q' => 'FAQ',
+		'tx_irfaq_q.q' => 'Spørgsmål:',
+		'tx_irfaq_q.a' => 'Svar:',
+		'tx_irfaq_q.q_from' => 'Spørger:',
+		'tx_irfaq_q.expert' => 'Ekspert:',
+		'tx_irfaq_cat' => 'FAQ kategori',
+		'tx_irfaq_expert' => 'FAQ ekspert',
+		'tx_irfaq_expert.name' => 'Navn:',
+		'tx_irfaq_expert.url' => 'URL:',
+		'tt_content.list_type_pi1' => 'Moderne FAQ',
+		'tx_irfaq.pi_flexform.what_to_display' => 'Hvad skal vises:',
+		'tx_irfaq.pi_flexform.category_selection' => 'Kategori valg:',
+		'tx_irfaq.pi_flexform.category_selection_notCategorized' => '[ikke kategoriseret]',
+		'tx_irfaq.pi_flexform.view_dynamic' => 'Dynamisk visning med DHTML (svar udfoldes på siden)',
+		'tx_irfaq.pi_flexform.view_static' => 'Statisk visning med svar under spørgsmål',
+		'tx_irfaq.pi_flexform.select_deselect_categories' => 'Kategori opsætning:',
+		'tx_irfaq.pi_flexform.category_selection_showAll' => 'Vis alle (ligegyldigt valg herunder)',
+		'tx_irfaq.pi_flexform.category_selection_showSelected' => 'Vis elementer fra de valgte kategorier',
+		'tx_irfaq.pi_flexform.category_selection_DontShowSelected' => 'Vis IKKE elementer fra de valgte kategorier',
+		'tx_irfaq.sysfolder' => 'Moderne FAQ',
 	),
 	'de' => Array (
 		'tx_irfaq_q' => 'FAQ',
@@ -185,6 +205,12 @@ $LOCAL_LANG = Array (
 	'ba' => Array (
 	),
 	'kr' => Array (
+	),
+	'eo' => Array (
+	),
+	'my' => Array (
+	),
+	'hi' => Array (
 	),
 );
 ?>
