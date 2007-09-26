@@ -29,6 +29,8 @@ FAQ_EXPERT - the Name of the Expert
 FAQ_EXPERT_URL - webpage of the expert
 TEXT_ASKED_BY
 ASKED_BY
+RELATED_FAQ - related FAQs (if any)
+RELATED_LINKS - related links (if any)
 </pre>
 <br />
 <br />
@@ -42,35 +44,37 @@ ASKED_BY
 <em>This is the template for static FAQ list. Use it when you don't like to have javascript.</em>
 
 <!-- ###TEMPLATE_STATIC### begin
-	This is the template for static FAQ list 
+	This is the template for static FAQ list
 -->
 <div class="tx-irfaq-pi1">
-	<ul class="tx-irfaq-questions-list">	
+	<ul class="tx-irfaq-questions-list">
 	<!-- ###QUESTIONS### begin
-		  This is the part of the template substituted with the list of FAQ - questions: 
+		  This is the part of the template substituted with the list of FAQ - questions:
 	-->
-		<!-- ###FAQ### begin 
-			Template for a single question 
+		<!-- ###FAQ### begin
+			Template for a single question
 		-->
 		<li><a href="#irfaq_###FAQ_ID###_###HASH###">###FAQ_Q###</a> ###TEXT_CATEGORY### ###FAQ_CATEGORY###</li>
 		<!-- ###FAQ### end-->
 	<!-- ###QUESTIONS###  end -->
-	</ul>	
-			
+	</ul>
+
 	<!-- ###ANSWERS### begin
-		  This is the part of the template substituted with the list of faqs: 
+		  This is the part of the template substituted with the list of faqs:
 	-->
-	<!-- ###FAQ### begin 
-		Template for a single item 
+	<!-- ###FAQ### begin
+		Template for a single item
 	-->
 	<div class="tx-irfaq-answer">
 		<a name="irfaq_###FAQ_ID###_###HASH###"></a>
-		<h4>###FAQ_Q###</h4> 
+		<h4>###FAQ_Q###</h4>
 		###FAQ_A###
 		<div class="additional-info">
 			###TEXT_CATEGORY### ###FAQ_CATEGORY###
 			###TEXT_EXPERT### ###FAQ_EXPERT### ###FAQ_EXPERT_URL###
 			###TEXT_ASKED_BY### ###ASKED_BY###
+			###RELATED_FAQ###
+			###RELATED_LINKS###
 		</div>
 	</div>
 	<!-- ###FAQ### end-->
@@ -90,19 +94,19 @@ ASKED_BY
 <em>This is the template for dynamic FAQ list. This will use dhtml (javascript and html)</em>
 
 <!-- ###TEMPLATE_DYNAMIC### begin
-	This is the template for dynamic FAQ list. 
+	This is the template for dynamic FAQ list.
 -->
 <div class="tx-irfaq-pi1">
 	<p>
 		<a href="javascript:toggleAll(true, '###HASH###', ###COUNT###);">###TEXT_SHOW###</a>/<a href="javascript:toggleAll(false, '###HASH###', ###COUNT###);">###TEXT_HIDE###</a>
 	</p>
-	
+
 	<dl>
 	<!-- ###CONTENT### begin
-		  This is the part of the template substituted with the list of FAQs: 
-	-->		
-		<!-- ###FAQ### begin 
-			Template for a single FAQ item 
+		  This is the part of the template substituted with the list of FAQs:
+	-->
+		<!-- ###FAQ### begin
+			Template for a single FAQ item
 		-->
 		<dt onclick="toggleFaq('###FAQ_ID###', ###SINGLE_OPEN###, '###HASH###')" style="cursor: pointer;">###FAQ_PM_IMG### ###FAQ_Q###</dt>
 		<dd id="irfaq_a_###FAQ_ID###_###HASH###" style="display: none;">
@@ -111,12 +115,14 @@ ASKED_BY
 				###TEXT_CATEGORY### ###FAQ_CATEGORY###
 				###TEXT_EXPERT### ###FAQ_EXPERT### ###FAQ_EXPERT_URL###
 				###TEXT_ASKED_BY### ###ASKED_BY###
+				###RELATED_FAQ###
+				###RELATED_LINKS###
 			</div>
-		</dd>	
+		</dd>
 		<!-- ###FAQ### end-->
 	<!-- ###CONTENT###  end -->
 	</dl>
-</div>	
+</div>
 <!-- ###TEMPLATE_DYNAMIC### end -->
 
 <!-- ###TEMPLATE_SEARCH### begin
@@ -128,10 +134,32 @@ ASKED_BY
 	<span class="irfaq-search-form-submit"><input type="submit" name="search" value="###SEARCH_BUTTON###" /></span>
 </form></div>
 <!-- ###TEMPLATE_SEARCH### end -->
+
+<!-- ###TEMPLATE_RELATED_FAQ### begin
+	Subpart for the related faq
+-->
+<div class="irfaq-related-faq-block">
+###TEXT_RELATED_FAQ###
+<ul class="irfaq-related-faq">
+	<!-- ###RELATED_FAQ_ENTRY### begin -->
+	<li><a href="#irfaq_###RELATED_FAQ_ENTRY_UID###_###RELATED_FAQ_ENTRY_HASH###">###RELATED_FAQ_ENTRY_TITLE###</a></li>
+	<!-- ###RELATED_FAQ_ENTRY### end -->
+</ul>
+</div>
+<!-- ###TEMPLATE_RELATED_FAQ### end -->
+
+<!-- ###TEMPLATE_RELATED_LINKS### begin
+	Subpart for the related links
+-->
+<div class="irfaq-related-link-block">
+###TEXT_RELATED_LINKS###
+<ul class="irfaq-related-links">
+	<!-- ###RELATED_LINK_ENTRY### begin -->
+	<li><a href="###RELATED_LINK_ENTRY_HREF###">###RELATED_LINK_ENTRY_TITLE###</a></li>
+	<!-- ###RELATED_LINK_ENTRY### end -->
+</ul>
+</div>
+<!-- ###TEMPLATE_RELATED_LINKS### end -->
+
 </body>
 </html>
-
-
-
-
-

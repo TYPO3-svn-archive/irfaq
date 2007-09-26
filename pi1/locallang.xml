@@ -17,6 +17,8 @@
             <label index="text_asked_by">Question asked by: </label>
             <label index="text_show">Show all</label>
             <label index="text_hide">Hide all</label>
+            <label index="text_related_faq">Related entries:</label>
+            <label index="text_related_links">Related links:</label>
             <label index="searchButtonLabel">Search</label>
         </languageKey>
         <languageKey index="dk">EXT:irfaq/pi1/dk.locallang.xml</languageKey>
