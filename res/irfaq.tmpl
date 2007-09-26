@@ -94,7 +94,7 @@ ASKED_BY
 -->
 <div class="tx-irfaq-pi1">
 	<p>
-		<a href="javascript:toggleAll(true, '###HASH###', ###COUNT###);">show</a>/<a href="javascript:toggleAll(false, '###HASH###', ###COUNT###);">hide</a> all
+		<a href="javascript:toggleAll(true, '###HASH###', ###COUNT###);">###TEXT_SHOW###</a>/<a href="javascript:toggleAll(false, '###HASH###', ###COUNT###);">###TEXT_HIDE###</a>
 	</p>
 	
 	<dl>
@@ -119,6 +119,15 @@ ASKED_BY
 </div>	
 <!-- ###TEMPLATE_DYNAMIC### end -->
 
+<!-- ###TEMPLATE_SEARCH### begin
+	Subpart for the search-form
+-->
+<div class="irfaq-search-form">
+<form method="post" action="###FORM_URL###">
+	<input size="30" maxlength="100" type="text" name="tx_irfaq_pi1[swords]" value="###SWORDS###" />
+	<span class="irfaq-search-form-submit"><input type="submit" name="search" value="###SEARCH_BUTTON###" /></span>
+</form></div>
+<!-- ###TEMPLATE_SEARCH### end -->
 </body>
 </html>
 

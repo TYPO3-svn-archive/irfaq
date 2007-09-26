@@ -2,7 +2,8 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2004 Ingo Renner (typo3@ingo-renner.com)
+*  (c) 2004 - 2006 Ingo Renner (typo3@ingo-renner.com)
+*  (c) 2006        Netcreators (extensions@netcreators.com)
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,36 +25,24 @@
 /**
  * Class that adds the wizard icon.
  *
- * @author	Ingo Renner <typo3@ingo-renner.com>
+ * @author	Netcreators <extensions@netcreators.com>
  */
+$LANG->includeLLFile('EXT:irfaq/lang/locallang.xml');
+
 class tx_irfaq_pi1_wizicon {
 	function proc($wizardItems)	{
 		global $LANG;
 
-		$LL = $this->includeLocalLang();
-
-		$wizardItems['plugins_tx_irfaq_pi1'] = array(
-			'icon'=>t3lib_extMgm::extRelPath('irfaq')."pi1/ce_wiz.gif",
-			'title'=>$LANG->getLLL('pi1_title',$LL),
-			'description'=>$LANG->getLLL('pi1_plus_wiz_description',$LL),
-			'params'=>'&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=irfaq_pi1'
+		$wizardItems["plugins_tx_irfaq_pi1"] = array(
+			"icon"=>t3lib_extMgm::extRelPath("irfaq")."pi1/ce_wiz.gif",
+			"title"=>$LANG->getLL("pi1_title_irfaq"),
+			"description"=>$LANG->getLL("pi1_plus_wiz_description_irfaq"),
+			"params"=>"&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=irfaq_pi1"
 		);
 
 		return $wizardItems;
 	}
-
-	/**
-	 * Includes the locallang file for the 'tt_news' extension
-	 * 
-	 * @return	array		The LOCAL_LANG array
-	 */
-	function includeLocalLang()	{
-		include(t3lib_extMgm::extPath('irfaq').'locallang.php');
-		return $LOCAL_LANG;
-	}
 }
-
-
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/irfaq/pi1/class.tx_irfaq_pi1_wizicon.php'])	{
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/irfaq/pi1/class.tx_irfaq_pi1_wizicon.php']);

@@ -2,7 +2,8 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2004 - 2005 Ingo Renner (typo3@ingo-renner.com)
+*  (c) 2004 - 2006 Ingo Renner (typo3@ingo-renner.com)
+*  (c) 2006        Netcreators (extensions@netcreators.com)
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +25,7 @@
 /**
  * Plugin 'Simple FAQ' for the 'irfaq' extension.
  *
- * @author	Ingo Renner <typo3@ingo-renner.com>
+ * @author	Netcreators <extensions@netcreators.com>
  * @package TYPO3
  * @subpackage irfaq
  */
@@ -37,9 +38,8 @@ require_once(PATH_tslib.'class.tslib_pibase.php');
  * class.tx_irfaq_pi1.php
  *
  * Creates a faq list.
- * $Id$
  *
- * @author Ingo Renner <typo3@ingo-renner.com>
+ * @author Netcreators <extensions@netcreators.com>
  */
 class tx_irfaq_pi1 extends tslib_pibase {
 	var $local_cObj;
@@ -49,7 +49,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	// Path to this script relative to the extension dir.
 	var $scriptRelPath 	= 'pi1/class.tx_irfaq_pi1.php';	
 	var $extKey 		= 'irfaq';	
-
+	var $searchFieldList = 'q, a';
 	var $config 		= array();
 	var $categories 	= array();
 	var $experts		= array();
@@ -68,16 +68,21 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	function main($content,$conf)	{
 		$this->local_cObj = t3lib_div::makeInstance('tslib_cObj');
 		$this->init($conf);
-
-		switch($this->config['code']) {
-			case 'DYNAMIC':
-				$content .= $this->dynamicView();
-				break;
-			case 'STATIC':
-				$content .= $this->staticView();
-				break;
-			default:
-				$content .= 'unknown view!';
+		
+		foreach($this->config['code'] as $code) {
+			switch($code) {
+				case 'SEARCH':
+					$content .= $this->searchView();
+					break;
+				case 'DYNAMIC':
+					$content .= $this->dynamicView();
+					break;
+				case 'STATIC':
+					$content .= $this->staticView();
+					break;
+				default:
+					$content .= 'unknown view!';
+			}
 		}
 
 		return $this->pi_wrapInBaseClass($content);
@@ -103,19 +108,20 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$this->config['code'] = $ffCode ?
 			$ffCode : 
 			strtoupper($conf['code']);
+		$this->config['code'] = explode(',', $this->config['code']);
 
 		// categoryModes are: 0=display all categories, 1=display selected categories, -1=display deselected categories
 		$ffCategoryMode = $this->pi_getFFvalue(
-			$this->cObj->data['pi_flexform'], 'categoryMode');
+			$this->cObj->data['pi_flexform'], 'categoryMode', 'sCATEGORIES');
 		$this->config['categoryMode'] = $ffCategoryMode ? 
 			$ffCategoryMode : 
-			$this->conf['categoryMode'];
+			$this->config['categoryMode'];
 
 		$ffCatSelection = $this->pi_getFFvalue(
-			$this->cObj->data['pi_flexform'], 'categorySelection');
+			$this->cObj->data['pi_flexform'], 'categorySelection', 'sCATEGORIES');
 		$this->config['catSelection'] = $ffCatSelection ? 
 			$ffCatSelection : 
-			trim($this->conf['categorySelection']);
+			trim($this->config['categorySelection']);
 
 		// ignore category selection if categoryMode isn't set
 		if($this->config['categoryMode'] != 0) {
@@ -130,13 +136,35 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$this->config['catExclusive'] = $this->piVars['cat'];
 			$this->config['categoryMode'] = 1;
 		}
+		
+		$ffSearchPid = $this->pi_getFFvalue(
+			$this->cObj->data['pi_flexform'], 'searchPid', 'sSEARCH');
+		$this->config['searchPid'] = $ffSearchPid ? 
+			$ffSearchPid : 
+			trim($this->config['searchPid']);
+			
+		$ffEmptySearchAtStart = $this->pi_getFFvalue(
+			$this->cObj->data['pi_flexform'], 'emptySearchAtStart', 'sSEARCH');
+		$this->config['emptySearchAtStart'] = $ffEmptySearchAtStart != '' ? 
+			$ffEmptySearchAtStart : 
+			trim($this->config['emptySearchAtStart']);
+			
+			// get fieldnames from the tx_irfaq_q db-table
+		$this->fieldNames = array_keys($GLOBALS['TYPO3_DB']->admin_get_fields('tx_irfaq_q'));
+		
+		if ($this->config['searchFieldList']) {
+			$searchFieldList = $this->validateFields($this->config['searchFieldList']);
+			if ($searchFieldList) {
+				$this->searchFieldList = $searchFieldList;
+			}
+		}
 
 		// pidList is the pid/list of pids from where to fetch the faq items.
 		$ffPidList = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'pages');
 		$pidList   = $ffPidList ? 
 			$ffPidList : 
 			trim($this->cObj->stdWrap(
-				$this->conf['pid_list'], $this->conf['pid_list.']
+				$this->config['pid_list'], $this->config['pid_list.']
 			));
 		$this->config['pidList'] = $pidList ? 
 			implode(t3lib_div::intExplode(',', $pidList), ',') : 
@@ -162,9 +190,9 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$this->config['limit'] = $TSLimit ? $TSLimit : 50;
 
 		// display text like 'page' in pagebrowser
-		$this->config['showPBrowserText'] = $this->conf['showPBrowserText']; 
+		$this->config['showPBrowserText'] = $this->config['showPBrowserText']; 
 		// get pageBrowser configuration
-		$this->config['pageBrowser.']     = $this->conf['pageBrowser.']; 
+		$this->config['pageBrowser.']     = $this->config['pageBrowser.']; 
 
 		// read template file
 		$this->templateCode = $this->cObj->fileResource(
@@ -229,6 +257,18 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$this->experts[$row['uid']]['email'] = $row['email'];
 		}
 	}
+	
+	function searchView() {
+		$template['total'] = $this->cObj->getSubpart($this->templateCode, '###TEMPLATE_SEARCH###');
+
+		$formURL = $this->pi_linkTP_keepPIvars_url(array('cat' => null), 0, 1, $this->config['searchPid']) ;
+			
+		$content = $this->cObj->substituteMarker($template['total'], '###FORM_URL###', $formURL);
+		$content = $this->cObj->substituteMarker($content, '###SWORDS###', htmlspecialchars($this->piVars['swords']));
+		$content = $this->cObj->substituteMarker($content, '###SEARCH_BUTTON###', $this->pi_getLL('searchButtonLabel'));
+
+		return $content;
+	}
 
 	/**
 	 * creates the dynamic view with dhtml and adds javascript to the page
@@ -251,26 +291,30 @@ class tx_irfaq_pi1 extends tslib_pibase {
 
 		$subpartArray['###CONTENT###'] = $this->fillMarkers($template['content']);
 
-		//after calling fillMarkers we know count and can fill the corresponding js var
-		$header  = '<script type="text/javascript" language="javascript">'.chr(10);
-		$header .= '<!--'.chr(10);
-		$header .= 'var tx_irfaq_pi1_iconPlus = "'.$this->config['iconPlus'].'";'.chr(10);
-		$header .= 'var tx_irfaq_pi1_iconMinus = "'.$this->config['iconMinus'].'";'.chr(10);
-		$header .= '// -->'.chr(10);
-		$header .= '</script>'.chr(10);
-		$header .= '<script type="text/javascript" src="'.
-			t3lib_extMgm::siteRelPath($this->extKey).'res/toggleFaq.js"></script>';
-		$GLOBALS['TSFE']->additionalHeaderData['tx_irfaq'] = $header;
-
-		$markerArray = array(
-			'###HASH###' => $this->hash,
-			'###COUNT###' => $this->faqCount,
-		);
-		$content = $this->cObj->substituteMarkerArrayCached(
-			$template['total'], 
-			$markerArray, 
-			$subpartArray
-		);
+		if(!empty($this->faqCount)) {
+			//after calling fillMarkers we know count and can fill the corresponding js var
+			$header  = '<script type="text/javascript" language="javascript">'.chr(10);
+			$header .= '<!--'.chr(10);
+			$header .= 'var tx_irfaq_pi1_iconPlus = "'.$this->config['iconPlus'].'";'.chr(10);
+			$header .= 'var tx_irfaq_pi1_iconMinus = "'.$this->config['iconMinus'].'";'.chr(10);
+			$header .= '// -->'.chr(10);
+			$header .= '</script>'.chr(10);
+			$header .= '<script type="text/javascript" src="'.
+				t3lib_extMgm::siteRelPath($this->extKey).'res/toggleFaq.js"></script>';
+			$GLOBALS['TSFE']->additionalHeaderData['tx_irfaq'] = $header;
+	
+			$markerArray = array(
+				'###HASH###' => $this->hash,
+				'###COUNT###' => $this->faqCount,
+				'###TEXT_SHOW###' => $this->pi_getLL('text_show'), 
+				'###TEXT_HIDE###' => $this->pi_getLL('text_hide'),
+			);
+			$content = $this->cObj->substituteMarkerArrayCached(
+				$template['total'], 
+				$markerArray, 
+				$subpartArray
+			);
+		}
 
 		return $content;
 	}
@@ -336,7 +380,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			);
 			$markerArray['###FAQ_A###']	 = $this->formatStr(
 				$this->local_cObj->stdWrap(
-					$row['a'], 
+					$this->pi_RTEcssText($row['a']), 
 					$this->config['answer_stdWrap.']
 				)
 			);
@@ -516,7 +560,27 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$selectConf['leftjoin'] .= '))';
 			$selectConf['where'] .= ' AND (tx_irfaq_q_cat_mm.uid_foreign IS NULL)';
 		}
+		
+		// do the search and add the result to the $where string
+		if ($this->piVars['swords']) {
+			$selectConf['where'] .= $this->searchWhere(trim($this->piVars['swords']));
+		} elseif(in_array('SEARCH', $this->config['code'])) {
+			// display an empty list, if 'emptySearchAtStart' is set.
+			$selectConf['where'] .= ($this->config['emptySearchAtStart'] ? 'AND 1=0' : '');
+		}
+
 		return $selectConf;
+	}
+	
+	/**
+	 * Generates a search where clause.
+	 *
+	 * @param	string		$sw: searchword(s)
+	 * @return	string		querypart
+	 */
+	function searchWhere($searchWords) {
+		$where = $this->cObj->searchWhere($searchWords, $this->searchFieldList, 'tx_irfaq_q');
+		return $where;
 	}
 
 	/**
@@ -534,12 +598,27 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		}
 		return $str;
 	}
+	
+	/**
+	 * checks for each field of a list of items if it exists in the tx_irfaq_q table ($this->fieldNames) and returns the validated fields
+	 *
+	 * @param	string		$fieldlist: a list of fields to ckeck
+	 * @return	string		the list of validated fields
+	 */
+	function validateFields($fieldlist) {
+		$checkedFields = array();
+		$fArr = t3lib_div::trimExplode(',',$fieldlist,1);
+		while (list(,$fN) = each($fArr)) {
+			if (in_array($fN,$this->fieldNames)) {
+				$checkedFields[] = $fN;
+			}
+		}
+		$checkedFieldlist = implode($checkedFields,',');
+		return $checkedFieldlist;
+	}
 }
-
-
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/irfaq/pi1/class.tx_irfaq_pi1.php'])	{
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/irfaq/pi1/class.tx_irfaq_pi1.php']);
 }
-
 ?>

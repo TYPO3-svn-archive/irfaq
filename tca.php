@@ -4,7 +4,7 @@ if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 $TCA['tx_irfaq_q'] = Array (
 	'ctrl' => $TCA['tx_irfaq_q']['ctrl'],
 	'interface' => Array (
-		'showRecordFieldList' => 'hidden,fe_group,q,cat,a,related'
+		'showRecordFieldList' => 'hidden,fe_group,q,cat,a,related,faq_files'
 	),
 	'feInterface' => $TCA['tx_irfaq_q']['feInterface'],
 	'columns' => Array (
@@ -32,7 +32,7 @@ $TCA['tx_irfaq_q'] = Array (
 		),
 		'q' => Array (		
 			'exclude' => 0,		
-			'label' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_q.q',		
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.q',		
 			'config' => Array (
 				'type' => 'input',	
 				'size' => '30',	
@@ -42,7 +42,7 @@ $TCA['tx_irfaq_q'] = Array (
 		),
 		'q_from' => Array (		
 			'exclude' => 1,		
-			'label' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_q.q_from',		
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.q_from',		
 			'config' => Array (
 				'type' => 'input',	
 				'size' => '30',
@@ -63,7 +63,7 @@ $TCA['tx_irfaq_q'] = Array (
 		),
 		'a' => Array (		
 			'exclude' => 0,		
-			'label' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_q.a',		
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.a',		
 			'config' => Array (
 				'type' => 'text',
 				'cols' => '30',
@@ -83,7 +83,7 @@ $TCA['tx_irfaq_q'] = Array (
 		),
 		'expert' => Array (
 			'exclude' => 1, 
-			'label' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_q.expert',
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.expert',
 			'config' => Array (
 				'type' => 'select',
 				'items' => Array (
@@ -108,10 +108,44 @@ $TCA['tx_irfaq_q'] = Array (
 				'minitems' => '0'
 			)
 		),*/
+		'related' => array (
+			'exclude' => 1,
+			'l10n_mode' => 'exclude',
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.related',
+			'config' => array (
+				'type' => 'group',
+				'internal_type' => 'db',
+					'allowed' => 'tx_irfaq_q,pages',
+					'MM' => 'tx_irfaq_related_mm',
+				'size' => '3',
+				'autoSizeMax' => 10,
+				'maxitems' => '200',
+				'minitems' => '0',
+				'show_thumbs' => '1'
+			)
+		),
+		'faq_files' => array (
+			'exclude' => 1,
+			'l10n_mode' => 'mergeIfNotBlank',
+			'label' => 'LLL:EXT:cms/locallang_ttc.php:media',
+			'config' => array (
+				'type' => 'group',
+				'internal_type' => 'file',
+				'allowed' => '',	// Must be empty for disallowed to work.
+				'disallowed' => 'php,php3',
+				'max_size' => '10000',
+				'uploadfolder' => 'uploads/media',
+				'show_thumbs' => '1',
+				'size' => '3',
+				'autoSizeMax' => '10',
+				'maxitems' => '10',
+				'minitems' => '0'
+			)
+		),
 	),
 	'types' => Array (
 		//divider to tabs
-		'0' => Array('showitem' => 'hidden;;1;;1-1-1, q, a;;;richtext[paste|bold|italic|underline|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts],--div--;Details, q_from, expert, cat') #,image')
+		'0' => Array('showitem' => 'hidden;;1;;1-1-1, q, a;;;richtext[paste|bold|italic|underline|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts],--div--;Details, q_from, expert, related, faq_files, cat') #,image')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => 'fe_group')
@@ -188,7 +222,7 @@ $TCA['tx_irfaq_expert'] = Array (
 	'columns' => Array (
 		'name' => Array (		
 			'exclude' => 1,		
-			'label' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_expert.name',		
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_expert.name',		
 			'config' => Array (
 				'type' => 'input',	
 				'size' => '30',
@@ -207,7 +241,7 @@ $TCA['tx_irfaq_expert'] = Array (
 		),
 		'url' => Array (		
 			'exclude' => 1,		
-			'label' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_expert.url',		
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_expert.url',		
 			'config' => Array (
 				'type' => 'input',	
 				'size' => '30',	

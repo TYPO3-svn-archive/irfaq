@@ -29,20 +29,10 @@ plugin.tx_irfaq_pi1 {
 	categoryMode = 0
 	#categorySelection = 0
 	
-	### Set default Styles
-	_CSS_DEFAULT_STYLE (
-		.tx-irfaq-pi1 ul.tx-irfaq-questions-list { margin-bottom: 75px; }
-		.tx-irfaq-pi1 ul li a p.bodytext { margin: 0px; display: inline; font-weight: bold; }
-		.tx-irfaq-pi1 ul li a { color: #000; text-decoration: none; }
-		.tx-irfaq-pi1 ul li a:hover { color: #000; text-decoration: underline; }
-		.tx-irfaq-pi1 .tx-irfaq-answer { margin-bottom: 10px; }
-		.tx-irfaq-pi1 .tx-irfaq-answer h4 p.bodytext { margin: 0px; display: inline; font-weight: bold; }
-		.tx-irfaq-pi1 dt p { font-weight: bold; margin: 0px; display: inline; }
-		.tx-irfaq-pi1 dd { margin-left: 0px; }
-		.tx-irfaq-pi1 dd p { margin-top: 0px;	}
-		.tx-irfaq-pi1 .additional-info { border-top: 2px solid #e6e6e6; margin-bottom: 10px; }
-	)
-
+	emptySearchAtStart = 1
+	searchFieldList = q,a
+	searchPid = 
+	
     answer_stdWrap.wrap = 
     question_stdWrap.wrap = 
     text_expert_stdWrap.wrap = <br /> |

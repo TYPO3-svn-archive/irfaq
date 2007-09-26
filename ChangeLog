@@ -1,8 +1,14 @@
-2005-11-15  Ingo Renner  <typo3@ingo-renner.com>
+2006-11-08  Patrick Broens  <patrick@netcreators.com>
+	+ Added a language label for show/hide all
 
-	* ADD added danish translation
-	* CHG version is now 0.4.11
-	
+2006-10-27  Patrick Broens  <patrick@netcreators.com>
+	~ CSS-styles in static template instead of standard typoscript
+	~ Locallang files to XML
+
+2006-10-24  Patrick Broens  <patrick@netcreators.com>
+
+	~ The answer string was not processed correctly with the parseFunc function from tslib_cObj based on configuration set in "lib.parseFunc_RTE" in the current TypoScript template.
+
 2005-10-24  Ingo Renner  <typo3@ingo-renner.com>
 
 	* FIX fixed bug with category selector, now using cHash. Thanks to Benjamin A. Schmit
