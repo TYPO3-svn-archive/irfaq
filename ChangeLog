@@ -1,6 +1,7 @@
 2007-09-26	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Added related and related_links field to tx_irfaq_q table
+	* Added TCEmain hook to handle bidirectional relations between FAQ items
 
 2006-11-08  Patrick Broens  <patrick@netcreators.com>
 	+ Added a language label for show/hide all
