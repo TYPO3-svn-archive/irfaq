@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Language labels</description>
+        <type>database</type>
+        <csh_table></csh_table>
+        <fileId>EXT:irfaq/lang/locallang_db.xml</fileId>
+		<ext_filename_template>EXT:irfaq/lang/###LANGKEY###.locallang_db.xml</ext_filename_template>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="tx_irfaq_q">FAQ</label>
+            <label index="tx_irfaq_q.q">question:</label>
+            <label index="tx_irfaq_q.a">answer:</label>
+            <label index="tx_irfaq_q.q_from">asked by:</label>
+            <label index="tx_irfaq_q.expert">expert:</label>
+            <label index="tx_irfaq_q.related">Related:</label>
+            <label index="tx_irfaq_cat">FAQ category</label>
+            <label index="tx_irfaq_expert">FAQ expert</label>
+            <label index="tx_irfaq_expert.name">name:</label>
+            <label index="tx_irfaq_expert.url">URL:</label>
+            <label index="tt_content.list_type_pi1">Modern FAQ</label>
+            <label index="tx_irfaq.pi_flexform.sheet_general">General</label>
+            <label index="tx_irfaq.pi_flexform.sheet_categories">Categories</label>
+            <label index="tx_irfaq.pi_flexform.sheet_search">Search</label>
+            <label index="tx_irfaq.pi_flexform.what_to_display">What to display:</label>
+            <label index="tx_irfaq.pi_flexform.category_selection">Category selection:</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_notCategorized">[not categorized]</label>
+            <label index="tx_irfaq.pi_flexform.view_dynamic">dynamic view with dhtml (answers folding out)</label>
+            <label index="tx_irfaq.pi_flexform.view_static">static view with answers below of question list</label>
+            <label index="tx_irfaq.pi_flexform.view_search">searchform</label>
+            <label index="tx_irfaq.pi_flexform.select_deselect_categories">Category mode:</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_showAll">Show all (don't care about selection below)</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_showSelected">Show items with selected categories</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_DontShowSelected">Do NOT show items with selected categories</label>
+            <label index="tx_irfaq.pi_flexform.searchPid">Redirect to page</label>
+            <label index="tx_irfaq.pi_flexform.emptySearchAtStart">Empty search at start</label>
+            <label index="tx_irfaq.sysfolder">Modern FAQ</label>
+        </languageKey>
+        <languageKey index="dk">EXT:irfaq/lang/dk.locallang_db.xml</languageKey>
+        <languageKey index="de">EXT:irfaq/lang/de.locallang_db.xml</languageKey>
+		<languageKey index="it">EXT:irfaq/lang/it.locallang_db.xml</languageKey>
+		<languageKey index="nl">EXT:irfaq/lang/nl.locallang_db.xml</languageKey>
+        <languageKey index="fi">EXT:irfaq/lang/fi.locallang_db.xml</languageKey>
+    </data>
+    <orig_hash type="array">
+        <languageKey index="default" type="array">
+            <label index="tx_irfaq_q" type="integer">33460603</label>
+            <label index="tx_irfaq_q.q" type="integer">4445288</label>
+            <label index="tx_irfaq_q.a" type="integer">22525561</label>
+            <label index="tx_irfaq_q.q_from" type="integer">116129997</label>
+            <label index="tx_irfaq_q.expert" type="integer">66425179</label>
+            <label index="tx_irfaq_cat" type="integer">22693426</label>
+            <label index="tx_irfaq_expert" type="integer">37438168</label>
+            <label index="tx_irfaq_expert.name" type="integer">227813010</label>
+            <label index="tx_irfaq_expert.url" type="integer">62115936</label>
+            <label index="tt_content.list_type_pi1" type="integer">201706153</label>
+            <label index="tx_irfaq.pi_flexform.what_to_display" type="integer">185349833</label>
+            <label index="tx_irfaq.pi_flexform.category_selection" type="integer">199961520</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_notCategorized" type="integer">207488249</label>
+            <label index="tx_irfaq.pi_flexform.view_dynamic" type="integer">87099062</label>
+            <label index="tx_irfaq.pi_flexform.view_static" type="integer">134980570</label>
+            <label index="tx_irfaq.pi_flexform.select_deselect_categories" type="integer">206189891</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_showAll" type="integer">116815203</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_showSelected" type="integer">207954795</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_DontShowSelected" type="integer">172816251</label>
+            <label index="tx_irfaq.sysfolder" type="integer">201706153</label>
+        </languageKey>
+        <languageKey index="dk">EXT:irfaq/lang/dk.locallang_db.xml</languageKey>
+        <languageKey index="de">EXT:irfaq/lang/de.locallang_db.xml</languageKey>
+		<languageKey index="it">EXT:irfaq/lang/it.locallang_db.xml</languageKey>
+		<languageKey index="nl">EXT:irfaq/lang/nl.locallang_db.xml</languageKey>
+        <languageKey index="fi">EXT:irfaq/lang/fi.locallang_db.xml</languageKey>
+    </orig_hash>
+    <orig_text type="array">
+    </orig_text>
+</T3locallang>

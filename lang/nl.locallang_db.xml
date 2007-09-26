@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <data type="array">
+        <languageKey index="nl" type="array">
+            <label index="tx_irfaq_q">FAQ</label>
+            <label index="tx_irfaq_q.q">vraag:</label>
+            <label index="tx_irfaq_q.a">antwoord:</label>
+            <label index="tx_irfaq_q.q_from">gevraagd door:</label>
+            <label index="tx_irfaq_q.expert">expert:</label>
+            <label index="tx_irfaq_cat">FAQ category</label>
+            <label index="tx_irfaq_expert">FAQ expert</label>
+            <label index="tx_irfaq_expert.name">naam:</label>
+            <label index="tx_irfaq_expert.url">URL:</label>
+            <label index="tt_content.list_type_pi1">Modern FAQ</label>
+            <label index="tx_irfaq.pi_flexform.what_to_display">Wat te tonen:</label>
+            <label index="tx_irfaq.pi_flexform.category_selection">Categorie selectie:</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_notCategorized">[niet gecategoriseerd]</label>
+            <label index="tx_irfaq.pi_flexform.view_dynamic">dynamisch (antwoorden vouwen uit)</label>
+            <label index="tx_irfaq.pi_flexform.view_static">statisch (antwoorden onder de vragen)</label>
+            <label index="tx_irfaq.pi_flexform.select_deselect_categories">Categorie modus:</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_showAll">Toon alle (negeer onderstaande selectie)</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_showSelected">Toon items behorend in de geselecteerde categorien</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_DontShowSelected">Toon items NIET behorend in de geselecteerde categorien</label>
+            <label index="tx_irfaq.sysfolder">Modern FAQ</label>
+        </languageKey>
+    </data>
+    <orig_hash type="array">
+        <languageKey index="nl" type="array">
+            <label index="tx_irfaq_q" type="integer">33460603</label>
+            <label index="tx_irfaq_q.q" type="integer">4445288</label>
+            <label index="tx_irfaq_q.a" type="integer">22525561</label>
+            <label index="tx_irfaq_q.q_from" type="integer">116129997</label>
+            <label index="tx_irfaq_q.expert" type="integer">66425179</label>
+            <label index="tx_irfaq_cat" type="integer">22693426</label>
+            <label index="tx_irfaq_expert" type="integer">37438168</label>
+            <label index="tx_irfaq_expert.name" type="integer">227813010</label>
+            <label index="tx_irfaq_expert.url" type="integer">62115936</label>
+            <label index="tt_content.list_type_pi1" type="integer">201706153</label>
+            <label index="tx_irfaq.pi_flexform.what_to_display" type="integer">185349833</label>
+            <label index="tx_irfaq.pi_flexform.category_selection" type="integer">199961520</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_notCategorized" type="integer">207488249</label>
+            <label index="tx_irfaq.pi_flexform.view_dynamic" type="integer">87099062</label>
+            <label index="tx_irfaq.pi_flexform.view_static" type="integer">134980570</label>
+            <label index="tx_irfaq.pi_flexform.select_deselect_categories" type="integer">206189891</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_showAll" type="integer">116815203</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_showSelected" type="integer">207954795</label>
+            <label index="tx_irfaq.pi_flexform.category_selection_DontShowSelected" type="integer">172816251</label>
+            <label index="tx_irfaq.sysfolder" type="integer">201706153</label>
+        </languageKey>
+    </orig_hash>
+    <orig_text type="array">
+        <languageKey index="nl" type="array">
+        </languageKey>
+    </orig_text>
+</T3locallang>
