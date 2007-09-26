@@ -2,6 +2,7 @@
 
 	* Added related and related_links field to tx_irfaq_q table
 	* Added TCEmain hook to handle bidirectional relations between FAQ items
+	* Added displaying of related and related_links fields
 
 2006-11-08  Patrick Broens  <patrick@netcreators.com>
 	+ Added a language label for show/hide all

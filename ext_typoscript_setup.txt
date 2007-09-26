@@ -5,46 +5,48 @@ includeLibs.tx_irfaq_pi1 = EXT:irfaq/pi1/class.tx_irfaq_pi1.php
 plugin.tx_irfaq_pi1 = USER
 plugin.tx_irfaq_pi1 {
 	userFunc = tx_irfaq_pi1->main
-	
+
 	defaultCode = dynamic
-	
+
 	# html template
 	templateFile = {$plugin.tx_irfaq_pi1.file.templateFile}
-	
+
 	# plus/minus icons for dynamic view
 	iconMinus = {$plugin.tx_irfaq_pi1.file.iconMinus}
 	iconPlus = {$plugin.tx_irfaq_pi1.file.iconPlus}
-	
+
 	# dynamic view behavior
 	singleOpen = {$plugin.tx_irfaq_pi1.singleOpen}
-	
-	# pid_list is the page, where your faq db-records are stored 
+
+	# pid_list is the page, where your faq db-records are stored
 	pid_list.field = pages
-  
+
 	# you can also leave the "starting Point" field in the content element empty and
 	# define the pid_list in this way:
 	# pid_list = 12,13  # comma separated list of pages
-	
+
 	# categoryModes are: 0=display all categories, 1=display selected categories, -1=display deselected categories
 	categoryMode = 0
 	#categorySelection = 0
-	
+
 	emptySearchAtStart = 1
 	searchFieldList = q,a
-	searchPid = 
-	
-    answer_stdWrap.wrap = 
-    question_stdWrap.wrap = 
+	searchPid =
+
+    answer_stdWrap.wrap =
+    question_stdWrap.wrap =
     text_expert_stdWrap.wrap = <br /> |
-    expert_stdWrap.wrap = 
+    expert_stdWrap.wrap =
     expert_stdWrap.typolink.parameter.data = register:faqExpertEmail
-    expertemail_stdWrap.wrap = 
+    expertemail_stdWrap.wrap =
     experturl_stdWrap.wrap = (|)
     text_asked_by_stdWrap.wrap = <br /> |
     asked_by_stdWrap.wrap =
-    category_stdWrap.wrap = 
+    category_stdWrap.wrap =
+    related_entries_stdWrap.wrap =
+    related_links_stdWrap.wrap =
     catTextMode = 2
-    
+
     general_stdWrap.parseFunc >
     general_stdWrap.parseFunc =< tt_content.text.20.parseFunc
 }
