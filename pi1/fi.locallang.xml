@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <data type="array">
+        <languageKey index="fi" type="array">
+            <label index="fold_faq">faq hakemisto</label>
+            <label index="text_expert">Asiantuntija:</label>
+            <label index="text_category">Luokka:</label>
+            <label index="text_asked_by">Kysymyksen asetti:</label>
+        </languageKey>
+    </data>
+    <orig_hash type="array">
+        <languageKey index="fi" type="array">
+            <label index="fold_faq" type="integer">123277502</label>
+            <label index="text_expert" type="integer">174458476</label>
+            <label index="text_category" type="integer">215026594</label>
+            <label index="text_asked_by" type="integer">221518685</label>
+        </languageKey>
+    </orig_hash>
+    <orig_text type="array">
+        <languageKey index="fi" type="array">
+        </languageKey>
+    </orig_text>
+</T3locallang>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description></description>
+        <type>database</type>
+        <csh_table></csh_table>
+        <fileId>EXT:irfaq/pi1/locallang.xml</fileId>
+		<ext_filename_template>EXT:irfaq/pi1/###LANGKEY###.locallang.xml</ext_filename_template>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="fold_faq">fold faq</label>
+            <label index="text_expert">Expert:</label>
+            <label index="text_category">Category: </label>
+            <label index="text_asked_by">Question asked by: </label>
+            <label index="text_show">Show all</label>
+            <label index="text_hide">Hide all</label>
+            <label index="searchButtonLabel">Search</label>
+        </languageKey>
+        <languageKey index="dk">EXT:irfaq/pi1/dk.locallang.xml</languageKey>
+        <languageKey index="de">EXT:irfaq/pi1/de.locallang.xml</languageKey>
+		<languageKey index="it">EXT:irfaq/pi1/it.locallang.xml</languageKey>
+		<languageKey index="nl">EXT:irfaq/pi1/nl.locallang.xml</languageKey>
+        <languageKey index="fi">EXT:irfaq/pi1/fi.locallang.xml</languageKey>
+    </data>
+    <orig_hash type="array">
+        <languageKey index="default" type="array">
+            <label index="fold_faq" type="integer">123277502</label>
+            <label index="text_expert" type="integer">174458476</label>
+            <label index="text_category" type="integer">215026594</label>
+            <label index="text_asked_by" type="integer">221518685</label>
+        </languageKey>
+        <languageKey index="dk">EXT:irfaq/pi1/dk.locallang.xml</languageKey>
+        <languageKey index="de">EXT:irfaq/pi1/de.locallang.xml</languageKey>
+		<languageKey index="it">EXT:irfaq/pi1/it.locallang.xml</languageKey>
+		<languageKey index="nl">EXT:irfaq/pi1/nl.locallang.xml</languageKey>
+        <languageKey index="fi">EXT:irfaq/pi1/fi.locallang.xml</languageKey>
+    </orig_hash>
+    <orig_text type="array">
+        <languageKey index="default" type="array">
+        </languageKey>
+    </orig_text>
+</T3locallang>
