@@ -12,14 +12,17 @@
     <data type="array">
         <languageKey index="default" type="array">
             <label index="tx_irfaq_q">FAQ</label>
-            <label index="tx_irfaq_q.q">question:</label>
-            <label index="tx_irfaq_q.a">answer:</label>
-            <label index="tx_irfaq_q.q_from">asked by:</label>
-            <label index="tx_irfaq_q.expert">expert:</label>
-            <label index="tx_irfaq_q.related">Related:</label>
+            <label index="tx_irfaq_q.q">Question:</label>
+            <label index="tx_irfaq_q.a">Answer:</label>
+            <label index="tx_irfaq_q.q_from">Asked by:</label>
+            <label index="tx_irfaq_q.expert">Expert:</label>
+            <label index="tx_irfaq_q.related">Related entries:</label>
+            <label index="tx_irfaq_q.related_links">Related links (one per line):</label>
+            <label index="tx_irfaq_q.related_new">Create new FAQ and add here</label>
+            <label index="tx_irfaq_q.related_edit">Edit selected entry</label>
             <label index="tx_irfaq_cat">FAQ category</label>
             <label index="tx_irfaq_expert">FAQ expert</label>
-            <label index="tx_irfaq_expert.name">name:</label>
+            <label index="tx_irfaq_expert.name">Name:</label>
             <label index="tx_irfaq_expert.url">URL:</label>
             <label index="tt_content.list_type_pi1">Modern FAQ</label>
             <label index="tx_irfaq.pi_flexform.sheet_general">General</label>

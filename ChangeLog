@@ -1,3 +1,7 @@
+2007-09-26	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Added related and related_links field to tx_irfaq_q table
+
 2006-11-08  Patrick Broens  <patrick@netcreators.com>
 	+ Added a language label for show/hide all
 
@@ -12,7 +16,7 @@
 2005-10-24  Ingo Renner  <typo3@ingo-renner.com>
 
 	* FIX fixed bug with category selector, now using cHash. Thanks to Benjamin A. Schmit
-	
+
 2005-10-19  Ingo Renner  <typo3@ingo-renner.com>
 
 	* FIX rendering now works like regular content elements
@@ -28,11 +32,11 @@
 2005-05-20  Ingo Renner  <typo3@ingo-renner.com>
 
 	* CHG XHTML Strict compliant
-	
+
 2005-04-08  Ingo Renner  <typo3@ingo-renner.com>
 
 	* CHG Removed all "unsigned" keywords from ext_tables.sql
-	
+
 2005-02-20 Ingo Renner <typo3@ingo-renner.com>
 	* FIX small bug when using multiple instances of irfaq on one page
 

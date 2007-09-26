@@ -8,19 +8,19 @@ $TCA['tx_irfaq_q'] = Array (
 	),
 	'feInterface' => $TCA['tx_irfaq_q']['feInterface'],
 	'columns' => Array (
-		'hidden' => Array (		
-			'exclude' => 1,	
+		'hidden' => Array (
+			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.hidden',
 			'config' => Array (
 				'type' => 'check',
 				'default' => '0'
 			)
 		),
-		'fe_group' => Array (		
-			'exclude' => 1,	
+		'fe_group' => Array (
+			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.fe_group',
 			'config' => Array (
-				'type' => 'select',	
+				'type' => 'select',
 				'items' => Array (
 					Array('', 0),
 					Array('LLL:EXT:lang/locallang_general.php:LGL.hide_at_login', -1),
@@ -30,40 +30,40 @@ $TCA['tx_irfaq_q'] = Array (
 				'foreign_table' => 'fe_groups'
 			)
 		),
-		'q' => Array (		
-			'exclude' => 0,		
-			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.q',		
+		'q' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.q',
 			'config' => Array (
-				'type' => 'input',	
-				'size' => '30',	
-				'max' => '255',	
+				'type' => 'input',
+				'size' => '30',
+				'max' => '255',
 				'eval' => 'required,trim',
 			)
 		),
-		'q_from' => Array (		
-			'exclude' => 1,		
-			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.q_from',		
+		'q_from' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.q_from',
 			'config' => Array (
-				'type' => 'input',	
+				'type' => 'input',
 				'size' => '30',
 			)
 		),
-		'cat' => Array (		
-			'exclude' => 1,		
-			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.category',		
+		'cat' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.category',
 			'config' => Array (
-				'type' => 'group',	
-				'internal_type' => 'db',	
-				'allowed' => 'tx_irfaq_cat',	
-				'size' => 3,	
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'tx_irfaq_cat',
+				'size' => 3,
 				'minitems' => 0,
-				'maxitems' => 5,	
+				'maxitems' => 5,
 				'MM' => 'tx_irfaq_q_cat_mm',
 			)
 		),
-		'a' => Array (		
-			'exclude' => 0,		
-			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.a',		
+		'a' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.a',
 			'config' => Array (
 				'type' => 'text',
 				'cols' => '30',
@@ -74,15 +74,16 @@ $TCA['tx_irfaq_q'] = Array (
 						'notNewRecords' => 1,
 						'RTEonly' => 1,
 						'type' => 'script',
-						'title' => 'Full screen Rich Text Editing|Formatteret redigering i hele vinduet',
+						'title' => 'LLL:EXT:cms/locallang_ttc.php:bodytext.W.RTE',
 						'icon' => 'wizard_rte2.gif',
 						'script' => 'wizard_rte.php',
 					),
 				),
-			)
+			),
+			'softref' => 'typolink_tag,images,email[subst],url'
 		),
 		'expert' => Array (
-			'exclude' => 1, 
+			'exclude' => 1,
 			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.expert',
 			'config' => Array (
 				'type' => 'select',
@@ -94,7 +95,7 @@ $TCA['tx_irfaq_q'] = Array (
 		),
 		/*
 		'image' => Array (
-			'exclude' => 1,	
+			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.images',
 			'config' => Array (
 				'type' => 'group',
@@ -108,21 +109,50 @@ $TCA['tx_irfaq_q'] = Array (
 				'minitems' => '0'
 			)
 		),*/
-		'related' => array (
+		'related' => array(
 			'exclude' => 1,
 			'l10n_mode' => 'exclude',
 			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.related',
-			'config' => array (
+			'config' => array(
 				'type' => 'group',
 				'internal_type' => 'db',
-					'allowed' => 'tx_irfaq_q,pages',
-					'MM' => 'tx_irfaq_related_mm',
-				'size' => '3',
+				'allowed' => 'tx_irfaq_q',
+				'prepand_tname' => false,	// specify explicitly because we depend on it!
+				'size' => 3,
 				'autoSizeMax' => 10,
-				'maxitems' => '200',
-				'minitems' => '0',
-				'show_thumbs' => '1'
-			)
+				'multiple' => false,
+				'maxitems' => 1000,	// looks reasonable
+				'wizards' => array(
+					'_PADDING' => 2,
+					'edit' => array(
+						'type' => 'popup',
+						'title' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_q.related_edit',
+						'script' => 'wizard_edit.php',
+						'icon' => 'edit2.gif',
+						'popup_onlyOpenIfSelected' => 1,
+						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+					),
+					'add' => array(
+						'type' => 'script',
+						'title' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_q.related_new',
+						'icon' => 'add.gif',
+						'params' => array(
+							'table'=>'tx_irfaq_q',
+							'pid' => '###CURRENT_PID###',
+							'setValue' => 'append'
+						),
+						'script' => 'wizard_add.php',
+					),
+				),
+			),
+		),
+		'related_links' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.related_links',
+			'config' => array(
+				'type' => 'text',
+				'wrap' => 'off',
+			),
 		),
 		'faq_files' => array (
 			'exclude' => 1,
@@ -144,15 +174,12 @@ $TCA['tx_irfaq_q'] = Array (
 		),
 	),
 	'types' => Array (
-		//divider to tabs
-		'0' => Array('showitem' => 'hidden;;1;;1-1-1, q, a;;;richtext[paste|bold|italic|underline|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts],--div--;Details, q_from, expert, related, faq_files, cat') #,image')
+		'0' => Array('showitem' => 'hidden;;1;;1-1-1, q, a;;;richtext:rte_transform[flag=rte_enabled|mode=ts_css];,--div--;Details, q_from, expert, related, related_links, faq_files, cat') //,image')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => 'fe_group')
 	)
 );
-
-
 
 $TCA['tx_irfaq_cat'] = Array (
 	'ctrl' => $TCA['tx_irfaq_cat']['ctrl'],
@@ -161,19 +188,19 @@ $TCA['tx_irfaq_cat'] = Array (
 	),
 	'feInterface' => $TCA['tx_irfaq_cat']['feInterface'],
 	'columns' => Array (
-		'hidden' => Array (		
-			'exclude' => 1,	
+		'hidden' => Array (
+			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.hidden',
 			'config' => Array (
 				'type' => 'check',
 				'default' => '0'
 			)
 		),
-		'fe_group' => Array (		
-			'exclude' => 1,	
+		'fe_group' => Array (
+			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.fe_group',
 			'config' => Array (
-				'type' => 'select',	
+				'type' => 'select',
 				'items' => Array (
 					Array('', 0),
 					Array('LLL:EXT:lang/locallang_general.php:LGL.hide_at_login', -1),
@@ -183,12 +210,12 @@ $TCA['tx_irfaq_cat'] = Array (
 				'foreign_table' => 'fe_groups'
 			)
 		),
-		'title' => Array (		
-			'exclude' => 0,		
-			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.title',		
+		'title' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.title',
 			'config' => Array (
-				'type' => 'input',	
-				'size' => '30',	
+				'type' => 'input',
+				'size' => '30',
 				'eval' => 'required,trim',
 			)
 		),
@@ -220,31 +247,31 @@ $TCA['tx_irfaq_expert'] = Array (
 	),
 	'feInterface' => $TCA['tx_irfaq_expert']['feInterface'],
 	'columns' => Array (
-		'name' => Array (		
-			'exclude' => 1,		
-			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_expert.name',		
+		'name' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_expert.name',
 			'config' => Array (
-				'type' => 'input',	
+				'type' => 'input',
 				'size' => '30',
 				'eval' => 'required,trim',
 			)
 		),
-		'email' => Array (		
-			'exclude' => 1,		
-			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.email',		
+		'email' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.email',
 			'config' => Array (
-				'type' => 'input',	
-				'size' => '30',	
-				'checkbox' => '',	
+				'type' => 'input',
+				'size' => '30',
+				'checkbox' => '',
 				'eval' => 'nospace',
 			)
 		),
-		'url' => Array (		
-			'exclude' => 1,		
-			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_expert.url',		
+		'url' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_expert.url',
 			'config' => Array (
-				'type' => 'input',	
-				'size' => '30',	
+				'type' => 'input',
+				'size' => '30',
 				'checkbox' => '',
 			)
 		),
