@@ -142,7 +142,7 @@ RELATED_LINKS - related links (if any)
 ###TEXT_RELATED_FAQ###
 <ul class="irfaq-related-faq">
 	<!-- ###RELATED_FAQ_ENTRY### begin -->
-	<li><a href="#irfaq_###RELATED_FAQ_ENTRY_UID###_###RELATED_FAQ_ENTRY_HASH###">###RELATED_FAQ_ENTRY_TITLE###</a></li>
+	<li><a href="###RELATED_FAQ_ENTRY_HREF###">###RELATED_FAQ_ENTRY_TITLE###</a></li>
 	<!-- ###RELATED_FAQ_ENTRY### end -->
 </ul>
 </div>
@@ -160,6 +160,31 @@ RELATED_LINKS - related links (if any)
 </ul>
 </div>
 <!-- ###TEMPLATE_RELATED_LINKS### end -->
+
+<!-- ###TEMPLATE_SINGLE_VIEW### begin
+	Subpart for the related links
+-->
+<div class="tx-irfaq-singleview">
+	<!-- ###FAQ### begin
+		Template for a single item
+	-->
+	<div class="tx-irfaq-answer">
+		<a name="irfaq_###FAQ_ID###_###HASH###"></a>
+		<h4>###FAQ_Q###</h4>
+		###FAQ_A###
+		<div class="additional-info">
+			###TEXT_CATEGORY### ###FAQ_CATEGORY###
+			###TEXT_EXPERT### ###FAQ_EXPERT### ###FAQ_EXPERT_URL###
+			###TEXT_ASKED_BY### ###ASKED_BY###
+			###RELATED_FAQ###
+			###RELATED_LINKS###
+		</div>
+	</div>
+	<!-- ###FAQ### end-->
+	<a href="###BACK_HREF###">&laquo; ###BACK_TEXT###</a>
+</div>
+<!-- ###TEMPLATE_SINGLE_VIEW### end -->
+
 
 </body>
 </html>

@@ -20,6 +20,8 @@
             <label index="text_related_faq">Related entries:</label>
             <label index="text_related_links">Related links:</label>
             <label index="searchButtonLabel">Search</label>
+            <label index="noSuchEntry">Sorry, could not find such FAQ entry.</label>
+            <label index="back">Go back</label>
         </languageKey>
         <languageKey index="dk">EXT:irfaq/pi1/dk.locallang.xml</languageKey>
         <languageKey index="de">EXT:irfaq/pi1/de.locallang.xml</languageKey>

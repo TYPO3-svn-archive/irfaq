@@ -27,24 +27,26 @@
  *
  *
  *
- *   70: class tx_irfaq_pi1 extends tslib_pibase
- *   94:     function main($content,$conf)
- *  123:     function init($conf)
- *  241:     function initCategories()
- *  274:     function initExperts()
- *  292:     function searchView()
- *  310:     function dynamicView()
- *  358:     function staticView()
- *  389:     function fillMarkers($template)
- *  526:     function getCatMarkerArray($markerArray, $row)
- *  585:     function getSelectConf($where)
- *  628:     function searchWhere($searchWords)
- *  639:     function formatStr($str)
- *  655:     function validateFields($fieldlist)
- *  673:     function getRelatedEntries($list)
- *  703:     function getRelatedLinks($list)
+ *   72: class tx_irfaq_pi1 extends tslib_pibase
+ *   97:     function main($content,$conf)
+ *  131:     function init($conf)
+ *  257:     function initCategories()
+ *  291:     function initExperts()
+ *  310:     function searchView()
+ *  328:     function dynamicView()
+ *  376:     function staticView()
+ *  407:     function fillMarkers($template)
+ *  441:     function getCatMarkerArray($markerArray, $row)
+ *  500:     function getSelectConf($where)
+ *  543:     function searchWhere($searchWords)
+ *  554:     function formatStr($str)
+ *  570:     function validateFields($fieldlist)
+ *  588:     function getRelatedEntries($list)
+ *  619:     function getRelatedLinks($list)
+ *  644:     function fillMarkerArrayForRow(&$row)
+ *  752:     function singleView()
  *
- * TOTAL FUNCTIONS: 15
+ * TOTAL FUNCTIONS: 17
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -82,6 +84,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	var $pageArray 		= array();
 	var $faqCount		= 0;
 	var $hash			= ''; //a random hash to use multiple pi on one page
+	var $showUid		= 0;
 
 	/**
 	 * main function, which is called at startup
@@ -95,8 +98,12 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$this->local_cObj = t3lib_div::makeInstance('tslib_cObj');
 		$this->init($conf);
 
+		$content = '';
 		foreach($this->config['code'] as $code) {
 			switch($code) {
+				case 'SINGLE':
+					$content .= $this->singleView();
+					break;
 				case 'SEARCH':
 					$content .= $this->searchView();
 					break;
@@ -108,6 +115,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 					break;
 				default:
 					$content .= 'unknown view!';
+					break;
 			}
 		}
 
@@ -129,96 +137,104 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$this->enableFields = $this->cObj->enableFields('tx_irfaq_q');
 
 		// "CODE" decides what is rendered: code can be added by TS or FF with priority on FF
-		$ffCode = $this->pi_getFFvalue(
-			$this->cObj->data['pi_flexform'], 'what_to_display');
-		$this->config['code'] = $ffCode ?
-			$ffCode :
-			strtoupper($conf['code']);
-		$this->config['code'] = explode(',', $this->config['code']);
-
-		// categoryModes are: 0=display all categories, 1=display selected categories, -1=display deselected categories
-		$ffCategoryMode = $this->pi_getFFvalue(
-			$this->cObj->data['pi_flexform'], 'categoryMode', 'sCATEGORIES');
-		$this->config['categoryMode'] = $ffCategoryMode ?
-			$ffCategoryMode :
-			$this->config['categoryMode'];
-
-		$ffCatSelection = $this->pi_getFFvalue(
-			$this->cObj->data['pi_flexform'], 'categorySelection', 'sCATEGORIES');
-		$this->config['catSelection'] = $ffCatSelection ?
-			$ffCatSelection :
-			trim($this->config['categorySelection']);
-
-		// ignore category selection if categoryMode isn't set
-		if($this->config['categoryMode'] != 0) {
-			$this->config['catExclusive'] = $this->config['catSelection'];
-		}
-		else {
+		$this->showUid = intval($this->piVars['showUid']);
+		if ($this->showUid) {
+			$this->config['code'] = array('SINGLE');
+			$this->config['categoryMode'] = 0;
 			$this->config['catExclusive'] = 0;
 		}
+		else {
+			$ffCode = $this->pi_getFFvalue(
+				$this->cObj->data['pi_flexform'], 'what_to_display');
+			$this->config['code'] = $ffCode ?
+				$ffCode :
+				strtoupper($conf['code']);
+			$this->config['code'] = explode(',', $this->config['code']);
 
-		//set category by $_GET
-		if (is_numeric($this->piVars['cat'])) {
-			$this->config['catExclusive'] = $this->piVars['cat'];
-			$this->config['categoryMode'] = 1;
-		}
+			// categoryModes are: 0=display all categories, 1=display selected categories, -1=display deselected categories
+			$ffCategoryMode = $this->pi_getFFvalue(
+				$this->cObj->data['pi_flexform'], 'categoryMode', 'sCATEGORIES');
+			$this->config['categoryMode'] = $ffCategoryMode ?
+				$ffCategoryMode :
+				$this->config['categoryMode'];
 
-		$ffSearchPid = $this->pi_getFFvalue(
-			$this->cObj->data['pi_flexform'], 'searchPid', 'sSEARCH');
-		$this->config['searchPid'] = $ffSearchPid ?
-			$ffSearchPid :
-			trim($this->config['searchPid']);
+			$ffCatSelection = $this->pi_getFFvalue(
+				$this->cObj->data['pi_flexform'], 'categorySelection', 'sCATEGORIES');
+			$this->config['catSelection'] = $ffCatSelection ?
+				$ffCatSelection :
+				trim($this->config['categorySelection']);
 
-		$ffEmptySearchAtStart = $this->pi_getFFvalue(
-			$this->cObj->data['pi_flexform'], 'emptySearchAtStart', 'sSEARCH');
-		$this->config['emptySearchAtStart'] = $ffEmptySearchAtStart != '' ?
-			$ffEmptySearchAtStart :
-			trim($this->config['emptySearchAtStart']);
-
-			// get fieldnames from the tx_irfaq_q db-table
-		$this->fieldNames = array_keys($GLOBALS['TYPO3_DB']->admin_get_fields('tx_irfaq_q'));
-
-		if ($this->config['searchFieldList']) {
-			$searchFieldList = $this->validateFields($this->config['searchFieldList']);
-			if ($searchFieldList) {
-				$this->searchFieldList = $searchFieldList;
+			// ignore category selection if categoryMode isn't set
+			if($this->config['categoryMode'] != 0) {
+				$this->config['catExclusive'] = $this->config['catSelection'];
 			}
+			else {
+				$this->config['catExclusive'] = 0;
+			}
+
+			//set category by $_GET
+			if (is_numeric($this->piVars['cat'])) {
+				$this->config['catExclusive'] = $this->piVars['cat'];
+				$this->config['categoryMode'] = 1;
+			}
+
+			$ffSearchPid = $this->pi_getFFvalue(
+				$this->cObj->data['pi_flexform'], 'searchPid', 'sSEARCH');
+			$this->config['searchPid'] = $ffSearchPid ?
+				$ffSearchPid :
+				trim($this->config['searchPid']);
+
+			$ffEmptySearchAtStart = $this->pi_getFFvalue(
+				$this->cObj->data['pi_flexform'], 'emptySearchAtStart', 'sSEARCH');
+			$this->config['emptySearchAtStart'] = $ffEmptySearchAtStart != '' ?
+				$ffEmptySearchAtStart :
+				trim($this->config['emptySearchAtStart']);
+
+				// get fieldnames from the tx_irfaq_q db-table
+			$this->fieldNames = array_keys($GLOBALS['TYPO3_DB']->admin_get_fields('tx_irfaq_q'));
+
+			if ($this->config['searchFieldList']) {
+				$searchFieldList = $this->validateFields($this->config['searchFieldList']);
+				if ($searchFieldList) {
+					$this->searchFieldList = $searchFieldList;
+				}
+			}
+
+			// pidList is the pid/list of pids from where to fetch the faq items.
+			$ffPidList = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'pages');
+			$pidList   = $ffPidList ?
+				$ffPidList :
+				trim($this->cObj->stdWrap(
+					$this->config['pid_list'], $this->config['pid_list.']
+				));
+			$this->config['pidList'] = $pidList ?
+				implode(t3lib_div::intExplode(',', $pidList), ',') :
+				$GLOBALS['TSFE']->id;
+
+
+			//get items recursive
+			$recursive = $this->pi_getFFvalue(
+				$this->cObj->data['pi_flexform'],
+				'recursive'
+			);
+			$recursive = is_numeric($recursive) ?
+				$recursive :
+				$this->cObj->stdWrap($conf['recursive'], $conf['recursive.']);
+			// extend the pid_list by recursive levels
+			$this->config['pidList'] = $this->pi_getPidList(
+				$this->config['pidList'],
+				$recursive
+			);
+
+			// max items per page
+			$TSLimit = t3lib_div::intInRange($conf['limit'], 0, 1000);
+			$this->config['limit'] = $TSLimit ? $TSLimit : 50;
+
+			// display text like 'page' in pagebrowser
+			$this->config['showPBrowserText'] = $this->config['showPBrowserText'];
+			// get pageBrowser configuration
+			$this->config['pageBrowser.']     = $this->config['pageBrowser.'];
 		}
-
-		// pidList is the pid/list of pids from where to fetch the faq items.
-		$ffPidList = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'pages');
-		$pidList   = $ffPidList ?
-			$ffPidList :
-			trim($this->cObj->stdWrap(
-				$this->config['pid_list'], $this->config['pid_list.']
-			));
-		$this->config['pidList'] = $pidList ?
-			implode(t3lib_div::intExplode(',', $pidList), ',') :
-			$GLOBALS['TSFE']->id;
-
-
-		//get items recursive
-		$recursive = $this->pi_getFFvalue(
-			$this->cObj->data['pi_flexform'],
-			'recursive'
-		);
-		$recursive = is_numeric($recursive) ?
-			$recursive :
-			$this->cObj->stdWrap($conf['recursive'], $conf['recursive.']);
-		// extend the pid_list by recursive levels
-		$this->config['pidList'] = $this->pi_getPidList(
-			$this->config['pidList'],
-			$recursive
-		);
-
-		// max items per page
-		$TSLimit = t3lib_div::intInRange($conf['limit'], 0, 1000);
-		$this->config['limit'] = $TSLimit ? $TSLimit : 50;
-
-		// display text like 'page' in pagebrowser
-		$this->config['showPBrowserText'] = $this->config['showPBrowserText'];
-		// get pageBrowser configuration
-		$this->config['pageBrowser.']     = $this->config['pageBrowser.'];
 
 		// read template file
 		$this->templateCode = $this->cObj->fileResource(
@@ -264,6 +280,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				$this->categories['0'][$row['uid']] = $catTitle;
 			}
 		}
+		$GLOBALS['TYPO3_DB']->sql_free_result($res);
 	}
 
 	/**
@@ -282,12 +299,13 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$this->experts[$row['uid']]['url']   = $row['url'];
 			$this->experts[$row['uid']]['email'] = $row['email'];
 		}
+		$GLOBALS['TYPO3_DB']->sql_free_result($res);
 	}
 
 	/**
-	 * [Describe function...]
+	 * Shows search.
 	 *
-	 * @return	[type]		...
+	 * @return	string		Generated content
 	 */
 	function searchView() {
 		$template['total'] = $this->cObj->getSubpart($this->templateCode, '###TEMPLATE_SEARCH###');
@@ -391,7 +409,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$content = '';
 
 		$selectConf = array();
-		$where 		= '1 = 1'.$this->cObj->enableFields('tx_irfaq_q');
+		$where = '1 = 1'.$this->cObj->enableFields('tx_irfaq_q');
 		$selectConf = $this->getSelectConf($where);
 		$selectConf['selectFields'] = 'DISTINCT tx_irfaq_q.uid, tx_irfaq_q.q, tx_irfaq_q.q_from, tx_irfaq_q.a, tx_irfaq_q.cat, tx_irfaq_q.expert, tx_irfaq_q.related, tx_irfaq_q.related_links';
 		$selectConf['orderBy'] 		= 'tx_irfaq_q.sorting';
@@ -399,118 +417,15 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$res = $this->cObj->exec_getQuery('tx_irfaq_q', $selectConf);
 		$this->faqCount = $GLOBALS['TYPO3_DB']->sql_num_rows($res);
 
-		$markerArray = array();
-		$i = 0;
-		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+		$markerArray = array(); $i = 0;
+		while (false != ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
+			$markerArray = $this->fillMarkerArrayForRow($row);
 			$markerArray['###FAQ_ID###'] = ++$i;
-			$markerArray['###FAQ_Q###']	 = $this->formatStr(
-				$this->local_cObj->stdWrap(
-					htmlspecialchars($row['q']),
-					$this->config['question_stdWrap.']
-				)
-			);
-			$markerArray['###FAQ_A###']	 = $this->formatStr(
-				$this->local_cObj->stdWrap(
-					$this->pi_RTEcssText($row['a']),
-					$this->config['answer_stdWrap.']
-				)
-			);
-			//categories
-			$markerArray    			 = $this->getCatMarkerArray(
-				$markerArray,
-				$row
-			);
-
-			if($this->config['singleOpen']) {
-				$markerArray['###SINGLE_OPEN###'] = 'true';
-			}
-			else {
-				$markerArray['###SINGLE_OPEN###'] = 'false';
-			}
-
-			if($row['expert']) {
-				$this->local_cObj->LOAD_REGISTER(
-				array(
-					'faqExpertEmail' => $this->experts[$row['expert']]['email'],
-					'faqExpertUrl'   => $this->experts[$row['expert']]['url']
-				),
-				'');
-				$markerArray['###FAQ_EXPERT###']	   = $this->local_cObj->stdWrap(
-					$this->experts[$row['expert']]['name'],
-					$this->config['expert_stdWrap.']
-				);
-
-				$markerArray['###TEXT_EXPERT###']	   = $this->local_cObj->stdWrap(
-					$this->pi_getLL('text_expert'),
-					$this->config['text_expert_stdWrap.']
-				);
-
-				$markerArray['###FAQ_EXPERT_EMAIL###'] = $this->local_cObj->stdWrap(
-					$this->experts[$row['expert']]['email'],
-					$this->config['expertemail_stdWrap.']
-				);
-
-				if($this->experts[$row['expert']]['url']) {
-					$markerArray['###FAQ_EXPERT_URL###'] = $this->local_cObj->stdWrap(
-						$this->experts[$row['expert']]['url'],
-						$this->config['experturl_stdWrap.']
-					);
-				}
-				else {
-					$markerArray['###FAQ_EXPERT_URL###']   = '';
-				}
-			}
-			else {
-				//leave everything empty if no expert assigned
-				$markerArray['###FAQ_EXPERT###']	   = '';
-				$markerArray['###TEXT_EXPERT###']	   = '';
-				$markerArray['###FAQ_EXPERT_EMAIL###'] = '';
-				$markerArray['###FAQ_EXPERT_URL###']   = '';
-				$this->local_cObj->LOAD_REGISTER(
-					array('faqExpertEmail' => '','faqExpertUrl' => ''), '');
-			}
-
-			if($row['q_from']) {
-				$markerArray['###TEXT_ASKED_BY###'] = $this->local_cObj->stdWrap(
-					$this->pi_getLL('text_asked_by'),
-					$this->config['text_asked_by_stdWrap.']
-				);
-				$markerArray['###ASKED_BY###'] = $this->local_cObj->stdWrap(
-					$row['q_from'],
-					$this->config['asked_by_stdWrap.']
-				);
-			}
-			else {
-				$markerArray['###TEXT_ASKED_BY###'] = '';
-				$markerArray['###ASKED_BY###'] = '';
-			}
-
-			$markerArray['###RELATED_FAQ###'] = '';
-			if ($row['related']) {
-				$related = $this->getRelatedEntries($row['related']);
-				if ($related) {
-					$markerArray['###RELATED_FAQ###'] = $this->local_cObj->stdWrap($related, $this->config['related_entries_stdWrap.']);
-				}
-			}
-
-			$markerArray['###RELATED_LINKS###'] = '';
-			if ($row['related_links']) {
-				$related_links = $this->getRelatedLinks($row['related_links']);
-				if ($related_links) {
-					$markerArray['###RELATED_LINKS###'] = $this->local_cObj->stdWrap($related_links, $this->config['related_links_stdWrap.']);
-				}
-			}
-
-			$markerArray['###FAQ_PM_IMG###'] = '<img src="'.
-				$this->config['iconPlus'].'" id="irfaq_pm_'.$i.'_'.$this->hash.'" alt="'.
-				$this->pi_getLL('fold_faq').'" />';
-
-			$markerArray['###HASH###'] = $this->hash;
 
 			$subpart  = $this->cObj->getSubPart($template, '###FAQ###');
-			$content .= $this->cObj->substituteMarkerArrayCached($subpart,
-																 $markerArray);
+			$content .= $this->cObj->substituteMarkerArrayCached($subpart, $markerArray);
 		}
+		$GLOBALS['TYPO3_DB']->sql_free_result($res);
 
 		return $content;
 	}
@@ -679,12 +594,13 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			if (is_array($rows)) {
 				$template = $this->cObj->getSubpart($this->templateCode, '###TEMPLATE_RELATED_FAQ###');
 				$templateInner = $this->cObj->getSubpart($template, '###RELATED_FAQ_ENTRY###');
+				// We use base64_encode to encode return url because it looks better in the link and mod_security-like utilities do not throw false errors
+				$returnUrl = base64_encode(t3lib_div::getIndpEnv('TYPO3_SITE_SCRIPT'));
 				foreach ($rows as $row) {
 					// TODO Anchor is customizable in template!
 					$markers = array(
 						'###RELATED_FAQ_ENTRY_TITLE###' => $this->formatStr($this->local_cObj->stdWrap(htmlspecialchars($row['q']), $this->config['question_stdWrap.'])),
-						'###RELATED_FAQ_ENTRY_UID###' => $row['uid'],
-						'###RELATED_FAQ_ENTRY_HASH###' => $this->hash,
+						'###RELATED_FAQ_ENTRY_HREF###' => $this->pi_list_linkSingle('', $row['uid'], true, array('back' => $returnUrl), true),
 					);
 					$content .= $this->cObj->substituteMarkerArrayCached($templateInner, $markers);
 				}
@@ -714,6 +630,138 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				$content .= $this->cObj->substituteMarkerArrayCached($templateInner, $markers);
 			}
 			$content = $this->cObj->substituteMarkerArrayCached($template, array('###TEXT_RELATED_LINKS###' => $this->pi_getLL('text_related_links')), array('###RELATED_LINK_ENTRY###' => $content));
+		}
+		return $content;
+	}
+
+	/**
+	 * Creates marker array for a single FAQ row
+	 *
+	 * @param	array		$row	A row from tx_irfaq_q. Passed by reference to save memory.
+	 * @return	array		Generated marker array
+	 * @see	fillMarkers()
+	 */
+	function fillMarkerArrayForRow(&$row) {
+		$markerArray = array();
+
+		$markerArray['###FAQ_Q###']	 = $this->formatStr(
+			$this->local_cObj->stdWrap(
+				htmlspecialchars($row['q']),
+				$this->config['question_stdWrap.']
+			)
+		);
+		$markerArray['###FAQ_A###']	 = $this->formatStr(
+			$this->local_cObj->stdWrap(
+				$this->pi_RTEcssText($row['a']),
+				$this->config['answer_stdWrap.']
+			)
+		);
+
+		// categories
+		$markerArray = $this->getCatMarkerArray($markerArray, $row);
+
+		$markerArray['###SINGLE_OPEN###'] = ($this->config['singleOpen'] ? 'true' : 'false');
+
+		if($row['expert']) {
+			$this->local_cObj->LOAD_REGISTER(
+				array(
+					'faqExpertEmail' => $this->experts[$row['expert']]['email'],
+					'faqExpertUrl'   => $this->experts[$row['expert']]['url']
+				),
+				'');
+			$markerArray['###FAQ_EXPERT###'] = $this->local_cObj->stdWrap(
+					$this->experts[$row['expert']]['name'],
+					$this->config['expert_stdWrap.']
+				);
+
+			$markerArray['###TEXT_EXPERT###'] = $this->local_cObj->stdWrap(
+				$this->pi_getLL('text_expert'),
+				$this->config['text_expert_stdWrap.']
+			);
+
+			$markerArray['###FAQ_EXPERT_EMAIL###'] = $this->local_cObj->stdWrap(
+				$this->experts[$row['expert']]['email'],
+				$this->config['expertemail_stdWrap.']
+			);
+
+			if($this->experts[$row['expert']]['url']) {
+				$markerArray['###FAQ_EXPERT_URL###'] = $this->local_cObj->stdWrap(
+					$this->experts[$row['expert']]['url'],
+					$this->config['experturl_stdWrap.']
+				);
+			}
+			else {
+				$markerArray['###FAQ_EXPERT_URL###']   = '';
+			}
+		}
+		else {
+			//leave everything empty if no expert assigned
+			$markerArray['###FAQ_EXPERT###']	   = '';
+			$markerArray['###TEXT_EXPERT###']	   = '';
+			$markerArray['###FAQ_EXPERT_EMAIL###'] = '';
+			$markerArray['###FAQ_EXPERT_URL###']   = '';
+			$this->local_cObj->LOAD_REGISTER(
+				array('faqExpertEmail' => '','faqExpertUrl' => ''), '');
+		}
+
+		if($row['q_from']) {
+			$markerArray['###TEXT_ASKED_BY###'] = $this->local_cObj->stdWrap(
+				$this->pi_getLL('text_asked_by'),
+				$this->config['text_asked_by_stdWrap.']
+			);
+			$markerArray['###ASKED_BY###'] = $this->local_cObj->stdWrap(
+				$row['q_from'],
+				$this->config['asked_by_stdWrap.']
+			);
+		}
+		else {
+			$markerArray['###TEXT_ASKED_BY###'] = '';
+			$markerArray['###ASKED_BY###'] = '';
+		}
+
+		$markerArray['###RELATED_FAQ###'] = '';
+		if ($row['related']) {
+			$related = $this->getRelatedEntries($row['related']);
+			if ($related) {
+				$markerArray['###RELATED_FAQ###'] = $this->local_cObj->stdWrap($related, $this->config['related_entries_stdWrap.']);
+			}
+		}
+
+		$markerArray['###RELATED_LINKS###'] = '';
+		if ($row['related_links']) {
+			$related_links = $this->getRelatedLinks($row['related_links']);
+			if ($related_links) {
+				$markerArray['###RELATED_LINKS###'] = $this->local_cObj->stdWrap($related_links, $this->config['related_links_stdWrap.']);
+			}
+		}
+
+		$markerArray['###FAQ_PM_IMG###'] = '<img src="'.
+			$this->config['iconPlus'].'" id="irfaq_pm_'.$i.'_'.$this->hash.'" alt="'.
+			$this->pi_getLL('fold_faq').'" />';
+
+		$markerArray['###HASH###'] = $this->hash;
+
+		return $markerArray;
+	}
+
+	/**
+	 * Shows single FAQ item
+	 *
+	 * @return	string		Generated content
+	 */
+	function singleView() {
+		$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows('*', 'tx_irfaq_q', 'uid=' . intval($this->showUid) .
+					$this->cObj->enableFields('tx_irfaq_q'));
+		if (count($rows) == 0) {
+			$content = $this->pi_getLL('noSuchEntry');
+		}
+		else {
+			$template = $this->cObj->getSubpart($this->templateCode, '###TEMPLATE_SINGLE_VIEW###');
+			$markers = $this->fillMarkerArrayForRow($rows[0]);
+			unset($this->piVars['showUid']);
+			$markers['###BACK_HREF###'] = base64_decode($this->piVars['back']);
+			$markers['###BACK_TEXT###'] = $this->pi_getLL('back');
+			$content = $this->cObj->substituteMarkerArrayCached($template, $markers);
 		}
 		return $content;
 	}

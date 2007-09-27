@@ -1,5 +1,9 @@
 2007-09-26	Dmitry Dulepov	<dmitry@typo3.org>
 
+	* Related FAQs are now shows in single view
+
+2007-09-26	Dmitry Dulepov	<dmitry@typo3.org>
+
 	* Added related and related_links field to tx_irfaq_q table
 	* Added TCEmain hook to handle bidirectional relations between FAQ items
 	* Added displaying of related and related_links fields
