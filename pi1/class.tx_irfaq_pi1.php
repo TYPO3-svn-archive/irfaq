@@ -174,7 +174,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 
 			//set category by $_GET
 			if (is_numeric($this->piVars['cat'])) {
-				$this->config['catExclusive'] = $this->piVars['cat'];
+				$this->config['catExclusive'] = intval($this->piVars['cat']);
 				$this->config['categoryMode'] = 1;
 			}
 
