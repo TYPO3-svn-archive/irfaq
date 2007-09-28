@@ -154,7 +154,7 @@ $TCA['tx_irfaq_q'] = Array (
 				'wrap' => 'off',
 			),
 		),
-		'faq_files' => array (
+		/*'faq_files' => array (
 			'exclude' => 1,
 			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:cms/locallang_ttc.php:media',
@@ -171,7 +171,7 @@ $TCA['tx_irfaq_q'] = Array (
 				'maxitems' => '10',
 				'minitems' => '0'
 			)
-		),
+		),*/
 	),
 	'types' => Array (
 		'0' => Array('showitem' => 'hidden;;1;;1-1-1, q, a;;;richtext:rte_transform[flag=rte_enabled|mode=ts_css];,--div--;Details, q_from, expert, related, related_links, faq_files, cat') //,image')
