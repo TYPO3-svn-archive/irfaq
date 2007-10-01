@@ -417,10 +417,10 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$res = $this->cObj->exec_getQuery('tx_irfaq_q', $selectConf);
 		$this->faqCount = $GLOBALS['TYPO3_DB']->sql_num_rows($res);
 
-		$markerArray = array(); $i = 0;
+		$markerArray = array(); $i = 1;
 		while (false != ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
-			$markerArray = $this->fillMarkerArrayForRow($row);
-			$markerArray['###FAQ_ID###'] = ++$i;
+			$markerArray = $this->fillMarkerArrayForRow($row, $i);
+			$markerArray['###FAQ_ID###'] = $i++;
 
 			$subpart  = $this->cObj->getSubPart($template, '###FAQ###');
 			$content .= $this->cObj->substituteMarkerArrayCached($subpart, $markerArray);
@@ -641,7 +641,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	 * @return	array		Generated marker array
 	 * @see	fillMarkers()
 	 */
-	function fillMarkerArrayForRow(&$row) {
+	function fillMarkerArrayForRow(&$row, $i) {
 		$markerArray = array();
 
 		$markerArray['###FAQ_Q###']	 = $this->formatStr(
@@ -757,7 +757,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		}
 		else {
 			$template = $this->cObj->getSubpart($this->templateCode, '###TEMPLATE_SINGLE_VIEW###');
-			$markers = $this->fillMarkerArrayForRow($rows[0]);
+			$markers = $this->fillMarkerArrayForRow($rows[0], 1);
 			unset($this->piVars['showUid']);
 			$markers['###BACK_HREF###'] = base64_decode($this->piVars['back']);
 			$markers['###BACK_TEXT###'] = $this->pi_getLL('back');

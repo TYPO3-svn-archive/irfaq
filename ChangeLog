@@ -1,3 +1,7 @@
+2007-10-01	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Fixed: "Show all" did not expand all items
+
 2007-09-26	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Related FAQs are now shown in single view
