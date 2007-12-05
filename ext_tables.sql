@@ -35,6 +35,8 @@ CREATE TABLE tx_irfaq_q (
 	related text NOT NULL,
 	related_links text NOT NULL,
 	faq_files text NOT NULL,
+	disable_comments int(11) DEFAULT '0' NOT NULL,
+	comments_closetime int(11) DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)

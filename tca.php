@@ -172,9 +172,34 @@ $TCA['tx_irfaq_q'] = Array (
 				'minitems' => '0'
 			)
 		),*/
+		'disable_comments' => array(
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.disable_comments',
+			'exclude' => 1,
+			'displayCond' => 'EXT:comments:LOADED:true',
+			'config' => array(
+			'type'     => 'check',
+				'items'    => array(
+					array('', '')
+				),
+				'default'  => '0'
+			)
+		),
+		'comments_closetime' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.comments_closetime',
+			'displayCond' => 'EXT:comments:LOADED:true',
+			'config' => array (
+				'type'     => 'input',
+				'size'     => '12',
+				'max'      => '20',
+				'eval'     => 'datetime',
+				'checkbox' => '0',
+//				'default'  => PHP_INT_MAX,
+			)
+		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'hidden;;1;;1-1-1, q, a;;;richtext:rte_transform[flag=rte_enabled|mode=ts_css];,--div--;Details, q_from, expert, related, related_links, faq_files, cat') //,image')
+		'0' => Array('showitem' => 'hidden;;1;;1-1-1, q, a;;;richtext:rte_transform[flag=rte_enabled|mode=ts_css];,--div--;Details, q_from, expert, related, related_links, faq_files, cat, --div--;LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.comments_tab, disable_comments;;;;2-2-2, comments_closetime')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => 'fe_group')

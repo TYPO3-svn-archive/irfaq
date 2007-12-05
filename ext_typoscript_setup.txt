@@ -51,6 +51,5 @@ plugin.tx_irfaq_pi1 {
     general_stdWrap.parseFunc =< tt_content.text.20.parseFunc
 }
 
-
-
-
+# Additions to comments extension
+plugin.tx_comments_pi1.prefixToTableMap.tx_irfaq_pi1 = tx_irfaq_q

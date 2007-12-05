@@ -85,6 +85,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	var $faqCount		= 0;
 	var $hash			= ''; //a random hash to use multiple pi on one page
 	var $showUid		= 0;
+	var $pi_checkCHash	= true;
 
 	/**
 	 * main function, which is called at startup
@@ -112,6 +113,9 @@ class tx_irfaq_pi1 extends tslib_pibase {
 					break;
 				case 'STATIC':
 					$content .= $this->staticView();
+					break;
+				case 'STATIC_SEPARATE':
+					$content .= $this->staticSeparateView();
 					break;
 				default:
 					$content .= 'unknown view!';
@@ -741,6 +745,9 @@ class tx_irfaq_pi1 extends tslib_pibase {
 
 		$markerArray['###HASH###'] = $this->hash;
 
+		$returnUrl = base64_encode(t3lib_div::getIndpEnv('TYPO3_SITE_SCRIPT'));
+		$markerArray['###SINGLEVIEW_LINK###'] = $this->pi_list_linkSingle('', $row['uid'], true, array('back' => $returnUrl), true);
+
 		return $markerArray;
 	}
 
@@ -764,6 +771,18 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$content = $this->cObj->substituteMarkerArrayCached($template, $markers);
 		}
 		return $content;
+	}
+
+	/**
+	 * Creates a set of links to a separate page with answer. This mode is suitable if you want comments for FAQ entries
+	 *
+	 * @return Generated FAQ list
+	 */
+	function staticSeparateView() {
+		$template_sub = $this->cObj->getSubPart($this->templateCode, '###TEMPLATE_STATIC_SEPARATE###');
+		$template = $this->cObj->getSubPart($template_sub, '###QUESTIONS###');
+		$subpartArray['###QUESTIONS###'] = $this->fillMarkers($template);
+		return $this->cObj->substituteMarkerArrayCached($template_sub, array(), $subpartArray);
 	}
 }
 

@@ -20,17 +20,21 @@
 								<numIndex index="1" type="array">
 									<numIndex index="0">LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.view_static</numIndex>
 									<numIndex index="1">STATIC</numIndex>
-								</numIndex>	
+								</numIndex>
 								<numIndex index="2" type="array">
+									<numIndex index="0">LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.view_static_separate</numIndex>
+									<numIndex index="1">STATIC_SEPARATE</numIndex>
+								</numIndex>
+								<numIndex index="3" type="array">
 									<numIndex index="0">LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.view_search</numIndex>
 									<numIndex index="1">SEARCH</numIndex>
-								</numIndex>				
+								</numIndex>
 								</items>
 								<maxitems>100</maxitems>
-								<size>6</size>
+								<size>4</size>
 								<multiple>1</multiple>
-								<selectedListStyle>width:150px</selectedListStyle>
-								<itemListStyle>width:150px</itemListStyle>
+								<selectedListStyle>width:300px</selectedListStyle>
+								<itemListStyle>width:300px</itemListStyle>
 							</config>
 						</TCEforms>
 					</what_to_display>
@@ -58,7 +62,7 @@
 									<numIndex index="0" type="array">
 										<numIndex index="0"></numIndex>
 										<numIndex index="1"></numIndex>
-									</numIndex>					
+									</numIndex>
 									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:cms/locallang_ttc.php:recursive.I.1</numIndex>
 										<numIndex index="1">1</numIndex>
@@ -85,7 +89,7 @@
 								<size>1</size>
 							</config>
 						</TCEforms>
-					</recursive>   
+					</recursive>
 				</el>
 			</ROOT>
 		</sDEF>
@@ -199,5 +203,5 @@
 				</el>
 			</ROOT>
 		</sSEARCH>
-	</sheets>	
+	</sheets>
 </T3DataStructure>

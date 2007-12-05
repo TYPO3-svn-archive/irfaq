@@ -33,4 +33,7 @@ $TYPO3_CONF_VARS['EXTCONF']['cms']['db_layout']['addTables']['tx_irfaq_q'][0] = 
 // TCEmain hooks for managing related entries
 $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['irfaq'] = 'EXT:irfaq/class.tx_irfaq_tcemain.php:tx_irfaq_tcemain';
 $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass']['irfaq'] = 'EXT:irfaq/class.tx_irfaq_tcemain.php:tx_irfaq_tcemain';
+
+// Hook to comments for comments closing
+$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['comments/pi1/class.tx_comments_pi1.php']['tx_irfaq_q'] = 'EXT:irfaq/class.tx_irfaq_comments_hooks.php:tx_irfaq_comments_hooks->irfaqHook';
 ?>

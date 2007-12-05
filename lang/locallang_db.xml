@@ -20,6 +20,9 @@
             <label index="tx_irfaq_q.related_links">Related links (one per line):</label>
             <label index="tx_irfaq_q.related_new">Create new FAQ and add here</label>
             <label index="tx_irfaq_q.related_edit">Edit selected entry</label>
+            <label index="tx_irfaq_q.comments_tab">Comment options</label>
+            <label index="tx_irfaq_q.disable_comments">Disable comments:</label>
+            <label index="tx_irfaq_q.comments_closetime">Close commenting at:</label>
             <label index="tx_irfaq_cat">FAQ category</label>
             <label index="tx_irfaq_expert">FAQ expert</label>
             <label index="tx_irfaq_expert.name">Name:</label>
@@ -33,6 +36,7 @@
             <label index="tx_irfaq.pi_flexform.category_selection_notCategorized">[not categorized]</label>
             <label index="tx_irfaq.pi_flexform.view_dynamic">dynamic view with dhtml (answers folding out)</label>
             <label index="tx_irfaq.pi_flexform.view_static">static view with answers below of question list</label>
+            <label index="tx_irfaq.pi_flexform.view_static_separate">static view with answers on a separate page</label>
             <label index="tx_irfaq.pi_flexform.view_search">searchform</label>
             <label index="tx_irfaq.pi_flexform.select_deselect_categories">Category mode:</label>
             <label index="tx_irfaq.pi_flexform.category_selection_showAll">Show all (don't care about selection below)</label>
