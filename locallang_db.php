@@ -1,7 +1,7 @@
 <?php
 /**
  * Language labels for database tables/fields belonging to extension "irfaq"
- * 
+ *
  * This file is detected by the translation tool.
  */
 
@@ -22,6 +22,7 @@ $LOCAL_LANG = Array (
 		'tx_irfaq.pi_flexform.category_selection_notCategorized' => '[not categorized]',
 		'tx_irfaq.pi_flexform.view_dynamic' => 'dynamic view with dhtml (answers folding out)',
 		'tx_irfaq.pi_flexform.view_static' => 'static view with answers below of question list',
+		'tx_irfaq.pi_flexform.view_static_separate' => 'static view with answers on a separate page',
 		'tx_irfaq.pi_flexform.select_deselect_categories' => 'Category mode:',
 		'tx_irfaq.pi_flexform.category_selection_showAll' => 'Show all (don\'t care about selection below)',
 		'tx_irfaq.pi_flexform.category_selection_showSelected' => 'Show items with selected categories',
