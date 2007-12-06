@@ -1,6 +1,7 @@
 2007-10-01	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Fixed bug #2225: Labels cannot be overriden via TS
+	* Fixed bug #5219: invalid attribute in javascript
 
 2007-10-01	Dmitry Dulepov	<dmitry@typo3.org>
 
