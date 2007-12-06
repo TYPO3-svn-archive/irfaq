@@ -2,6 +2,7 @@
 
 	* Fixed bug #2225: Labels cannot be overriden via TS
 	* Fixed bug #5219: invalid attribute in javascript
+	* Fixed bug #4642: Wrong syntax in static template
 
 2007-10-01	Dmitry Dulepov	<dmitry@typo3.org>
 
