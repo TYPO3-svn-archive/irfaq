@@ -1,5 +1,9 @@
 2007-10-01	Dmitry Dulepov	<dmitry@typo3.org>
 
+	* Fixed bug #2225: Labels cannot be overriden via TS
+
+2007-10-01	Dmitry Dulepov	<dmitry@typo3.org>
+
 	* Fixed: "Show all" did not expand all items
 	* Fixed: FireFox displayed collapsed FAQs with indent if CSS styled content is used
 
