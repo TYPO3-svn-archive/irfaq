@@ -5,7 +5,6 @@
         <type>database</type>
         <csh_table></csh_table>
         <fileId>EXT:irfaq/lang/locallang_db.xml</fileId>
-		<ext_filename_template>EXT:irfaq/lang/###LANGKEY###.locallang_db.xml</ext_filename_template>
         <labelContext type="array">
         </labelContext>
     </meta>
@@ -46,11 +45,6 @@
             <label index="tx_irfaq.pi_flexform.emptySearchAtStart">Empty search at start</label>
             <label index="tx_irfaq.sysfolder">Modern FAQ</label>
         </languageKey>
-        <languageKey index="dk">EXT:irfaq/lang/dk.locallang_db.xml</languageKey>
-        <languageKey index="de">EXT:irfaq/lang/de.locallang_db.xml</languageKey>
-		<languageKey index="it">EXT:irfaq/lang/it.locallang_db.xml</languageKey>
-		<languageKey index="nl">EXT:irfaq/lang/nl.locallang_db.xml</languageKey>
-        <languageKey index="fi">EXT:irfaq/lang/fi.locallang_db.xml</languageKey>
     </data>
     <orig_hash type="array">
         <languageKey index="default" type="array">
@@ -75,11 +69,6 @@
             <label index="tx_irfaq.pi_flexform.category_selection_DontShowSelected" type="integer">172816251</label>
             <label index="tx_irfaq.sysfolder" type="integer">201706153</label>
         </languageKey>
-        <languageKey index="dk">EXT:irfaq/lang/dk.locallang_db.xml</languageKey>
-        <languageKey index="de">EXT:irfaq/lang/de.locallang_db.xml</languageKey>
-		<languageKey index="it">EXT:irfaq/lang/it.locallang_db.xml</languageKey>
-		<languageKey index="nl">EXT:irfaq/lang/nl.locallang_db.xml</languageKey>
-        <languageKey index="fi">EXT:irfaq/lang/fi.locallang_db.xml</languageKey>
     </orig_hash>
     <orig_text type="array">
     </orig_text>

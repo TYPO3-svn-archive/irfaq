@@ -2,10 +2,9 @@
 <T3locallang>
     <meta type="array">
         <description></description>
-        <type>database</type>
+        <type>module</type>
         <csh_table></csh_table>
         <fileId>EXT:irfaq/pi1/locallang.xml</fileId>
-		<ext_filename_template>EXT:irfaq/pi1/###LANGKEY###.locallang.xml</ext_filename_template>
         <labelContext type="array">
         </labelContext>
     </meta>
@@ -23,11 +22,6 @@
             <label index="noSuchEntry">Sorry, could not find such FAQ entry.</label>
             <label index="back">Go back</label>
         </languageKey>
-        <languageKey index="dk">EXT:irfaq/pi1/dk.locallang.xml</languageKey>
-        <languageKey index="de">EXT:irfaq/pi1/de.locallang.xml</languageKey>
-		<languageKey index="it">EXT:irfaq/pi1/it.locallang.xml</languageKey>
-		<languageKey index="nl">EXT:irfaq/pi1/nl.locallang.xml</languageKey>
-        <languageKey index="fi">EXT:irfaq/pi1/fi.locallang.xml</languageKey>
     </data>
     <orig_hash type="array">
         <languageKey index="default" type="array">
@@ -36,11 +30,6 @@
             <label index="text_category" type="integer">215026594</label>
             <label index="text_asked_by" type="integer">221518685</label>
         </languageKey>
-        <languageKey index="dk">EXT:irfaq/pi1/dk.locallang.xml</languageKey>
-        <languageKey index="de">EXT:irfaq/pi1/de.locallang.xml</languageKey>
-		<languageKey index="it">EXT:irfaq/pi1/it.locallang.xml</languageKey>
-		<languageKey index="nl">EXT:irfaq/pi1/nl.locallang.xml</languageKey>
-        <languageKey index="fi">EXT:irfaq/pi1/fi.locallang.xml</languageKey>
     </orig_hash>
     <orig_text type="array">
         <languageKey index="default" type="array">

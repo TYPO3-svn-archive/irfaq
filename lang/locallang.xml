@@ -1,31 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
-    <meta type="array">
-        <description>Language labels</description>
-        <type>database</type>
-        <csh_table></csh_table>
-        <fileId>EXT:irfaq/lang/locallang.xml</fileId>
-		<ext_filename_template>EXT:irfaq/lang/###LANGKEY###.locallang.xml</ext_filename_template>
-        <labelContext type="array">
-        </labelContext>
-    </meta>
-    <data type="array">
-        <languageKey index="default" type="array">
-            <label index="pi1_title_irfaq">Modern FAQ</label>
-            <label index="pi1_plus_wiz_description_irfaq">FAQ with dynamic and static list</label>
-        </languageKey>
-        <languageKey index="dk">EXT:irfaq/lang/dk.locallang.xml</languageKey>
-        <languageKey index="de">EXT:irfaq/lang/de.locallang.xml</languageKey>
-		<languageKey index="it">EXT:irfaq/lang/it.locallang.xml</languageKey>
-		<languageKey index="nl">EXT:irfaq/lang/nl.locallang.xml</languageKey>
-        <languageKey index="fi">EXT:irfaq/lang/fi.locallang.xml</languageKey>
-    </data>
-    <orig_hash type="array">
-        <languageKey index="default" type="array">
-            <label index="pi1_title_irfaq" type="integer">201706153</label>
-            <label index="pi1_plus_wiz_description_irfaq" type="integer">112867693</label>
-        </languageKey>
-    </orig_hash>
-    <orig_text type="array">
-    </orig_text>
+	<meta type="array">
+		<description>Language labels</description>
+		<type>module</type>
+		<csh_table></csh_table>
+		<fileId>EXT:irfaq/lang/locallang.xml</fileId>
+		<labelContext type="array">
+		</labelContext>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="pi1_title_irfaq">Modern FAQ</label>
+			<label index="pi1_plus_wiz_description_irfaq">FAQ with dynamic and static list</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+	</orig_hash>
+	<orig_text type="array">
+	</orig_text>
 </T3locallang>
