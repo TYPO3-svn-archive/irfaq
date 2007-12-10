@@ -78,7 +78,7 @@ $TCA['tx_irfaq_rating'] = array (
 		'cruser_id' => 'cruser_id',
 		'sortby' => 'faq',
 		'delete' => 'deleted',
-//		'hideTable' => 1,
+		'hideTable' => 1,
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 //		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_irfaq_q.gif',
 	),
