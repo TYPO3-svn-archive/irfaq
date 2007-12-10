@@ -19,7 +19,7 @@
             <label index="tx_irfaq_q.related_links">Related links (one per line):</label>
             <label index="tx_irfaq_q.related_new">Create new FAQ and add here</label>
             <label index="tx_irfaq_q.related_edit">Edit selected entry</label>
-            <label index="tx_irfaq_q.comments_tab">Comment options</label>
+            <label index="tx_irfaq_q.extra_tab">Extras</label>
             <label index="tx_irfaq_q.disable_comments">Disable comments:</label>
             <label index="tx_irfaq_q.comments_closetime">Close commenting at:</label>
             <label index="tx_irfaq_cat">FAQ category</label>
@@ -44,6 +44,13 @@
             <label index="tx_irfaq.pi_flexform.searchPid">Redirect to page</label>
             <label index="tx_irfaq.pi_flexform.emptySearchAtStart">Empty search at start</label>
             <label index="tx_irfaq.sysfolder">Modern FAQ</label>
+            <label index="tx_irfaq_rating.faq">FAQ entry:</label>
+            <label index="tx_irfaq_rating.rating">Rating value:</label>
+            <label index="tx_irfaq.pi_flexform.sheet_rating">Ratings</label>
+            <label index="tx_irfaq.pi_flexform.enableRating">Enable ratings:</label>
+            <label index="tx_irfaq.pi_flexform.minRating">Minimum rating:</label>
+            <label index="tx_irfaq.pi_flexform.maxRating">Maximum rating:</label>
+            <label index="tx_irfaq_q.enable_ratings">Enable ratings for this item:</label>
         </languageKey>
     </data>
     <orig_hash type="array">

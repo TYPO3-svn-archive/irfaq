@@ -35,6 +35,7 @@ CREATE TABLE tx_irfaq_q (
 	related text NOT NULL,
 	related_links text NOT NULL,
 	faq_files text NOT NULL,
+	enable_ratings tinyint(4) DEFAULT '1' NOT NULL,
 	disable_comments int(11) DEFAULT '0' NOT NULL,
 	comments_closetime int(11) DEFAULT '0' NOT NULL,
 
@@ -81,4 +82,22 @@ CREATE TABLE tx_irfaq_expert (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
+);
+
+#
+# Table structure for table 'tx_irfaq_rating'
+#
+CREATE TABLE tx_irfaq_rating (
+	uid int(11) NOT NULL AUTO_INCREMENT,
+	pid int(11) DEFAULT '0' NOT NULL,
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	faq text NOT NULL,
+	rating int(11) DEFAULT '0' NOT NULL,
+
+	PRIMARY KEY (uid),
+	KEY parent (pid),
+	KEY faq (faq(6),deleted)
 );

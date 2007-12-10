@@ -49,6 +49,10 @@ plugin.tx_irfaq_pi1 {
 
     general_stdWrap.parseFunc >
     general_stdWrap.parseFunc < tt_content.text.20.parseFunc
+
+    enableRatings = 0
+    minRating = 1
+    maxRating = 5
 }
 
 # Additions to comments extension

@@ -172,13 +172,24 @@ $TCA['tx_irfaq_q'] = Array (
 				'minitems' => '0'
 			)
 		),*/
+		'enable_ratings' => array(
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.enable_ratings',
+			'exclude' => 1,
+			'config' => array(
+				'type' => 'check',
+				'items'    => array(
+					array('', '')
+				),
+				'default'  => '1'
+			)
+		),
 		'disable_comments' => array(
 			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.disable_comments',
 			'exclude' => 1,
 			'displayCond' => 'EXT:comments:LOADED:true',
 			'config' => array(
-			'type'     => 'check',
-				'items'    => array(
+				'type' => 'check',
+				'items' => array(
 					array('', '')
 				),
 				'default'  => '0'
@@ -189,17 +200,16 @@ $TCA['tx_irfaq_q'] = Array (
 			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.comments_closetime',
 			'displayCond' => 'EXT:comments:LOADED:true',
 			'config' => array (
-				'type'     => 'input',
-				'size'     => '12',
-				'max'      => '20',
-				'eval'     => 'datetime',
+				'type' => 'input',
+				'size' => '12',
+				'max' => '20',
+				'eval' => 'datetime',
 				'checkbox' => '0',
-//				'default'  => PHP_INT_MAX,
 			)
 		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'hidden;;1;;1-1-1, q, a;;;richtext:rte_transform[flag=rte_enabled|mode=ts_css];,--div--;Details, q_from, expert, related, related_links, faq_files, cat, --div--;LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.comments_tab, disable_comments;;;;2-2-2, comments_closetime')
+		'0' => Array('showitem' => 'hidden;;1;;1-1-1, q, a;;;richtext:rte_transform[flag=rte_enabled|mode=ts_css];,--div--;Details, q_from, expert, related, related_links, faq_files, cat, --div--;LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.extra_tab, enable_ratings;;;;2-2-2, disable_comments, comments_closetime')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => 'fe_group')
@@ -306,6 +316,39 @@ $TCA['tx_irfaq_expert'] = Array (
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => '')
+	)
+);
+
+$TCA['tx_irfaq_rating'] = array(
+	'ctrl' => $TCA['tx_irfaq_rating']['ctrl'],
+	'columns' => array(
+		'faq' => array(
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_rating.faq',
+			'exclude' => 1,
+			'config' => Array (
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'tx_irfaq_q',
+				'prepend_tname' => false,
+				'size' => 1,
+				'minitems' => 1,
+				'maxitems' => 1,
+			)
+		),
+		'rating' => array(
+			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_rating.rating',
+			'exclude' => 1,
+			'config' => Array (
+				'type' => 'input',
+				'eval' => 'int,trim',
+				'size' => 5,
+				'default' => 0,
+			)
+
+		),
+	),
+	'types' => array(
+		'0' => array('showitem' => 'faq;;;;1-1-1, rating')
 	)
 );
 ?>

@@ -12,5 +12,9 @@ plugin.tx_irfaq_pi1 {
 		.tx-irfaq-pi1 dd p { margin-top: 0px;	}
 		.tx-irfaq-pi1 .additional-info { border-top: 2px solid #e6e6e6; margin-bottom: 10px; }
 		.tx-irfaq-pi1 .irfaq-related-faq, .tx-irfaq-pi1 .irfaq-related-links { padding-top: 0px; padding-bottom: 0px; margin-top: 3px; margin-bottom: 15px; }
+		.tx-irfaq-pi1 .tx-irfaq-bar { width: 55px; background: url(typo3conf/ext/irfaq/res/grey_star.gif); float: left; margin: 4px 10px 0 0; }
+		.tx-irfaq-pi1 .tx-irfaq-rating-bar { background: url(../typo3conf/ext/irfaq/res/orange_star.gif); height:12px; }
+		.tx-irfaq-pi1 .tx-irfaq-cleaner { clear: both; height: 3px; }
+		.tx-irfaq-pi1 .tx-irfaq-rating-prefix { float: left; margin: 3px 5px 0 0; }
 	)
 }

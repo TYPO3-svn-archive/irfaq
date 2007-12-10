@@ -1,4 +1,7 @@
 <T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
 	<sheets>
 		<sDEF>
 			<ROOT>
@@ -203,5 +206,71 @@
 				</el>
 			</ROOT>
 		</sSEARCH>
+		<sRATING>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.sheet_rating</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<enableRating>
+						<TCEforms>
+							<label>LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.enableRating</label>
+							<onChange>reload</onChange>
+							<config>
+								<type>check</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+								</items>
+								<default>0</default>
+							</config>
+						</TCEforms>
+					</enableRating>
+<!--
+					<ratingPid>
+						<TCEforms>
+							<label>LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.ratingPid</label>
+							<displayCond>FIELD:enableRating:=:1</displayCond>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+							</config>
+						</TCEforms>
+					</ratingPid>
+-->
+					<minRating>
+						<TCEforms>
+							<label>LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.minRating</label>
+							<displayCond>FIELD:enableRating:=:1</displayCond>
+							<config>
+								<type>input</type>
+								<size>5</size>
+								<default>1</default>
+								<eval>int,trim</eval>
+							</config>
+						</TCEforms>
+					</minRating>
+					<maxRating>
+						<TCEforms>
+							<label>LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.maxRating</label>
+							<displayCond>FIELD:enableRating:=:1</displayCond>
+							<config>
+								<type>input</type>
+								<size>5</size>
+								<default>5</default>
+								<eval>int,trim</eval>
+							</config>
+						</TCEforms>
+					</maxRating>
+				</el>
+			</ROOT>
+		</sRATING>
 	</sheets>
 </T3DataStructure>

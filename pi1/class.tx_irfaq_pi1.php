@@ -78,7 +78,6 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	var $scriptRelPath 	= 'pi1/class.tx_irfaq_pi1.php';
 	var $extKey 		= 'irfaq';
 	var $searchFieldList = 'q, a';
-	var $conf	 		= array();
 	var $categories 	= array();
 	var $experts		= array();
 	var $pageArray 		= array();
@@ -240,6 +239,20 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$this->conf['pageBrowser.']     = $this->conf['pageBrowser.'];
 		}
 
+		// ratings
+		$val = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'enableRating', 'sRATING');
+		if ($val != '') {
+			$this->conf['enableRatings'] = $val;
+		}
+		$val = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'minRating', 'sRATING');
+		if ($val != '') {
+			$this->conf['minRating'] = $val;
+		}
+		$val = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'maxRating', 'sRATING');
+		if ($val != '') {
+			$this->conf['maxRating'] = $val;
+		}
+
 		// read template file
 		$this->templateCode = $this->cObj->fileResource(
 			$this->conf['templateFile']
@@ -250,6 +263,8 @@ class tx_irfaq_pi1 extends tslib_pibase {
 
 		mt_srand((double) microtime() * 1000000);
 		$this->hash = substr(md5(mt_rand()), 0, 5);
+
+		$this->addHeaderParts();
 	}
 
 	/**
@@ -415,7 +430,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$selectConf = array();
 		$where = '1 = 1'.$this->cObj->enableFields('tx_irfaq_q');
 		$selectConf = $this->getSelectConf($where);
-		$selectConf['selectFields'] = 'DISTINCT tx_irfaq_q.uid, tx_irfaq_q.q, tx_irfaq_q.q_from, tx_irfaq_q.a, tx_irfaq_q.cat, tx_irfaq_q.expert, tx_irfaq_q.related, tx_irfaq_q.related_links';
+		$selectConf['selectFields'] = 'DISTINCT tx_irfaq_q.uid, tx_irfaq_q.q, tx_irfaq_q.q_from, tx_irfaq_q.a, tx_irfaq_q.cat, tx_irfaq_q.expert, tx_irfaq_q.related, tx_irfaq_q.related_links, tx_irfaq_q.enable_ratings';
 		$selectConf['orderBy'] 		= 'tx_irfaq_q.sorting';
 
 		$res = $this->cObj->exec_getQuery('tx_irfaq_q', $selectConf);
@@ -748,6 +763,8 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$returnUrl = base64_encode(t3lib_div::getIndpEnv('TYPO3_SITE_SCRIPT'));
 		$markerArray['###SINGLEVIEW_LINK###'] = $this->pi_list_linkSingle('', $row['uid'], true, array('back' => $returnUrl), true);
 
+		$markerArray['###RATING###'] = $this->getRatingForRow($row);
+
 		return $markerArray;
 	}
 
@@ -783,6 +800,75 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$template = $this->cObj->getSubPart($template_sub, '###QUESTIONS###');
 		$subpartArray['###QUESTIONS###'] = $this->fillMarkers($template);
 		return $this->cObj->substituteMarkerArrayCached($template_sub, array(), $subpartArray);
+	}
+
+	/**
+	 * Calculates and formats rating for row.
+	 * This function will check if prototype is available and select appropriate voting method
+	 *
+	 * @param	array	$row	Database row from tx_irfaq_q table
+	 */
+	function getRatingForRow($row) {
+		if (!$row['enable_ratings'] || !$this->conf['enableRatings']) {
+			// Ratings for item or plugin globally is not enabled. Return silently
+			return '';
+		}
+		$this->addHeaderParts('###HEADER_PARTS_RATING###');
+
+		// Get rating value
+		list($rating) = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows('SUM(rating)/COUNT(rating) AS rating, COUNT(rating) as count', 'tx_irfaq_rating',
+				'faq=' . intval($row['uid']) . $this->cObj->enableFields('tx_irfaq_rating'));
+
+		// Fill marker array
+		$percent = max(0, 100*(floatval($rating['rating'])-$this->conf['minRating'])/($this->conf['maxRating']-$this->conf['minRating']));
+		$markerArray = array(
+			'###MIN_RATING###' => $this->conf['minRating'],
+			'###MAX_RATING###' => $this->conf['maxRating'],
+			'###RATING###' => sprintf('%.2f', $rating['rating']),
+			'###VOTES###' => $rating['count'],
+			'###VOTES_STR###' => sprintf($this->pi_getLL('votes_str'), $row['uid'], $rating['count']),
+			'###TEXT_RATING###' => $this->pi_getLL('rating_str'),
+			'###TEXT_YOUR_VOTE###' => $this->pi_getLL('your_vote'),
+			'###PERCENT###' => $percent,
+			'###PERCENT_STR###' => sprintf($this->pi_getLL('votes_percent_str'), $percent),
+			'###PERCENT_INT###' => intval($percent),
+			'###PID###' => $GLOBALS['TSFE']->id,
+			'###UID###' => $row['uid'],
+		);
+		// Get template name (depends on whether if we have prototype) & template
+		$templateVar = '###TEMPLATE_RATING_POPUP###'; //is_dir(PATH_typo3 . 'contrib/prototype') ? '###TEMPLATE_RATING_PROTOTYPE###' : '###TEMPLATE_RATING_POPUP###';
+		$template = $this->cObj->getSubpart($this->templateCode, $templateVar);
+
+		// Format vote selector
+		$subTemplate = $this->cObj->getSubpart($template, '###VOTE_SUB###');
+		$items = array();
+		for ($i = $this->conf['minRating']; $i <= $this->conf['maxRating']; $i++) {
+			$items[] = $this->cObj->substituteMarkerArray($subTemplate, array(
+					'###VOTE###' => $i,
+					'###UID###' => $row['uid'],
+					'###PID###' => $GLOBALS['TSFE']->id,
+					'###SITE_REL_PATH###' => t3lib_extMgm::siteRelPath('irfaq'),
+					'###CHECK###' => md5($row['uid'] . $GLOBALS['TSFE']->id . $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']),
+					));
+		}
+
+		// Format
+		return $this->cObj->substituteMarkerArrayCached($template, $markerArray, array(
+					'###VOTE_SUB###' => implode('', $items)));
+	}
+
+	/**
+	 * Adds header parts from the template to the TSFE.
+	 * It fetches subpart identified by $subpart and replaces ###SITE_REL_PATH### with site-relative part to the extension.
+	 *
+	 * @param	string	$subpart	Subpart from template to add.
+	 */
+	function addHeaderParts($subpart = '###HEADER_PARTS###') {
+		if (!isset($GLOBALS['TSFE']->additionalHeaderData['tx_irfaq_pi1_' . $subpart])) {
+			$template = $this->cObj->getSubpart($this->templateCode, $subpart);
+			$GLOBALS['TSFE']->additionalHeaderData['tx_irfaq_pi1_' . $subpart] =
+				$this->cObj->substituteMarker($template, '###SITE_REL_PATH###', t3lib_extMgm::siteRelPath('irfaq'));
+		}
 	}
 }
 

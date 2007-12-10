@@ -5,15 +5,15 @@ t3lib_extMgm::allowTableOnStandardPages('tx_irfaq_q');
 
 $TCA['tx_irfaq_q'] = Array (
 	'ctrl' => Array (
-		'title' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q',		
-		'label' => 'q',	
+		'title' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q',
+		'label' => 'q',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'sortby' => 'sorting',	
-		'delete' => 'deleted',	
-		'enablecolumns' => Array (		
-			'disabled' => 'hidden',	
+		'sortby' => 'sorting',
+		'delete' => 'deleted',
+		'enablecolumns' => Array (
+			'disabled' => 'hidden',
 			'fe_group' => 'fe_group',
 		),
 		'dividers2tabs' => true,
@@ -30,15 +30,15 @@ t3lib_extMgm::allowTableOnStandardPages('tx_irfaq_cat');
 
 $TCA['tx_irfaq_cat'] = Array (
 	'ctrl' => Array (
-		'title' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_cat',		
-		'label' => 'title',	
+		'title' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_cat',
+		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'sortby' => 'sorting',	
-		'delete' => 'deleted',	
-		'enablecolumns' => Array (		
-			'disabled' => 'hidden',	
+		'sortby' => 'sorting',
+		'delete' => 'deleted',
+		'enablecolumns' => Array (
+			'disabled' => 'hidden',
 			'fe_group' => 'fe_group',
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
@@ -54,19 +54,34 @@ t3lib_extMgm::allowTableOnStandardPages('tx_irfaq_expert');
 
 $TCA['tx_irfaq_expert'] = Array (
 	'ctrl' => Array (
-		'title' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_expert',		
-		'label' => 'name',	
+		'title' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_expert',
+		'label' => 'name',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'default_sortby' => 'ORDER BY crdate',	
-		'delete' => 'deleted',	
+		'default_sortby' => 'ORDER BY crdate',
+		'delete' => 'deleted',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_irfaq_expert.gif',
 	),
 	'feInterface' => Array (
 		'fe_admin_fieldList' => 'name, email, url',
 	)
+);
+
+$TCA['tx_irfaq_rating'] = array (
+	'ctrl' => array (
+		'title' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_rating',
+		'label' => 'faq',
+		'tstamp' => 'tstamp',
+		'crdate' => 'crdate',
+		'cruser_id' => 'cruser_id',
+		'sortby' => 'faq',
+		'delete' => 'deleted',
+//		'hideTable' => 1,
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
+//		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_irfaq_q.gif',
+	),
 );
 
 
@@ -76,16 +91,16 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1']='pi_fle
 
 //adding sysfolder icon
 t3lib_div::loadTCA('pages');
-$TCA['pages']['columns']['module']['config']['items'][$_EXTKEY]['0'] = 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.sysfolder'; 
+$TCA['pages']['columns']['module']['config']['items'][$_EXTKEY]['0'] = 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.sysfolder';
 $TCA['pages']['columns']['module']['config']['items'][$_EXTKEY]['1'] = $_EXTKEY;
 
 t3lib_extMgm::addPlugin(Array('LLL:EXT:irfaq/lang/locallang_db.xml:tt_content.list_type_pi1', $_EXTKEY.'_pi1'),'list_type');
 t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:irfaq/flexform_ds.xml');
 
-t3lib_extMgm::addStaticFile($_EXTKEY,'static/css/','Default CSS-styles');		
+t3lib_extMgm::addStaticFile($_EXTKEY,'static/css/','Default CSS-styles');
 
 
-if (TYPO3_MODE=='BE')	
+if (TYPO3_MODE=='BE')
 {
 	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_irfaq_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY).'pi1/class.tx_irfaq_pi1_wizicon.php';
 	//adding sysfolder icon
