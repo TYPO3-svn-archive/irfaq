@@ -126,7 +126,7 @@ $TCA['tx_irfaq_q'] = Array (
 					'_PADDING' => 2,
 					'edit' => array(
 						'type' => 'popup',
-						'title' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_q.related_edit',
+						'title' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.related_edit',
 						'script' => 'wizard_edit.php',
 						'icon' => 'edit2.gif',
 						'popup_onlyOpenIfSelected' => 1,
@@ -134,7 +134,7 @@ $TCA['tx_irfaq_q'] = Array (
 					),
 					'add' => array(
 						'type' => 'script',
-						'title' => 'LLL:EXT:irfaq/locallang_db.php:tx_irfaq_q.related_new',
+						'title' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.related_new',
 						'icon' => 'add.gif',
 						'params' => array(
 							'table'=>'tx_irfaq_q',
