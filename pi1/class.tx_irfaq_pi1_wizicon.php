@@ -33,11 +33,11 @@ class tx_irfaq_pi1_wizicon {
 	function proc($wizardItems)	{
 		global $LANG;
 
-		$wizardItems["plugins_tx_irfaq_pi1"] = array(
-			"icon"=>t3lib_extMgm::extRelPath("irfaq")."pi1/ce_wiz.gif",
-			"title"=>$LANG->getLL("pi1_title_irfaq"),
-			"description"=>$LANG->getLL("pi1_plus_wiz_description_irfaq"),
-			"params"=>"&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=irfaq_pi1"
+		$wizardItems['plugins_tx_irfaq_pi1'] = array(
+			'icon' => t3lib_extMgm::extRelPath('irfaq').'res/ce_wiz.gif',
+			'title' => $LANG->getLL('pi1_title_irfaq'),
+			'description' => $LANG->getLL('pi1_plus_wiz_description_irfaq'),
+			'params' => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=irfaq_pi1'
 		);
 
 		return $wizardItems;

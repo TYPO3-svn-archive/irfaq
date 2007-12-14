@@ -1,3 +1,11 @@
+2007-12-14	Patrick Broens	<patrick@netcreators.com>
+
+	* Moved icons to folder 'res'
+	* Removed addPItoST43 method and moved constants and setup to static template list
+	* Deleted old unused files
+	* Moved flexform.xml into own folder
+	* Splitted TCA files for each table and moved to TCA folder
+
 2007-12-10	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Added ratings

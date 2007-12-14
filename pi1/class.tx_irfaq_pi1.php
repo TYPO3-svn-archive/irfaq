@@ -145,15 +145,14 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$this->conf['code'] = array('SINGLE');
 			$this->conf['categoryMode'] = 0;
 			$this->conf['catExclusive'] = 0;
-		}
-		else {
-			$ffCode = $this->pi_getFFvalue(
-				$this->cObj->data['pi_flexform'], 'what_to_display');
-			$this->conf['code'] = $ffCode ?
-				$ffCode :
-				strtoupper($conf['code']);
+		} else {
+			$ffCode = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'what_to_display');
+			$this->conf['code'] = $ffCode ? $ffCode : strtoupper($conf['code']);
+			if(empty($this->conf['code'])) {
+				$this->conf['code'] = strtoupper($conf['defaultCode']);
+			}
 			$this->conf['code'] = explode(',', $this->conf['code']);
-
+			
 			// categoryModes are: 0=display all categories, 1=display selected categories, -1=display deselected categories
 			$ffCategoryMode = $this->pi_getFFvalue(
 				$this->cObj->data['pi_flexform'], 'categoryMode', 'sCATEGORIES');
@@ -161,8 +160,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				$ffCategoryMode :
 				$this->conf['categoryMode'];
 
-			$ffCatSelection = $this->pi_getFFvalue(
-				$this->cObj->data['pi_flexform'], 'categorySelection', 'sCATEGORIES');
+			$ffCatSelection = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'categorySelection', 'sCATEGORIES');
 			$this->conf['catSelection'] = $ffCatSelection ?
 				$ffCatSelection :
 				trim($this->conf['categorySelection']);
