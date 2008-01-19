@@ -88,7 +88,7 @@ CREATE TABLE tx_irfaq_expert (
 # Table structure for table 'tx_irfaq_rating'
 #
 CREATE TABLE tx_irfaq_rating (
-	uid int(11) NOT NULL AUTO_INCREMENT,
+	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
