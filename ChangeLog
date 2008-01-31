@@ -1,3 +1,7 @@
+2008-01-31	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Changed to use ratings extension instead of built-in rated feature
+
 2008-01-19	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Committed some fies for ratings feature
