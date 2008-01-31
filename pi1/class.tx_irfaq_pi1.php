@@ -314,6 +314,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 													  '1=1'.$this->cObj->enableFields('tx_irfaq_expert'));
 
 		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))   {
+			$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_expert', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL, '');
 			$this->experts[$row['uid']]['name']  = $row['name'];
 			$this->experts[$row['uid']]['url']   = $row['url'];
 			$this->experts[$row['uid']]['email'] = $row['email'];
@@ -430,7 +431,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$selectConf = array();
 		$where = '1 = 1'.$this->cObj->enableFields('tx_irfaq_q');
 		$selectConf = $this->getSelectConf($where);
-		$selectConf['selectFields'] = 'DISTINCT tx_irfaq_q.uid, tx_irfaq_q.q, tx_irfaq_q.q_from, tx_irfaq_q.a, tx_irfaq_q.cat, tx_irfaq_q.expert, tx_irfaq_q.related, tx_irfaq_q.related_links, tx_irfaq_q.enable_ratings';
+		$selectConf['selectFields'] = 'DISTINCT tx_irfaq_q.uid, tx_irfaq_q.pid, tx_irfaq_q.q, tx_irfaq_q.q_from, tx_irfaq_q.a, tx_irfaq_q.cat, tx_irfaq_q.expert, tx_irfaq_q.related, tx_irfaq_q.related_links, tx_irfaq_q.enable_ratings, tx_irfaq_q.sys_language_uid, tx_irfaq_q.l18n_parent, tx_irfaq_q.l18n_diffsource';
 		$selectConf['orderBy'] 		= 'tx_irfaq_q.sorting';
 
 		$res = $this->cObj->exec_getQuery('tx_irfaq_q', $selectConf);
@@ -438,6 +439,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 
 		$markerArray = array(); $i = 1;
 		while (false != ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
+			$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_q', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL, '');
 			$markerArray = $this->fillMarkerArrayForRow($row, $i);
 			$markerArray['###FAQ_ID###'] = $i++;
 
@@ -520,6 +522,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$selectConf = array();
 		$selectConf['pidInList'] = $this->conf['pidList'];
 		$selectConf['where'] = $where;
+		$selectConf['where'] .= ' AND sys_language_uid=0';// . intval($GLOBALS['TSFE']->sys_language_uid);
 
 		//build SQL on condition of categoryMode
 		if($this->conf['categoryMode'] == 1) {
@@ -608,7 +611,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$content = '';
 		$list = t3lib_div::trimExplode(',', $list, true);	// Have to do that because there can be empty elements!
 		if (count($list)) {
-			$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows('uid,q', 'tx_irfaq_q', 'uid IN (' . implode(',', $list) . ')' .
+			$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows('*', 'tx_irfaq_q', 'uid IN (' . implode(',', $list) . ')' .
 						$this->cObj->enableFields('tx_irfaq_q'));
 			if (is_array($rows)) {
 				$template = $this->cObj->getSubpart($this->templateCode, '###TEMPLATE_RELATED_FAQ###');
@@ -617,6 +620,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				$returnUrl = base64_encode(t3lib_div::getIndpEnv('TYPO3_SITE_SCRIPT'));
 				foreach ($rows as $row) {
 					// TODO Anchor is customizable in template!
+					$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_q', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL, '');
 					$markers = array(
 						'###RELATED_FAQ_ENTRY_TITLE###' => $this->formatStr($this->local_cObj->stdWrap(htmlspecialchars($row['q']), $this->conf['question_stdWrap.'])),
 						'###RELATED_FAQ_ENTRY_HREF###' => $this->pi_list_linkSingle('', $row['uid'], true, array('back' => $returnUrl), true),
@@ -776,6 +780,9 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	function singleView() {
 		$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows('*', 'tx_irfaq_q', 'uid=' . intval($this->showUid) .
 					$this->cObj->enableFields('tx_irfaq_q'));
+		if (count($rows)) {
+			$rows[0] = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_q', $rows[0], $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL, '');
+		}
 		if (count($rows) == 0) {
 			$content = $this->pi_getLL('noSuchEntry');
 		}
@@ -815,7 +822,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 
 			$apiObj = t3lib_div::makeInstance('tx_ratings_api');
 			/* @var $apiObj tx_ratings_api */
-			$result = $apiObj->getRatingDisplay('tx_irfaq_q_' . $row['uid']);
+			$result = $apiObj->getRatingDisplay('tx_irfaq_q_' . ($row['l18n_parent'] ? $row['l18n_parent'] : $row['uid']));
 		}
 		return $result;
 	}

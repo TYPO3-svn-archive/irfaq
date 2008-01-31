@@ -2,6 +2,7 @@
 
 	* Changed to use ratings extension instead of built-in rated feature
 	* Changed inclusion of the plugin to show error message if TS template is not included
+	* Initial work on localization feature
 
 2008-01-19	Dmitry Dulepov	<dmitry@typo3.org>
 

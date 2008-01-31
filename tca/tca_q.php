@@ -175,6 +175,7 @@ $TCA['tx_irfaq_q'] = Array (
 		'enable_ratings' => array(
 			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.enable_ratings',
 			'exclude' => 1,
+			'l10n_mode' => 'exclude',
 			'displayCond' => 'EXT:ratings:LOADED:true',
 			'config' => array(
 				'type' => 'check',
@@ -187,6 +188,7 @@ $TCA['tx_irfaq_q'] = Array (
 		'disable_comments' => array(
 			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.disable_comments',
 			'exclude' => 1,
+			'l10n_mode' => 'exclude',
 			'displayCond' => 'EXT:comments:LOADED:true',
 			'config' => array(
 				'type' => 'check',
@@ -198,6 +200,7 @@ $TCA['tx_irfaq_q'] = Array (
 		),
 		'comments_closetime' => Array (
 			'exclude' => 1,
+			'l10n_mode' => 'exclude',
 			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.comments_closetime',
 			'displayCond' => 'EXT:comments:LOADED:true',
 			'config' => array (
@@ -207,6 +210,36 @@ $TCA['tx_irfaq_q'] = Array (
 				'eval' => 'datetime',
 				'checkbox' => '0',
 			)
+		),
+		'sys_language_uid' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.language',
+			'config' => Array (
+				'type' => 'select',
+				'foreign_table' => 'sys_language',
+				'foreign_table_where' => 'ORDER BY sys_language.title',
+				'items' => Array(
+					Array('LLL:EXT:lang/locallang_general.php:LGL.allLanguages',-1),
+					Array('LLL:EXT:lang/locallang_general.php:LGL.default_value',0)
+				)
+			)
+		),
+		'l18n_parent' => Array (
+			'displayCond' => 'FIELD:sys_language_uid:>:0',
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.l18n_parent',
+			'config' => Array (
+				'type' => 'select',
+				'items' => Array (
+					Array('', 0),
+				),
+				'foreign_table' => 'tx_irfaq_q',
+				'foreign_table_where' => 'AND tx_irfaq_q.uid=###REC_FIELD_l18n_parent### AND tx_irfaq_q.sys_language_uid IN (-1,0)',
+			)
+		),
+		'l18n_diffsource' => Array(
+			'config'=>array(
+				'type'=>'passthrough')
 		),
 	),
 	'types' => Array (
