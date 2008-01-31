@@ -1,5 +1,3 @@
-#includeLibs.tx_irfaq_pi1 = EXT:irfaq/pi1/class.tx_irfaq_pi1.php
-
 plugin.tx_irfaq_pi1 = USER
 plugin.tx_irfaq_pi1 {
 	userFunc = tx_irfaq_pi1->main
@@ -53,5 +51,3 @@ plugin.tx_irfaq_pi1 {
 
 # Additions to comments extension
 plugin.tx_comments_pi1.prefixToTableMap.tx_irfaq_pi1 = tx_irfaq_q
-
-#tt_content.list.20.irfaq_pi1 =< plugin.tx_irfaq_pi1
