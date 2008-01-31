@@ -1,4 +1,4 @@
-includeLibs.tx_irfaq_pi1 = EXT:irfaq/pi1/class.tx_irfaq_pi1.php
+#includeLibs.tx_irfaq_pi1 = EXT:irfaq/pi1/class.tx_irfaq_pi1.php
 
 plugin.tx_irfaq_pi1 = USER
 plugin.tx_irfaq_pi1 {
@@ -48,12 +48,10 @@ plugin.tx_irfaq_pi1 {
     general_stdWrap.parseFunc >
     general_stdWrap.parseFunc < tt_content.text.20.parseFunc
 
-    enableRatings = 0
-    minRating = 1
-    maxRating = 5
+    enableRatings = {$plugin.tx_irfaq_pi1.enableRatings}
 }
 
 # Additions to comments extension
 plugin.tx_comments_pi1.prefixToTableMap.tx_irfaq_pi1 = tx_irfaq_q
 
-tt_content.list.20.irfaq_pi1 =< plugin.tx_irfaq_pi1
+#tt_content.list.20.irfaq_pi1 =< plugin.tx_irfaq_pi1

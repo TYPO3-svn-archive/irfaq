@@ -175,6 +175,7 @@ $TCA['tx_irfaq_q'] = Array (
 		'enable_ratings' => array(
 			'label' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_q.enable_ratings',
 			'exclude' => 1,
+			'displayCond' => 'EXT:ratings:LOADED:true',
 			'config' => array(
 				'type' => 'check',
 				'items'    => array(

@@ -98,27 +98,32 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$this->local_cObj = t3lib_div::makeInstance('tslib_cObj');
 		$this->init($conf);
 
-		$content = '';
-		foreach($this->conf['code'] as $code) {
-			switch($code) {
-				case 'SINGLE':
-					$content .= $this->singleView();
-					break;
-				case 'SEARCH':
-					$content .= $this->searchView();
-					break;
-				case 'DYNAMIC':
-					$content .= $this->dynamicView();
-					break;
-				case 'STATIC':
-					$content .= $this->staticView();
-					break;
-				case 'STATIC_SEPARATE':
-					$content .= $this->staticSeparateView();
-					break;
-				default:
-					$content .= 'unknown view!';
-					break;
+		if (!isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_irfaq_pi1.'])) {
+			$content = $this->pi_getLL('no_ts_template');
+		}
+		else {
+			$content = '';
+			foreach($this->conf['code'] as $code) {
+				switch($code) {
+					case 'SINGLE':
+						$content .= $this->singleView();
+						break;
+					case 'SEARCH':
+						$content .= $this->searchView();
+						break;
+					case 'DYNAMIC':
+						$content .= $this->dynamicView();
+						break;
+					case 'STATIC':
+						$content .= $this->staticView();
+						break;
+					case 'STATIC_SEPARATE':
+						$content .= $this->staticSeparateView();
+						break;
+					default:
+						$content .= 'unknown view!';
+						break;
+				}
 			}
 		}
 
@@ -152,7 +157,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				$this->conf['code'] = strtoupper($conf['defaultCode']);
 			}
 			$this->conf['code'] = explode(',', $this->conf['code']);
-			
+
 			// categoryModes are: 0=display all categories, 1=display selected categories, -1=display deselected categories
 			$ffCategoryMode = $this->pi_getFFvalue(
 				$this->cObj->data['pi_flexform'], 'categoryMode', 'sCATEGORIES');
@@ -238,17 +243,14 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		}
 
 		// ratings
-		$val = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'enableRating', 'sRATING');
-		if ($val != '') {
-			$this->conf['enableRatings'] = $val;
+		if (!t3lib_extMgm::isLoaded('ratings')) {
+			$this->conf['enableRatings'] = false;
 		}
-		$val = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'minRating', 'sRATING');
-		if ($val != '') {
-			$this->conf['minRating'] = $val;
-		}
-		$val = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'maxRating', 'sRATING');
-		if ($val != '') {
-			$this->conf['maxRating'] = $val;
+		else {
+			$val = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'enableRatings', 'sDEF');
+			if ($val != '') {
+				$this->conf['enableRatings'] = $val;
+			}
 		}
 
 		// read template file
@@ -801,58 +803,21 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	}
 
 	/**
-	 * Calculates and formats rating for row.
-	 * This function will check if prototype is available and select appropriate voting method
+	 * Obtains rating HTML for row if enabled.
 	 *
 	 * @param	array	$row	Database row from tx_irfaq_q table
+	 * @return	string	Generated ratings
 	 */
 	function getRatingForRow($row) {
-		if (!$row['enable_ratings'] || !$this->conf['enableRatings']) {
-			// Ratings for item or plugin globally is not enabled. Return silently
-			return '';
+		$result = '';
+			if ($row['enable_ratings'] && $this->conf['enableRatings']) {
+			require_once(t3lib_extMgm::extPath('ratings', 'class.tx_ratings_api.php'));
+
+			$apiObj = t3lib_div::makeInstance('tx_ratings_api');
+			/* @var $apiObj tx_ratings_api */
+			$result = $apiObj->getRatingDisplay('tx_irfaq_q_' . $row['uid']);
 		}
-		$this->addHeaderParts('###HEADER_PARTS_RATING###');
-
-		// Get rating value
-		list($rating) = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows('SUM(rating)/COUNT(rating) AS rating, COUNT(rating) as count', 'tx_irfaq_rating',
-				'faq=' . intval($row['uid']) . $this->cObj->enableFields('tx_irfaq_rating'));
-
-		// Fill marker array
-		$percent = max(0, 100*(floatval($rating['rating'])-$this->conf['minRating'])/($this->conf['maxRating']-$this->conf['minRating']));
-		$markerArray = array(
-			'###MIN_RATING###' => $this->conf['minRating'],
-			'###MAX_RATING###' => $this->conf['maxRating'],
-			'###RATING###' => sprintf('%.2f', $rating['rating']),
-			'###VOTES###' => $rating['count'],
-			'###VOTES_STR###' => sprintf($this->pi_getLL('votes_str'), $row['uid'], $rating['count']),
-			'###TEXT_RATING###' => $this->pi_getLL('rating_str'),
-			'###TEXT_YOUR_VOTE###' => $this->pi_getLL('your_vote'),
-			'###PERCENT###' => $percent,
-			'###PERCENT_STR###' => sprintf($this->pi_getLL('votes_percent_str'), $percent),
-			'###PERCENT_INT###' => intval($percent),
-			'###PID###' => $GLOBALS['TSFE']->id,
-			'###UID###' => $row['uid'],
-		);
-		// Get template name (depends on whether if we have prototype) & template
-		$templateVar = '###TEMPLATE_RATING_POPUP###'; //is_dir(PATH_typo3 . 'contrib/prototype') ? '###TEMPLATE_RATING_PROTOTYPE###' : '###TEMPLATE_RATING_POPUP###';
-		$template = $this->cObj->getSubpart($this->templateCode, $templateVar);
-
-		// Format vote selector
-		$subTemplate = $this->cObj->getSubpart($template, '###VOTE_SUB###');
-		$items = array();
-		for ($i = $this->conf['minRating']; $i <= $this->conf['maxRating']; $i++) {
-			$items[] = $this->cObj->substituteMarkerArray($subTemplate, array(
-					'###VOTE###' => $i,
-					'###UID###' => $row['uid'],
-					'###PID###' => $GLOBALS['TSFE']->id,
-					'###SITE_REL_PATH###' => t3lib_extMgm::siteRelPath('irfaq'),
-					'###CHECK###' => md5($row['uid'] . $GLOBALS['TSFE']->id . $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']),
-					));
-		}
-
-		// Format
-		return $this->cObj->substituteMarkerArrayCached($template, $markerArray, array(
-					'###VOTE_SUB###' => implode('', $items)));
+		return $result;
 	}
 
 	/**
@@ -861,7 +826,8 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	 *
 	 * @param	string	$subpart	Subpart from template to add.
 	 */
-	function addHeaderParts($subpart = '###HEADER_PARTS###') {
+	function addHeaderParts() {
+		$subpart = '###HEADER_PARTS###';
 		if (!isset($GLOBALS['TSFE']->additionalHeaderData['tx_irfaq_pi1_' . $subpart])) {
 			$template = $this->cObj->getSubpart($this->templateCode, $subpart);
 			$GLOBALS['TSFE']->additionalHeaderData['tx_irfaq_pi1_' . $subpart] =

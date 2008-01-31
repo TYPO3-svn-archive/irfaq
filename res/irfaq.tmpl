@@ -6,10 +6,6 @@
 <!-- ###HEADER_PARTS### -->
 <link rel="stylesheet" href="###SITE_REL_PATH###res/styles.css" />
 <!-- ###HEADER_PARTS### -->
-<!-- ###HEADER_PARTS_RATING### -->
-<script type="text/javascript" src="###SITE_REL_PATH###res/rating.js"></script>
-<!-- ###HEADER_PARTS_RATING### -->
-</head>
 
 <body>
 <br />
@@ -225,44 +221,6 @@ RELATED_LINKS - related links (if any)
 
 </div>
 <!-- ###TEMPLATE_STATIC_SEPARATE### end -->
-
-<br />
-<br />
-<br />
-<br />
-<hr />
-<br />
-<br />
-<br />
-<h3>TEMPLATE_RATING_PROTOTYPE</h3>
-<em>This is the template for rating display and update (using Prototype's Ajax)</em>
-
-<!-- ###TEMPLATE_RATING_POPUP### end -->
-<div class="tx-irfaq-rating">
-	<div>
-		<div class="tx-irfaq-rating-prefix">
-			###TEXT_RATING###
-		</div>
-		<div class="tx-irfaq-bar">
-			<div class="tx-irfaq-rating-bar" id="tx-irfaq-rating-bar-###UID###" style="width: ###PERCENT_INT###%;">
-			</div>
-		</div>
-	</div>
-	<div class="tx-irfaq-cleaner"></div>
-	<div id="tx-irfaq-rating-###UID###">
-		###VOTES_STR###.
-		<span id="tx-irfaq-select-###UID###">
-			###TEXT_YOUR_VOTE###
-			<select onchange="tx_irfaq_recordVote(this,###MIN_RATING###,###MAX_RATING###)">
-				<option value=""></option>
-				<!-- ###VOTE_SUB### -->
-				<option value="index.php?eID=irfaq&amp;cmd=vote&amp;rating=###VOTE###&amp;uid=###UID###&amp;pid=###PID###&amp;chk=###CHECK###">###VOTE###</option>
-				<!-- ###VOTE_SUB### -->
-			</select>
-		</span>
-	</div>
-</div>
-<!-- ###TEMPLATE_RATING_POPUP### end -->
 
 </body>
 </html>

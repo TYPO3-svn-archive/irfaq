@@ -44,13 +44,7 @@
             <label index="tx_irfaq.pi_flexform.searchPid">Redirect to page</label>
             <label index="tx_irfaq.pi_flexform.emptySearchAtStart">Empty search at start</label>
             <label index="tx_irfaq.sysfolder">Modern FAQ</label>
-            <label index="tx_irfaq_rating.faq">FAQ entry:</label>
-            <label index="tx_irfaq_rating.rating">Rating value:</label>
-            <label index="tx_irfaq.pi_flexform.sheet_rating">Ratings</label>
-            <label index="tx_irfaq.pi_flexform.enableRating">Enable ratings:</label>
-            <label index="tx_irfaq.pi_flexform.minRating">Minimum rating:</label>
-            <label index="tx_irfaq.pi_flexform.maxRating">Maximum rating:</label>
-            <label index="tx_irfaq_q.enable_ratings">Enable ratings for this item:</label>
+            <label index="tx_irfaq.pi_flexform.enableRatings">Enable ratings:</label>
         </languageKey>
     </data>
     <orig_hash type="array">

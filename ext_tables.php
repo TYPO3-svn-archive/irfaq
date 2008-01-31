@@ -67,20 +67,6 @@ $TCA['tx_irfaq_expert'] = array (
 	)
 );
 
-$TCA['tx_irfaq_rating'] = array (
-	'ctrl' => array (
-		'title' => 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq_rating',
-		'label' => 'faq',
-		'tstamp' => 'tstamp',
-		'crdate' => 'crdate',
-		'cruser_id' => 'cruser_id',
-		'sortby' => 'faq',
-		'delete' => 'deleted',
-		'hideTable' => 1,
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'tca/tca_rating.php',
-	),
-);
-
 t3lib_div::loadTCA('tt_content');
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY . '_pi1'] = 'layout,select_key,pages';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_pi1'] = 'pi_flexform';
@@ -90,13 +76,10 @@ t3lib_div::loadTCA('pages');
 $TCA['pages']['columns']['module']['config']['items'][$_EXTKEY]['0'] = 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.sysfolder';
 $TCA['pages']['columns']['module']['config']['items'][$_EXTKEY]['1'] = $_EXTKEY;
 
-t3lib_extMgm::addPlugin(array('LLL:EXT:irfaq/lang/locallang_db.xml:tt_content.list_type_pi1', 'irfaq_pi1'), 'list_type');
-t3lib_extMgm::addPiFlexFormValue($_EXTKEY . '_pi1', 'FILE:EXT:irfaq/flexform/flexform_ds.xml');
-
-// Add an entry in the static template list found in sys_templates
-t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/', 'Default CSS-styles');
-// Add an entry in the static template list found in sys_templates
 t3lib_extMgm::addStaticFile($_EXTKEY, 'static/ts/', 'Default TS');
+t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/', 'Default CSS-styles (obsolete)');
+t3lib_extMgm::addPlugin(array('LLL:EXT:irfaq/lang/locallang_db.xml:tt_content.list_type_pi1', $_EXTKEY . '_pi1'), 'list_type');
+t3lib_extMgm::addPiFlexFormValue($_EXTKEY . '_pi1', 'FILE:EXT:irfaq/flexform/flexform_ds.xml');
 
 if (TYPO3_MODE=='BE') {
 	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_irfaq_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY) . 'pi1/class.tx_irfaq_pi1_wizicon.php';

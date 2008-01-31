@@ -21,10 +21,7 @@
             <label index="searchButtonLabel">Search</label>
             <label index="noSuchEntry">Sorry, could not find such FAQ entry.</label>
             <label index="back">Go back</label>
-            <label index="rating_str">Rating:</label>
-            <label index="votes_str">Total &lt;span id="tx-irfaq-count-%1$d"&gt;%2$d&lt;/span&gt; votes</label>
-            <label index="your_vote">Your vote:</label>
-            <label index="votes_percent_str">%d%%</label>
+			<label index="no_ts_template">Error (irfaq): extension's TypoScript template is not included. Please, go to Web&gt;Template and fix this error</label>
         </languageKey>
     </data>
     <orig_hash type="array">
