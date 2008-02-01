@@ -314,10 +314,11 @@ class tx_irfaq_pi1 extends tslib_pibase {
 													  '1=1'.$this->cObj->enableFields('tx_irfaq_expert'));
 
 		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))   {
-			$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_expert', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL, '');
-			$this->experts[$row['uid']]['name']  = $row['name'];
-			$this->experts[$row['uid']]['url']   = $row['url'];
-			$this->experts[$row['uid']]['email'] = $row['email'];
+			if (($row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_expert', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL))) {
+				$this->experts[$row['uid']]['name']  = $row['name'];
+				$this->experts[$row['uid']]['url']   = $row['url'];
+				$this->experts[$row['uid']]['email'] = $row['email'];
+			}
 		}
 		$GLOBALS['TYPO3_DB']->sql_free_result($res);
 	}
@@ -439,12 +440,13 @@ class tx_irfaq_pi1 extends tslib_pibase {
 
 		$markerArray = array(); $i = 1;
 		while (false != ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
-			$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_q', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL, '');
-			$markerArray = $this->fillMarkerArrayForRow($row, $i);
-			$markerArray['###FAQ_ID###'] = $i++;
+			if (($row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_q', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL))) {
+				$markerArray = $this->fillMarkerArrayForRow($row, $i);
+				$markerArray['###FAQ_ID###'] = $i++;
 
-			$subpart  = $this->cObj->getSubPart($template, '###FAQ###');
-			$content .= $this->cObj->substituteMarkerArrayCached($subpart, $markerArray);
+				$subpart  = $this->cObj->getSubPart($template, '###FAQ###');
+				$content .= $this->cObj->substituteMarkerArrayCached($subpart, $markerArray);
+			}
 		}
 		$GLOBALS['TYPO3_DB']->sql_free_result($res);
 
@@ -620,12 +622,13 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				$returnUrl = base64_encode(t3lib_div::getIndpEnv('TYPO3_SITE_SCRIPT'));
 				foreach ($rows as $row) {
 					// TODO Anchor is customizable in template!
-					$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_q', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL, '');
-					$markers = array(
-						'###RELATED_FAQ_ENTRY_TITLE###' => $this->formatStr($this->local_cObj->stdWrap(htmlspecialchars($row['q']), $this->conf['question_stdWrap.'])),
-						'###RELATED_FAQ_ENTRY_HREF###' => $this->pi_list_linkSingle('', $row['uid'], true, array('back' => $returnUrl), true),
-					);
-					$content .= $this->cObj->substituteMarkerArrayCached($templateInner, $markers);
+					if (($row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_q', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL))) {
+						$markers = array(
+							'###RELATED_FAQ_ENTRY_TITLE###' => $this->formatStr($this->local_cObj->stdWrap(htmlspecialchars($row['q']), $this->conf['question_stdWrap.'])),
+							'###RELATED_FAQ_ENTRY_HREF###' => $this->pi_list_linkSingle('', $row['uid'], true, array('back' => $returnUrl), true),
+						);
+						$content .= $this->cObj->substituteMarkerArrayCached($templateInner, $markers);
+					}
 				}
 				$content = $this->cObj->substituteMarkerArrayCached($template, array('###TEXT_RELATED_FAQ###' => $this->pi_getLL('text_related_faq')), array('###RELATED_FAQ_ENTRY###' => $content));
 			}
@@ -781,7 +784,10 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows('*', 'tx_irfaq_q', 'uid=' . intval($this->showUid) .
 					$this->cObj->enableFields('tx_irfaq_q'));
 		if (count($rows)) {
-			$rows[0] = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_q', $rows[0], $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL, '');
+			$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_q', $rows[0], $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
+			if ($row) {
+				$rows[0] = $row;
+			}
 		}
 		if (count($rows) == 0) {
 			$content = $this->pi_getLL('noSuchEntry');
