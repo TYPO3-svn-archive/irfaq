@@ -1,6 +1,7 @@
 2008-02-01	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Changed localization to use content.sys_language_overlay option correctly
+	* Updated documentation
 
 2008-01-31	Dmitry Dulepov	<dmitry@typo3.org>
 
