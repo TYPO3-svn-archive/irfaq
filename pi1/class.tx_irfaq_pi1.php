@@ -524,7 +524,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$selectConf = array();
 		$selectConf['pidInList'] = $this->conf['pidList'];
 		$selectConf['where'] = $where;
-		$selectConf['where'] .= ' AND sys_language_uid=0';// . intval($GLOBALS['TSFE']->sys_language_uid);
+		$selectConf['where'] .= ' AND sys_language_uid=0';
 
 		//build SQL on condition of categoryMode
 		if($this->conf['categoryMode'] == 1) {
