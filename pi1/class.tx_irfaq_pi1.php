@@ -87,6 +87,27 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	var $pi_checkCHash	= true;
 
 	/**
+	 * See config.sys_language_overlay in TSRef
+	 *
+	 * @var string
+	 */
+	var $sys_language_contentOL;
+
+	/**
+	 * See config.sys_language_mode in TSRef. This variable includes only keyword, not list of languges
+	 *
+	 * @var string
+	 */
+	var	$sys_language_mode;
+
+	/**
+	 * A list of languages to look overlays in
+	 *
+	 * @var array
+	 */
+	var $content_languages = array(0);
+
+	/**
 	 * main function, which is called at startup
 	 * calls init() and determines view
 	 *
@@ -264,6 +285,18 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		mt_srand((double) microtime() * 1000000);
 		$this->hash = substr(md5(mt_rand()), 0, 5);
 
+		// Language settings
+		$sys_language_mode = (isset($this->conf['sys_language_mode']) ? $this->conf['sys_language_mode'] : $GLOBALS['TSFE']->config['config']['sys_language_mode']);
+		list($this->sys_language_mode, $languages) = t3lib_div::trimExplode(';', $sys_language_mode);
+		$this->content_languages = array($GLOBALS['TSFE']->sys_language_uid);
+		if ($languages != '' && $this->sys_language_mode == 'content_fallback') {
+			foreach (t3lib_div::trimExplode(',', $languages, true) as $language) {
+				$this->content_languages[] = $language;
+			}
+		}
+		$this->sys_language_contentOL = isset($this->conf['sys_language_overlay']) ? $this->conf['sys_language_overlay'] : $GLOBALS['TSFE']->config['config']['sys_language_overlay'];
+
+		// Header parts
 		$this->addHeaderParts();
 	}
 
@@ -309,12 +342,11 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	 */
 	function initExperts() {
 		// Fetching experts
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*',
-													  'tx_irfaq_expert',
-													  '1=1'.$this->cObj->enableFields('tx_irfaq_expert'));
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tx_irfaq_expert',
+						'1=1'.$this->cObj->enableFields('tx_irfaq_expert'));
 
 		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))   {
-			if (($row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_expert', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL))) {
+			if (($row = $this->getLanguageOverlay('tx_irfaq_expert', $row))) {
 				$this->experts[$row['uid']]['name']  = $row['name'];
 				$this->experts[$row['uid']]['url']   = $row['url'];
 				$this->experts[$row['uid']]['email'] = $row['email'];
@@ -440,7 +472,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 
 		$markerArray = array(); $i = 1;
 		while (false != ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
-			if (($row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_q', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL))) {
+			if (($row = $this->getLanguageOverlay('tx_irfaq_q', $row))) {
 				$markerArray = $this->fillMarkerArrayForRow($row, $i);
 				$markerArray['###FAQ_ID###'] = $i++;
 
@@ -622,7 +654,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				$returnUrl = base64_encode(t3lib_div::getIndpEnv('TYPO3_SITE_SCRIPT'));
 				foreach ($rows as $row) {
 					// TODO Anchor is customizable in template!
-					if (($row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_q', $row, $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL))) {
+					if (($row = $this->getLanguageOverlay('tx_irfaq_q', $row))) {
 						$markers = array(
 							'###RELATED_FAQ_ENTRY_TITLE###' => $this->formatStr($this->local_cObj->stdWrap(htmlspecialchars($row['q']), $this->conf['question_stdWrap.'])),
 							'###RELATED_FAQ_ENTRY_HREF###' => $this->pi_list_linkSingle('', $row['uid'], true, array('back' => $returnUrl), true),
@@ -784,8 +816,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows('*', 'tx_irfaq_q', 'uid=' . intval($this->showUid) .
 					$this->cObj->enableFields('tx_irfaq_q'));
 		if (count($rows)) {
-			$row = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_irfaq_q', $rows[0], $GLOBALS['TSFE']->sys_language_content, $GLOBALS['TSFE']->sys_language_contentOL);
-			if ($row) {
+			if (($row = $this->getLanguageOverlay('tx_irfaq_q', $rows[0]))) {
 				$rows[0] = $row;
 			}
 		}
@@ -846,6 +877,25 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$GLOBALS['TSFE']->additionalHeaderData['tx_irfaq_pi1_' . $subpart] =
 				$this->cObj->substituteMarker($template, '###SITE_REL_PATH###', t3lib_extMgm::siteRelPath('irfaq'));
 		}
+	}
+
+	/**
+	 * Gets language overlay for the record
+	 *
+	 * @param	string	$table	Table name
+	 * @param	array	$row	Row
+	 * @return	mixed	Row or false if not found and no fallbacks available
+	 */
+	function getLanguageOverlay($table, $row) {
+		foreach ($this->content_languages as $language) {
+			if (($result = $GLOBALS['TSFE']->sys_page->getRecordOverlay($table, $row, $language, $this->sys_language_contentOL))) {
+				return $result;
+			}
+		}
+		if ($this->sys_language_mode == '') {
+			return $row;
+		}
+		return false;
 	}
 }
 

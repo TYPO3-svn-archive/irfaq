@@ -55,7 +55,7 @@ class tx_irfaq_comments_hooks {
 	 * @param	tx_comments_pi1	$pObj	Parent object
 	 */
 	function irfaqHook(&$params, &$pObj) {
-		return $this->getCloseTime('tx_irfaq_q', $params['uid'], $pObj->cObj);
+		return ($params['table'] !== 'tx_irfaq_q' ? false : $this->getCloseTime('tx_irfaq_q', $params['uid'], $pObj->cObj));
 	}
 
 	/**
