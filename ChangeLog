@@ -1,3 +1,9 @@
+2008-02-25	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Renamed JavaScript functions to have extension id as prefix
+	* Moved all inline CSS styles to CSS classes
+	* Changed expand/collapse in dynamic view to use CSS classes instead of inline style (to be print-friendly)
+
 2008-02-22	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Added posibility to override sys_language_mode/sys_language_overlay for records
