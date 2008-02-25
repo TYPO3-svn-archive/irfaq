@@ -275,9 +275,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		}
 
 		// read template file
-		$this->templateCode = $this->cObj->fileResource(
-			$this->conf['templateFile']
-		);
+		$this->templateCode = $this->cObj->fileResource($this->conf['templateFile']);
 
 		$this->initCategories(); // initialize category-array
 		$this->initExperts(); // initialize experts-array
@@ -295,6 +293,9 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			}
 		}
 		$this->sys_language_contentOL = isset($this->conf['sys_language_overlay']) ? $this->conf['sys_language_overlay'] : $GLOBALS['TSFE']->config['config']['sys_language_overlay'];
+
+		$this->conf['iconPlus'] = $GLOBALS['TSFE']->tmpl->getFileName($this->conf['iconPlus']);
+		$this->conf['iconMinus'] = $GLOBALS['TSFE']->tmpl->getFileName($this->conf['iconMinus']);
 
 		// Header parts
 		$this->addHeaderParts();

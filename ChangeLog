@@ -4,6 +4,7 @@
 	* Moved all inline CSS styles to CSS classes
 	* Changed expand/collapse in dynamic view to use CSS classes instead of inline style (to be print-friendly)
 	* Commented obsolete TS template named "CSS default styles"
+	* Fixed icon paths: did not expand from constants at some TYPO3 installations
 
 2008-02-22	Dmitry Dulepov	<dmitry@typo3.org>
 
