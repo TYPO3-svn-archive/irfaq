@@ -33,10 +33,11 @@
             <label index="tx_irfaq.pi_flexform.what_to_display">What to display:</label>
             <label index="tx_irfaq.pi_flexform.category_selection">Category selection:</label>
             <label index="tx_irfaq.pi_flexform.category_selection_notCategorized">[not categorized]</label>
-            <label index="tx_irfaq.pi_flexform.view_dynamic">dynamic view with dhtml (answers folding out)</label>
-            <label index="tx_irfaq.pi_flexform.view_static">static view with answers below of question list</label>
-            <label index="tx_irfaq.pi_flexform.view_static_separate">static view with answers on a separate page</label>
-            <label index="tx_irfaq.pi_flexform.view_search">searchform</label>
+            <label index="tx_irfaq.pi_flexform.view_dynamic">Dynamic view with dhtml (answers folding out)</label>
+            <label index="tx_irfaq.pi_flexform.view_static">Static view with answers below of question list</label>
+            <label index="tx_irfaq.pi_flexform.view_static_separate">Static view with answers on a separate page</label>
+            <label index="tx_irfaq.pi_flexform.view_search">Search form</label>
+            <label index="tx_irfaq.pi_flexform.no_view">not configured!!!</label>
             <label index="tx_irfaq.pi_flexform.select_deselect_categories">Category mode:</label>
             <label index="tx_irfaq.pi_flexform.category_selection_showAll">Show all (don't care about selection below)</label>
             <label index="tx_irfaq.pi_flexform.category_selection_showSelected">Show items with selected categories</label>
