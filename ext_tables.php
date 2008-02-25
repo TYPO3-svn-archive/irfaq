@@ -85,8 +85,8 @@ t3lib_div::loadTCA('pages');
 $TCA['pages']['columns']['module']['config']['items'][$_EXTKEY]['0'] = 'LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.sysfolder';
 $TCA['pages']['columns']['module']['config']['items'][$_EXTKEY]['1'] = $_EXTKEY;
 
-t3lib_extMgm::addStaticFile($_EXTKEY, 'static/ts/', 'Default TS');
-t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/', 'Default CSS-styles (obsolete)');
+t3lib_extMgm::addStaticFile($_EXTKEY, 'static/ts/', 'IRFAQ default TS');
+//t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/', 'Default CSS-styles (obsolete)');
 t3lib_extMgm::addPlugin(array('LLL:EXT:irfaq/lang/locallang_db.xml:tt_content.list_type_pi1', $_EXTKEY . '_pi1'), 'list_type');
 t3lib_extMgm::addPiFlexFormValue($_EXTKEY . '_pi1', 'FILE:EXT:irfaq/flexform/flexform_ds.xml');
 
