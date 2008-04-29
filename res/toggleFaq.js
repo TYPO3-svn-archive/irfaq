@@ -8,13 +8,13 @@ function tx_irfaq_toggleFaq(id, single, hash) {
 
 	if (single) {
 		// show only one Q+A at a time
-		toggleAll(false, hash);
-		showHideFaq(id, true, hash);
+		tx_irfaq_toggleAll(false, hash);
+		tx_irfaq_showHideFaq(id, true, hash);
 	}
 	else {
 		// open as many Q+A as you like
 		var hidden = (document.getElementById('irfaq_a_'+id+'_'+hash).className == 'tx-irfaq-dynans-hidden');
-		showHideFaq(id, hidden, hash);
+		tx_irfaq_showHideFaq(id, hidden, hash);
 	}
 }
 
@@ -45,6 +45,6 @@ function tx_irfaq_showHideFaq(id, show, hash) {
  */
 function tx_irfaq_toggleAll(mode, hash, count) {
 	for (i = 0; i < count; i++) {
-		showHideFaq(i+1, mode, hash);
+		tx_irfaq_showHideFaq(i+1, mode, hash);
 	}
 }

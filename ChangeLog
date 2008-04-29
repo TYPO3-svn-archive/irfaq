@@ -1,3 +1,7 @@
+2008-02-29  Michiel Roos  <extensions@netcreators.com>
+
+  * Fix bug 8122: Toogle doesn't work
+
 2008-02-25	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Renamed JavaScript functions to have extension id as prefix
