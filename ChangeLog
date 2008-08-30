@@ -1,3 +1,6 @@
+2008-08-30 Martin Holtz <typo3@martinholtz.de>
+  * Fix (forge) bug 1150: incorrect sql with emptySearchAtStart
+
 2008-02-29  Michiel Roos  <extensions@netcreators.com>
 
   * Fix bug 8122: Toogle doesn't work
