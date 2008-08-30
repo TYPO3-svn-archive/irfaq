@@ -585,7 +585,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$selectConf['where'] .= $this->searchWhere(trim($this->piVars['swords']));
 		} elseif(in_array('SEARCH', $this->conf['code'])) {
 			// display an empty list, if 'emptySearchAtStart' is set.
-			$selectConf['where'] .= ($this->conf['emptySearchAtStart'] ? 'AND 1=0' : '');
+			$selectConf['where'] .= ($this->conf['emptySearchAtStart'] ? ' AND 1=0' : '');
 		}
 
 		return $selectConf;
