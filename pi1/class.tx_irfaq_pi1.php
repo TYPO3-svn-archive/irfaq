@@ -119,7 +119,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$this->local_cObj = t3lib_div::makeInstance('tslib_cObj');
 		$this->init($conf);
 
-		if (!isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_irfaq_pi1.'])) {
+		if (!isset($this->conf['templateFile'])) {
 			$content = $this->pi_getLL('no_ts_template');
 		}
 		else {

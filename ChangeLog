@@ -1,9 +1,14 @@
+2008-09-01	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Fixed: wrong check for missing TS template
+
 2008-08-30 Martin Holtz <typo3@martinholtz.de>
-  * Fix (forge) bug 1150: incorrect sql with emptySearchAtStart
+
+	* Fixed bug #1150: incorrect sql with emptySearchAtStart
 
 2008-02-29  Michiel Roos  <extensions@netcreators.com>
 
-  * Fix bug 8122: Toogle doesn't work
+	* Fixed bug #8122: Toogle doesn't work
 
 2008-02-25	Dmitry Dulepov	<dmitry@typo3.org>
 
