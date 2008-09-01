@@ -2,6 +2,7 @@
 
 	* Fixed: wrong check for missing TS template
 	* Removed duplicate $cObj from pi1 class
+	* Removed restriction to TYPO3 4.2 as highest TYPO3 version
 
 2008-08-30 Martin Holtz <typo3@martinholtz.de>
 
