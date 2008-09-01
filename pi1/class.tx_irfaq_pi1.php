@@ -70,8 +70,6 @@ require_once(PATH_tslib.'class.tslib_pibase.php');
  * @author Netcreators <extensions@netcreators.com>
  */
 class tx_irfaq_pi1 extends tslib_pibase {
-	var $local_cObj;
-
 	// Same as class name
 	var $prefixId 		= 'tx_irfaq_pi1';
 	// Path to this script relative to the extension dir.
@@ -82,7 +80,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	var $experts		= array();
 	var $pageArray 		= array();
 	var $faqCount		= 0;
-	var $hash			= ''; //a random hash to use multiple pi on one page
+	var $hash			= ''; // a random hash to use multiple pi on one page
 	var $showUid		= 0;
 	var $pi_checkCHash	= true;
 
@@ -116,7 +114,6 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	 * @return	string		$content: output of faq plugin
 	 */
 	function main($content,$conf)	{
-		$this->local_cObj = t3lib_div::makeInstance('tslib_cObj');
 		$this->init($conf);
 
 		if (!isset($this->conf['templateFile'])) {
@@ -537,7 +534,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 
 		//apply the wraps if there are categories
 		if(count($faq_category)) {
-			$markerArray['###FAQ_CATEGORY###']= $this->local_cObj->stdWrap(
+			$markerArray['###FAQ_CATEGORY###']= $this->cObj->stdWrap(
 				$markerArray['###FAQ_CATEGORY###'],
 				$this->conf['category_stdWrap.']
 			);
@@ -610,7 +607,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	 */
 	function formatStr($str) {
 		if (is_array($this->conf['general_stdWrap.'])) {
-			$str = $this->local_cObj->stdWrap(
+			$str = $this->cObj->stdWrap(
 				$str,
 				$this->conf['general_stdWrap.']
 			);
@@ -657,7 +654,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 					// TODO Anchor is customizable in template!
 					if (($row = $this->getLanguageOverlay('tx_irfaq_q', $row))) {
 						$markers = array(
-							'###RELATED_FAQ_ENTRY_TITLE###' => $this->formatStr($this->local_cObj->stdWrap(htmlspecialchars($row['q']), $this->conf['question_stdWrap.'])),
+							'###RELATED_FAQ_ENTRY_TITLE###' => $this->formatStr($this->cObj->stdWrap(htmlspecialchars($row['q']), $this->conf['question_stdWrap.'])),
 							'###RELATED_FAQ_ENTRY_HREF###' => $this->pi_list_linkSingle('', $row['uid'], true, array('back' => $returnUrl), true),
 						);
 						$content .= $this->cObj->substituteMarkerArrayCached($templateInner, $markers);
@@ -704,13 +701,13 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$markerArray = array();
 
 		$markerArray['###FAQ_Q###']	 = $this->formatStr(
-			$this->local_cObj->stdWrap(
+			$this->cObj->stdWrap(
 				htmlspecialchars($row['q']),
 				$this->conf['question_stdWrap.']
 			)
 		);
 		$markerArray['###FAQ_A###']	 = $this->formatStr(
-			$this->local_cObj->stdWrap(
+			$this->cObj->stdWrap(
 				$this->pi_RTEcssText($row['a']),
 				$this->conf['answer_stdWrap.']
 			)
@@ -722,29 +719,29 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$markerArray['###SINGLE_OPEN###'] = ($this->conf['singleOpen'] ? 'true' : 'false');
 
 		if($row['expert']) {
-			$this->local_cObj->LOAD_REGISTER(
+			$this->cObj->LOAD_REGISTER(
 				array(
 					'faqExpertEmail' => $this->experts[$row['expert']]['email'],
 					'faqExpertUrl'   => $this->experts[$row['expert']]['url']
 				),
 				'');
-			$markerArray['###FAQ_EXPERT###'] = $this->local_cObj->stdWrap(
+			$markerArray['###FAQ_EXPERT###'] = $this->cObj->stdWrap(
 					$this->experts[$row['expert']]['name'],
 					$this->conf['expert_stdWrap.']
 				);
 
-			$markerArray['###TEXT_EXPERT###'] = $this->local_cObj->stdWrap(
+			$markerArray['###TEXT_EXPERT###'] = $this->cObj->stdWrap(
 				$this->pi_getLL('text_expert'),
 				$this->conf['text_expert_stdWrap.']
 			);
 
-			$markerArray['###FAQ_EXPERT_EMAIL###'] = $this->local_cObj->stdWrap(
+			$markerArray['###FAQ_EXPERT_EMAIL###'] = $this->cObj->stdWrap(
 				$this->experts[$row['expert']]['email'],
 				$this->conf['expertemail_stdWrap.']
 			);
 
 			if($this->experts[$row['expert']]['url']) {
-				$markerArray['###FAQ_EXPERT_URL###'] = $this->local_cObj->stdWrap(
+				$markerArray['###FAQ_EXPERT_URL###'] = $this->cObj->stdWrap(
 					$this->experts[$row['expert']]['url'],
 					$this->conf['experturl_stdWrap.']
 				);
@@ -759,16 +756,16 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$markerArray['###TEXT_EXPERT###']	   = '';
 			$markerArray['###FAQ_EXPERT_EMAIL###'] = '';
 			$markerArray['###FAQ_EXPERT_URL###']   = '';
-			$this->local_cObj->LOAD_REGISTER(
+			$this->cObj->LOAD_REGISTER(
 				array('faqExpertEmail' => '','faqExpertUrl' => ''), '');
 		}
 
 		if($row['q_from']) {
-			$markerArray['###TEXT_ASKED_BY###'] = $this->local_cObj->stdWrap(
+			$markerArray['###TEXT_ASKED_BY###'] = $this->cObj->stdWrap(
 				$this->pi_getLL('text_asked_by'),
 				$this->conf['text_asked_by_stdWrap.']
 			);
-			$markerArray['###ASKED_BY###'] = $this->local_cObj->stdWrap(
+			$markerArray['###ASKED_BY###'] = $this->cObj->stdWrap(
 				$row['q_from'],
 				$this->conf['asked_by_stdWrap.']
 			);
@@ -782,7 +779,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		if ($row['related']) {
 			$related = $this->getRelatedEntries($row['related']);
 			if ($related) {
-				$markerArray['###RELATED_FAQ###'] = $this->local_cObj->stdWrap($related, $this->conf['related_entries_stdWrap.']);
+				$markerArray['###RELATED_FAQ###'] = $this->cObj->stdWrap($related, $this->conf['related_entries_stdWrap.']);
 			}
 		}
 
@@ -790,7 +787,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		if ($row['related_links']) {
 			$related_links = $this->getRelatedLinks($row['related_links']);
 			if ($related_links) {
-				$markerArray['###RELATED_LINKS###'] = $this->local_cObj->stdWrap($related_links, $this->conf['related_links_stdWrap.']);
+				$markerArray['###RELATED_LINKS###'] = $this->cObj->stdWrap($related_links, $this->conf['related_links_stdWrap.']);
 			}
 		}
 

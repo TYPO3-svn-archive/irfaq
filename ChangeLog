@@ -1,6 +1,7 @@
 2008-09-01	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Fixed: wrong check for missing TS template
+	* Removed duplicate $cObj from pi1 class
 
 2008-08-30 Martin Holtz <typo3@martinholtz.de>
 
