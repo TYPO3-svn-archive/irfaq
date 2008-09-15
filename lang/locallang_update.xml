@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>Language labels</description>
+		<type>module</type>
+		<csh_table></csh_table>
+		<fileId>EXT:irfaq/lang/locallang_update.xml</fileId>
+		<labelContext type="array">
+		</labelContext>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="form_intro">This module will update all irfaq instances from the previous versions to this latest version.</label>
+			<label index="replace_empty">Treat all empty values as missing. This will restore old non-empty values even if you already set empty in the record. When unchecked empty existing values are preserved.</label>
+			<label index="submit_button">Check and update now!</label>
+			<label index="errors">Errors while saving data to the database:</label>
+			<label index="result">Total irfaq instances: %d. Converted to the new format: %d.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+	</orig_hash>
+	<orig_text type="array">
+	</orig_text>
+</T3locallang>
