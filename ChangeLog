@@ -1,6 +1,7 @@
 2008-09-15	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Added extension updater
+	* Fixed missing </head> in the template
 
 2008-09-01	Dmitry Dulepov	<dmitry@typo3.org>
 
