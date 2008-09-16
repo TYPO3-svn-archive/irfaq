@@ -2,6 +2,7 @@
 
 	* Added extension updater
 	* Fixed missing </head> in the template
+	* Released version 1.1.1
 
 2008-09-01	Dmitry Dulepov	<dmitry@typo3.org>
 
