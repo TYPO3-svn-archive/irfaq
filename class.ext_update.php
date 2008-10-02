@@ -81,8 +81,9 @@ class ext_update {
 	 */
 	function showForm() {
 		$content = '<p>' . $this->lang->getLL('form_intro', true) . '</p>' .
-			'<form action="' . t3lib_div::getIndpEnv('REQUEST_URI') .
-			'" method="post">' .
+			'<form action="index.php" method="post">' .
+			'<input type="hidden" name="CMD[showExt]" value="irfaq" />' .
+			'<input type="hidden" name="SET[singleDetails]" value="updateModule" />' .
 			'<input type="checkbox" name="replaceEmpty" value="1" />' .
 			$this->lang->getLL('replace_empty') . '<br />' .
 			'<input type="submit" name="run" value="' .
@@ -98,13 +99,14 @@ class ext_update {
 	function runConversion() {
 		$content = '';
 		// Select all instances
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid,pi_flexform',
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid,pid,pi_flexform',
 						'tt_content', 'list_type=\'irfaq_pi1\'' .
 						t3lib_BEfunc::BEenableFields('tt_content') .
 						t3lib_BEfunc::deleteClause('tt_content'));
 		$results = $GLOBALS['TYPO3_DB']->sql_num_rows($res);
 		$converted = 0;
 		$data = array();
+		$pidList = array();
 		$replaceEmpty = intval(t3lib_div::_GP('replaceEmpty'));
 
 		$flexformtools = t3lib_div::makeInstance('t3lib_flexformtools');
@@ -128,6 +130,9 @@ class ext_update {
 									($replaceEmpty && strlen($ffArray['data'][$sheet][$sLang][$field]['vDEF']) == 0))) {
 								$ffArray['data'][$sheet][$sLang][$field]['vDEF'] =
 									$ffArray['data']['sDEF'][$sLang][$field]['vDEF'];
+								if ($row['pid'] > 0) {
+									$pidList[$row['pid']] = $row['pid'];
+								}
 								$modified = true;
 							}
 						}
@@ -153,6 +158,10 @@ class ext_update {
 			if (count($tce->errorLog) > 0) {
 				$content .= '<p>' . $this->lang->getLL('errors') . '</p><ul><li>' .
 					implode('</li><li>', $tce->errorLog) . '</li></ul>';
+			}
+			// Clear cache
+			foreach ($pidList as $pid) {
+				$tce->clear_cacheCmd($pid);
 			}
 		}
 		$content .= '<p>' . sprintf($this->lang->getLL('result'), $results, $converted) .
