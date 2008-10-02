@@ -44,7 +44,8 @@ plugin.tx_irfaq_pi1 {
     catTextMode = 2
 
     general_stdWrap.parseFunc >
-    general_stdWrap.parseFunc < tt_content.text.20.parseFunc
+# Commented parseFunc because it adds <p class="bodytext"> wraps, which is not valid everywhere
+#    general_stdWrap.parseFunc < tt_content.text.20.parseFunc
 
     enableRatings = {$plugin.tx_irfaq_pi1.enableRatings}
 }

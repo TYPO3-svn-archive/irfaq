@@ -361,7 +361,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	function searchView() {
 		$template['total'] = $this->cObj->getSubpart($this->templateCode, '###TEMPLATE_SEARCH###');
 
-		$formURL = $this->pi_linkTP_keepPIvars_url(array('cat' => null), 0, 1, $this->conf['searchPid']) ;
+		$formURL = htmlspecialchars($this->pi_linkTP_keepPIvars_url(array('cat' => null), 0, 1, $this->conf['searchPid'])) ;
 
 		$content = $this->cObj->substituteMarker($template['total'], '###FORM_URL###', $formURL);
 		$content = $this->cObj->substituteMarker($content, '###SWORDS###', htmlspecialchars($this->piVars['swords']));
@@ -450,7 +450,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	}
 
 	/**
-	 * replaces markers with content
+	 * Replaces markers with content
 	 *
 	 * @param	string		$template: the html with markers to substitude
 	 * @return	string		template with substituted markers
@@ -504,22 +504,22 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				// find categories, wrap them with links and collect them in the array $faq_category.
 				if ($this->conf['catTextMode'] == 1) {
 					// link to category shortcut page
-					$faq_category[] = $this->pi_linkToPage(
+					$faq_category[] = htmlspecialchars($this->pi_linkToPage(
 						$this->categories[$row['uid']][$key]['title'],
 						$this->categories[$row['uid']][$key]['shortcut']
-					);
+					));
 				}
 				else if($this->conf['catTextMode'] == 2) {
 					// act as category selector
-					$faq_category[] = $this->pi_linkToPage(
+					$faq_category[] = htmlspecialchars($this->pi_linkToPage(
 						$this->categories[$row['uid']][$key]['title'],
 						$GLOBALS['TSFE']->page['uid'],
 						'',
 						array('tx_irfaq_pi1[cat]' => $this->categories[$row['uid']][$key]['catid'])
-					);
+					));
 				}
 				else {
-					//no link
+					// no link
 					$faq_category[] = $this->categories[$row['uid']][$key]['title'];
 				}
 			}
@@ -606,7 +606,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 	 * @return	string		wrapped string
 	 */
 	function formatStr($str) {
-		if (is_array($this->conf['general_stdWrap.'])) {
+		if (is_array($this->conf['general_stdWrap.']) || count($this->conf['general_stdWrap.']) > 0) {
 			$str = $this->cObj->stdWrap(
 				$str,
 				$this->conf['general_stdWrap.']
@@ -655,7 +655,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 					if (($row = $this->getLanguageOverlay('tx_irfaq_q', $row))) {
 						$markers = array(
 							'###RELATED_FAQ_ENTRY_TITLE###' => $this->formatStr($this->cObj->stdWrap(htmlspecialchars($row['q']), $this->conf['question_stdWrap.'])),
-							'###RELATED_FAQ_ENTRY_HREF###' => $this->pi_list_linkSingle('', $row['uid'], true, array('back' => $returnUrl), true),
+							'###RELATED_FAQ_ENTRY_HREF###' => htmlspecialchars($this->pi_list_linkSingle('', $row['uid'], true, array('back' => $returnUrl), true)),
 						);
 						$content .= $this->cObj->substituteMarkerArrayCached($templateInner, $markers);
 					}
@@ -798,7 +798,8 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$markerArray['###HASH###'] = $this->hash;
 
 		$returnUrl = base64_encode(t3lib_div::getIndpEnv('TYPO3_SITE_SCRIPT'));
-		$markerArray['###SINGLEVIEW_LINK###'] = $this->pi_list_linkSingle('', $row['uid'], true, array('back' => $returnUrl), true);
+		$markerArray['###SINGLEVIEW_LINK###'] = htmlspecialchars(
+				$this->pi_list_linkSingle('', $row['uid'], true, array('back' => $returnUrl), true));
 
 		$markerArray['###RATING###'] = $this->getRatingForRow($row);
 
@@ -827,6 +828,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			unset($this->piVars['showUid']);
 			$markers['###BACK_HREF###'] = base64_decode($this->piVars['back']);
 			$markers['###BACK_TEXT###'] = $this->pi_getLL('back');
+			$markers['###FAQ_ID###'] = $rows[0]['uid'];
 			$content = $this->cObj->substituteMarkerArrayCached($template, $markers);
 		}
 		return $content;

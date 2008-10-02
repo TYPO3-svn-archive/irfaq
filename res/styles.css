@@ -10,7 +10,6 @@
 .tx-irfaq-pi1 .additional-info { border-top: 2px solid #e6e6e6; margin-bottom: 10px; }
 .tx-irfaq-pi1 .irfaq-related-faq, .tx-irfaq-pi1 .irfaq-related-links { padding-top: 0px; padding-bottom: 0px; margin-top: 3px; margin-bottom: 15px; }
 
-.tx-irfaq-cleaner { clear: left; height: 1px; }
-.tx-irfaq-dynheader { cursor: pointer; }
+.tx-irfaq-dynheader { cursor: pointer; overflow: hidden; }
 .tx-irfaq-dynans-hidden { display: none; }
 .tx-irfaq-dynans-visible { display: inline; }
