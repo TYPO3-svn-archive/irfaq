@@ -1,3 +1,11 @@
+2008-10-03	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Additional impovements for XHTML compatibility
+
+2008-10-02	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Fixed forge bug #1444: irfaq does not produce XHTML valid output
+
 2008-09-15	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Added extension updater

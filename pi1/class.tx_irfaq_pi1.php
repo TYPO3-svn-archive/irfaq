@@ -504,19 +504,19 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				// find categories, wrap them with links and collect them in the array $faq_category.
 				if ($this->conf['catTextMode'] == 1) {
 					// link to category shortcut page
-					$faq_category[] = htmlspecialchars($this->pi_linkToPage(
+					$faq_category[] = $this->pi_linkToPage(
 						$this->categories[$row['uid']][$key]['title'],
 						$this->categories[$row['uid']][$key]['shortcut']
-					));
+					);
 				}
 				else if($this->conf['catTextMode'] == 2) {
 					// act as category selector
-					$faq_category[] = htmlspecialchars($this->pi_linkToPage(
+					$faq_category[] = $this->pi_linkToPage(
 						$this->categories[$row['uid']][$key]['title'],
 						$GLOBALS['TSFE']->page['uid'],
 						'',
 						array('tx_irfaq_pi1[cat]' => $this->categories[$row['uid']][$key]['catid'])
-					));
+					);
 				}
 				else {
 					// no link
