@@ -1,6 +1,7 @@
 2008-10-03	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Additional impovements for XHTML compatibility
+	* Added <fieldset> in the search form
 
 2008-10-02	Dmitry Dulepov	<dmitry@typo3.org>
 
