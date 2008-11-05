@@ -557,7 +557,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$selectConf['where'] .= ' AND sys_language_uid=0';
 
 		//build SQL on condition of categoryMode
-		if($this->conf['categoryMode'] == 1) {
+		if($this->conf['categoryMode'] == 1 && trim($this->conf['catExclusive']) != '') {
 			$selectConf['leftjoin'] = 'tx_irfaq_q_cat_mm ON tx_irfaq_q.uid = tx_irfaq_q_cat_mm.uid_local';
 			$selectConf['where']   .= ' AND (IFNULL(tx_irfaq_q_cat_mm.uid_foreign,0) IN (' .$this->conf['catExclusive']. '))';
 		}

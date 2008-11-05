@@ -1,3 +1,7 @@
+2008-11-05	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Fix: SQL errors if category mode is set to use categories but category list is empty
+
 2008-10-03	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Additional impovements for XHTML compatibility
