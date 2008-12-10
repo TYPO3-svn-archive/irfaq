@@ -803,6 +803,8 @@ class tx_irfaq_pi1 extends tslib_pibase {
 
 		$markerArray['###RATING###'] = $this->getRatingForRow($row);
 
+		$this->cObj->lastChanged($row['tstamp']);
+
 		return $markerArray;
 	}
 
@@ -830,6 +832,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			$markers['###BACK_TEXT###'] = $this->pi_getLL('back');
 			$markers['###FAQ_ID###'] = $rows[0]['uid'];
 			$content = $this->cObj->substituteMarkerArrayCached($template, $markers);
+			$this->cObj->lastChanged($row['tstamp']);
 		}
 		return $content;
 	}
