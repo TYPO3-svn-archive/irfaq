@@ -29,6 +29,9 @@ plugin.tx_irfaq_pi1 {
 	searchFieldList = q,a
 	searchPid =
 
+	# Sorting order of the FAQs can be: sorting, q (question), q_from (Asked by), expert or any comma separated list of values like: question,expert,sorting
+	orderBy = sorting
+	
     answer_stdWrap.wrap =
     question_stdWrap.wrap =
     text_expert_stdWrap.wrap = <br /> |

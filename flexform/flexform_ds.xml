@@ -41,6 +41,39 @@
 							</config>
 						</TCEforms>
 					</what_to_display>
+					<sorting>
+						<TCEforms>
+							<label>LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.sorting</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+								<numIndex index="0" type="array">
+									<numIndex index="0">LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.sorting_ts</numIndex>
+									<numIndex index="1">ts</numIndex>
+								</numIndex>
+								<numIndex index="1" type="array">
+									<numIndex index="0">LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.sorting_sorting</numIndex>
+									<numIndex index="1">sorting</numIndex>
+								</numIndex>
+								<numIndex index="2" type="array">
+									<numIndex index="0">LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.sorting_q</numIndex>
+									<numIndex index="1">q</numIndex>
+								</numIndex>
+								<numIndex index="3" type="array">
+									<numIndex index="0">LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.sorting_q_from</numIndex>
+									<numIndex index="1">q_from</numIndex>
+								</numIndex>
+								<numIndex index="4" type="array">
+									<numIndex index="0">LLL:EXT:irfaq/lang/locallang_db.xml:tx_irfaq.pi_flexform.sorting_expert</numIndex>
+									<numIndex index="1">expert</numIndex>
+								</numIndex>
+								</items>
+								<maxitems>1</maxitems>
+								<size>1</size>
+								<default>sorting</default>
+							</config>
+						</TCEforms>
+					</sorting>
 					<pages>
 						<TCEforms>
 						<exclude>1</exclude>

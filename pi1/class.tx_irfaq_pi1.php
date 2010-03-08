@@ -208,6 +208,12 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				$ffSearchPid :
 				trim($this->conf['searchPid']);
 
+			$ffSorting = $this->pi_getFFvalue(
+				$this->cObj->data['pi_flexform'], 'sorting', 'sDEF');
+			$this->conf['orderBy'] = ($ffSorting !== 'ts') ?
+				$ffSorting :
+				trim($this->conf['orderBy']);
+
 			$ffEmptySearchAtStart = $this->pi_getFFvalue(
 				$this->cObj->data['pi_flexform'], 'emptySearchAtStart', 'sSEARCH');
 			$this->conf['emptySearchAtStart'] = $ffEmptySearchAtStart != '' ?
@@ -463,7 +469,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$where = '1 = 1'.$this->cObj->enableFields('tx_irfaq_q');
 		$selectConf = $this->getSelectConf($where);
 		$selectConf['selectFields'] = 'DISTINCT tx_irfaq_q.uid, tx_irfaq_q.pid, tx_irfaq_q.q, tx_irfaq_q.q_from, tx_irfaq_q.a, tx_irfaq_q.cat, tx_irfaq_q.expert, tx_irfaq_q.related, tx_irfaq_q.related_links, tx_irfaq_q.enable_ratings, tx_irfaq_q.sys_language_uid, tx_irfaq_q.l18n_parent, tx_irfaq_q.l18n_diffsource';
-		$selectConf['orderBy'] 		= 'tx_irfaq_q.sorting';
+		$selectConf['orderBy'] = $this->conf['orderBy'] ? $this->conf['orderBy'] : 'tx_irfaq_q.sorting';
 
 		$res = $this->cObj->exec_getQuery('tx_irfaq_q', $selectConf);
 		$this->faqCount = $GLOBALS['TYPO3_DB']->sql_num_rows($res);

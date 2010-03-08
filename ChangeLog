@@ -1,6 +1,7 @@
 2010-03-08	Michiel Roos <extensions@netcreators.com>
 
 	* Fixed bug #6699: Restore faq_id to the id of the faq
+	* Added feature #6696: Configure sorting order of faq items
 
 2008-12-10	Dmitry Dulepov	<dmitry@typo3.org>
 

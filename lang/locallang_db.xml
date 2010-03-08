@@ -44,6 +44,12 @@
             <label index="tx_irfaq.pi_flexform.category_selection_DontShowSelected">Do NOT show items with selected categories</label>
             <label index="tx_irfaq.pi_flexform.searchPid">Redirect to page</label>
             <label index="tx_irfaq.pi_flexform.emptySearchAtStart">Empty search at start</label>
+            <label index="tx_irfaq.pi_flexform.sorting">Sort order</label>
+            <label index="tx_irfaq.pi_flexform.sorting_ts">Defined in TypoScript</label>
+            <label index="tx_irfaq.pi_flexform.sorting_sorting">Manual sorting order</label>
+            <label index="tx_irfaq.pi_flexform.sorting_expert">Expert</label>
+            <label index="tx_irfaq.pi_flexform.sorting_q">Question</label>
+            <label index="tx_irfaq.pi_flexform.sorting_q_from">Asked by</label>
             <label index="tx_irfaq.sysfolder">Modern FAQ</label>
             <label index="tx_irfaq.pi_flexform.enableRatings">Enable ratings:</label>
         </languageKey>
