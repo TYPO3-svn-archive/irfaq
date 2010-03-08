@@ -472,8 +472,9 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		while (false != ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 			if (($row = $this->getLanguageOverlay('tx_irfaq_q', $row))) {
 				$markerArray = $this->fillMarkerArrayForRow($row, $i);
-				$markerArray['###FAQ_ID###'] = $i++;
-
+				$markerArray['###FAQ_ID###'] = $row['uid'];
+				$markerArray['###COUNT###'] = $i++;
+				
 				$subpart  = $this->cObj->getSubPart($template, '###FAQ###');
 				$content .= $this->cObj->substituteMarkerArrayCached($subpart, $markerArray);
 			}
