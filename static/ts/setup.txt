@@ -7,6 +7,9 @@ plugin.tx_irfaq_pi1 {
 	# html template
 	templateFile = {$plugin.tx_irfaq_pi1.file.templateFile}
 
+	# Add default JavaScript?
+	addDefaultJs = 1
+	
 	# plus/minus icons for dynamic view
 	iconMinus = {$plugin.tx_irfaq_pi1.file.iconMinus}
 	iconPlus = {$plugin.tx_irfaq_pi1.file.iconPlus}

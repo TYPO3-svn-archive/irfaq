@@ -398,16 +398,18 @@ class tx_irfaq_pi1 extends tslib_pibase {
 		$subpartArray['###CONTENT###'] = $this->fillMarkers($template['content']);
 
 		if(!empty($this->faqCount)) {
-			//after calling fillMarkers we know count and can fill the corresponding js var
-			$header  = '<script type="text/javascript">'.chr(10);
-			$header .= '<!--'.chr(10);
-			$header .= 'var tx_irfaq_pi1_iconPlus = "'.$this->conf['iconPlus'].'";'.chr(10);
-			$header .= 'var tx_irfaq_pi1_iconMinus = "'.$this->conf['iconMinus'].'";'.chr(10);
-			$header .= '// -->'.chr(10);
-			$header .= '</script>'.chr(10);
-			$header .= '<script type="text/javascript" src="'.
-				t3lib_extMgm::siteRelPath($this->extKey).'res/toggleFaq.js"></script>';
-			$GLOBALS['TSFE']->additionalHeaderData['tx_irfaq'] = $header;
+			if ($this->conf['addDefaultJs'] == 1) {
+					//after calling fillMarkers we know count and can fill the corresponding js var
+				$header  = '<script type="text/javascript">'.chr(10);
+				$header .= '<!--'.chr(10);
+				$header .= 'var tx_irfaq_pi1_iconPlus = "'.$this->conf['iconPlus'].'";'.chr(10);
+				$header .= 'var tx_irfaq_pi1_iconMinus = "'.$this->conf['iconMinus'].'";'.chr(10);
+				$header .= '// -->'.chr(10);
+				$header .= '</script>'.chr(10);
+				$header .= '<script type="text/javascript" src="'.
+					t3lib_extMgm::siteRelPath($this->extKey).'res/toggleFaq.js"></script>';
+				$GLOBALS['TSFE']->additionalHeaderData['tx_irfaq'] = $header;
+			}
 
 			$markerArray = array(
 				'###HASH###' => $this->hash,
