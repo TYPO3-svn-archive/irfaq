@@ -101,9 +101,9 @@ RELATED_LINKS - related links (if any)
 -->
 <div class="tx-irfaq-pi1">
 	<p>
-		<a href="javascript:tx_irfaq_toggleAll(true,'###HASH###',###COUNT###);">###TEXT_SHOW###</a>
+		<a href="javascript:tx_irfaq_toggleAll(true,'###HASH###',###TOTALCOUNT###);">###TEXT_SHOW###</a>
 		/
-		<a href="javascript:tx_irfaq_toggleAll(false,'###HASH###',###COUNT###);">###TEXT_HIDE###</a>
+		<a href="javascript:tx_irfaq_toggleAll(false,'###HASH###',###TOTALCOUNT###);">###TEXT_HIDE###</a>
 	</p>
 
 	<dl>
@@ -113,7 +113,7 @@ RELATED_LINKS - related links (if any)
 		<!-- ###FAQ### begin
 			Template for a single FAQ item
 		-->
-		<dt onclick="tx_irfaq_toggleFaq('###COUNT###',###SINGLE_OPEN###,'###HASH###')" class="tx-irfaq-dynheader">
+		<dt onclick="tx_irfaq_toggleFaq('###COUNT###',###TOTALCOUNT###,###SINGLE_OPEN###,'###HASH###')" class="tx-irfaq-dynheader">
 			###FAQ_PM_IMG### ###FAQ_Q###
 		</dt>
 		<dd id="irfaq_a_###COUNT###_###HASH###" class="tx-irfaq-dynans-hidden">

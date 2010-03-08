@@ -411,7 +411,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 
 			$markerArray = array(
 				'###HASH###' => $this->hash,
-				'###COUNT###' => $this->faqCount,
+				'###TOTALCOUNT###' => $this->faqCount,
 				'###TEXT_SHOW###' => $this->pi_getLL('text_show'),
 				'###TEXT_HIDE###' => $this->pi_getLL('text_hide'),
 			);
@@ -480,6 +480,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				$markerArray = $this->fillMarkerArrayForRow($row, $i);
 				$markerArray['###FAQ_ID###'] = $row['uid'];
 				$markerArray['###COUNT###'] = $i++;
+				$markerArray['###TOTALCOUNT###'] = $this->faqCount;
 				
 				$subpart  = $this->cObj->getSubPart($template, '###FAQ###');
 				$content .= $this->cObj->substituteMarkerArrayCached($subpart, $markerArray);
