@@ -19,6 +19,7 @@
             <label index="text_related_faq">Related entries:</label>
             <label index="text_related_links">Related links:</label>
             <label index="searchButtonLabel">Search</label>
+            <label index="noResult">No FAQ's found.</label>
             <label index="noSuchEntry">Sorry, could not find such FAQ entry.</label>
             <label index="back">Go back</label>
 			<label index="no_ts_template">Error (irfaq): extension's TypoScript template is not included. Please, go to Web&gt;Template and fix this error</label>

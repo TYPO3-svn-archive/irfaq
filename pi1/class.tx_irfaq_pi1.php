@@ -423,6 +423,12 @@ class tx_irfaq_pi1 extends tslib_pibase {
 				$subpartArray
 			);
 		}
+		else {
+			$content = $this->cObj->stdWrap(
+				$this->pi_getLL('noResult'),
+				$this->conf['no_result_stdWrap.']
+			);
+		}
 
 		return $content;
 	}

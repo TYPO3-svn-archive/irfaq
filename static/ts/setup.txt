@@ -45,6 +45,7 @@ plugin.tx_irfaq_pi1 {
     text_asked_by_stdWrap.wrap = <br /> |
     asked_by_stdWrap.wrap =
     category_stdWrap.wrap =
+    no_result_stdWrap.wrap = <p> | </p>
     related_entries_stdWrap.wrap =
     related_links_stdWrap.wrap =
     catTextMode = 2

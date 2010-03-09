@@ -1,3 +1,7 @@
+2010-03-09	Michiel Roos <extensions@netcreators.com>
+
+	* Added feature: Show message when no FAQ's are found
+
 2010-03-08	Michiel Roos <extensions@netcreators.com>
 
 	* Fixed bug #6699: Restore faq_id to the id of the faq
