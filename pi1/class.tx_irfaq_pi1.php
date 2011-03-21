@@ -583,7 +583,7 @@ class tx_irfaq_pi1 extends tslib_pibase {
 			//multiple categories selected?
 			if(strpos($this->conf['catExclusive'], ',')) {
 				//yes
-				$selectConf['leftjoin'] .= ereg_replace(',', ' OR tx_irfaq_q_cat_mm.uid_foreign=', $this->conf['catExclusive']);
+				$selectConf['leftjoin'] .= preg_replace('/,/', ' OR tx_irfaq_q_cat_mm.uid_foreign=', $this->conf['catExclusive']);
 			}
 			else {
 				//no
