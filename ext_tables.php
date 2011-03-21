@@ -92,7 +92,12 @@ t3lib_extMgm::addPiFlexFormValue($_EXTKEY . '_pi1', 'FILE:EXT:irfaq/flexform/fle
 
 if (TYPO3_MODE=='BE') {
 	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_irfaq_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY) . 'pi1/class.tx_irfaq_pi1_wizicon.php';
-	//adding sysfolder icon
-	$ICON_TYPES[$_EXTKEY] = array('icon' => t3lib_extMgm::extRelPath($_EXTKEY) . 'res/icon_tx_irfaq_sysfolder.gif');
+		//adding sysfolder icon
+	if(version_compare(TYPO3_version, '4.5.0', '<')) {
+		$ICON_TYPES[$_EXTKEY] = array('icon' => t3lib_extMgm::extRelPath($_EXTKEY) . 'res/icon_tx_irfaq_sysfolder.gif');
+	}
+	else {
+		t3lib_SpriteManager::addTcaTypeIcon('pages', 'contains-irfaq', t3lib_extMgm::extRelPath($_EXTKEY) . 'res/icon_tx_irfaq_sysfolder.gif');
+	}
 }
 ?>
